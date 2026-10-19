@@ -252,10 +252,16 @@
               "readme": "labs/prometheus/README.md",
               "hints": "labs/prometheus/hints.md",
               "solution": "labs/prometheus/solution.md"
+            },
+            "tr": {
+              "readme": "labs/prometheus/README.tr.md",
+              "hints": "labs/prometheus/hints.tr.md",
+              "solution": "labs/prometheus/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -276,10 +282,16 @@
               "readme": "labs/prometheus/metrics/README.md",
               "hints": "labs/prometheus/metrics/hints.md",
               "solution": "labs/prometheus/metrics/solution.md"
+            },
+            "tr": {
+              "readme": "labs/prometheus/metrics/README.tr.md",
+              "hints": "labs/prometheus/metrics/hints.tr.md",
+              "solution": "labs/prometheus/metrics/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -300,10 +312,16 @@
               "readme": "labs/grafana/README.md",
               "hints": "labs/grafana/hints.md",
               "solution": "labs/grafana/solution.md"
+            },
+            "tr": {
+              "readme": "labs/grafana/README.tr.md",
+              "hints": "labs/grafana/hints.tr.md",
+              "solution": "labs/grafana/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -324,10 +342,16 @@
               "readme": "labs/elasticsearch/README.md",
               "hints": "labs/elasticsearch/hints.md",
               "solution": "labs/elasticsearch/solution.md"
+            },
+            "tr": {
+              "readme": "labs/elasticsearch/README.tr.md",
+              "hints": "labs/elasticsearch/hints.tr.md",
+              "solution": "labs/elasticsearch/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -569,7 +593,7 @@
   "stats": {
     "total": 19,
     "en": 19,
-    "tr": 6,
+    "tr": 10,
     "by_status": {
       "needs-review": 19
     }
