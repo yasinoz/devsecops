@@ -1,8 +1,12 @@
 name: Lab dogrulama
 
-# Dersi bozan hatalarin repoya sizmasini engeller. Araclar
-# yasinoz/labs-platform reposunda tutulur; burada checkout edilir, boylece
-# surum matrisi ve kurallar tek yerde yasar.
+# Dersi bozan hatalarin repoya sizmasini engeller.
+#
+# Araclar yasinoz/labs-platform reposunda tutulur; surum matrisi ve kurallar
+# tek yerde yasasin diye. Iki repo YAN YANA checkout edilir: platform lab
+# reposunun ICINE alinirsa lint platformun kendi dosyalarini da tarar ve
+# VERSIONS.yaml'daki 'image: jenkins/jenkins' satirlarini pinlenmemis imaj
+# sanar.
 
 on:
   push:
@@ -16,12 +20,14 @@ jobs:
     steps:
       - name: Lab reposunu al
         uses: actions/checkout@v5
+        with:
+          path: repo
 
       - name: Platform araclarini al
         uses: actions/checkout@v5
         with:
           repository: yasinoz/labs-platform
-          path: .platform
+          path: platform
 
       - name: Python kur
         uses: actions/setup-python@v6
@@ -29,26 +35,42 @@ jobs:
           python-version: '3.13'
 
       - name: manifest.json guncel mi
-        run: python .platform/tools/make-manifest.py . --check
+        # Henuz sections.yaml'i olmayan track'lerde bu adim atlanir.
+        run: |
+          if [ -f repo/sections.yaml ]; then
+            python platform/tools/make-manifest.py repo --check
+          else
+            echo "sections.yaml yok - manifest kontrolu atlandi"
+          fi
 
       - name: Mekanik sorunlar (compose v1, pinlenmemis/eski imaj)
         run: |
-          python .platform/tools/lab-lint.py . \
-            --versions .platform/VERSIONS.yaml \
+          python platform/tools/lab-lint.py repo \
+            --versions platform/VERSIONS.yaml \
             --only compose,pins,stale
 
-      - name: Kirik baglanti ve frontmatter
+      - name: Kirik baglantilar
         run: |
-          python .platform/tools/lab-lint.py . \
-            --versions .platform/VERSIONS.yaml \
-            --only links,frontmatter
+          python platform/tools/lab-lint.py repo \
+            --versions platform/VERSIONS.yaml \
+            --only links
 
-      # Ceviri ilerlemesi: henuz tamamlanmadigi icin basarisizlik saymiyoruz.
-      # Tum lablar cevrildiginde '|| true' kaldirilacak.
-      - name: Ceviri durumu (bilgilendirme)
+      - name: Frontmatter
+        # Frontmatter yalnizca iki dilli yapiya gecirilmis repolarda zorunlu.
         run: |
-          python .platform/tools/lab-lint.py . \
-            --versions .platform/VERSIONS.yaml \
+          if [ -f repo/sections.yaml ]; then
+            python platform/tools/lab-lint.py repo \
+              --versions platform/VERSIONS.yaml --only frontmatter
+          else
+            echo "sections.yaml yok - frontmatter kontrolu atlandi"
+          fi
+
+      - name: Ceviri durumu (bilgilendirme)
+        # Ceviri henuz tamamlanmadi; bu adim hata saymaz. Tum lablar
+        # cevrildiginde '|| true' kaldirilacak.
+        run: |
+          python platform/tools/lab-lint.py repo \
+            --versions platform/VERSIONS.yaml \
             --only i18n,parity || true
 
   compose-syntax:
