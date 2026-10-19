@@ -82,16 +82,23 @@ jobs:
         run: |
           # 'docker compose config' dosyayi ayristirir ve degiskenleri cozer;
           # sozdizimi hatasi varsa burada yakalanir.
+          #
+          # OVERRIDE PARCALARI: compose-build labi katmanli dosyalar kullaniyor
+          # (core.yml + dev.yml gibi, 'docker compose -f a -f b' ile birlesiyor).
+          # Bir override parcasi tek basina gecerli bir proje DEGIL: servisin
+          # image/build alani taban dosyadan geliyor. Bu durumu hata saymiyoruz,
+          # atlandi diye raporluyoruz.
           fail=0
           while IFS= read -r f; do
-            if grep -qE '^[[:space:]]*services[[:space:]]*:' "$f"; then
-              if ! out=$(docker compose -f "$f" config 2>&1); then
-                echo "::error file=$f::compose ayristirma hatasi"
-                echo "$out" | head -20
-                fail=1
-              else
-                echo "ok  $f"
-              fi
+            grep -qE '^[[:space:]]*services[[:space:]]*:' "$f" || continue
+            if out=$(docker compose -f "$f" config 2>&1); then
+              echo "ok        $f"
+            elif echo "$out" | grep -q 'has neither an image nor a build context'; then
+              echo "override  $f  (tek basina dogrulanamaz, atlandi)"
+            else
+              echo "::error file=$f::compose ayristirma hatasi"
+              echo "$out" | head -20
+              fail=1
             fi
           done < <(find . -name '*.yml' -o -name '*.yaml' | grep -v '^./.git' | sort)
           exit $fail
