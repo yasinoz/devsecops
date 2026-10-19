@@ -40,4 +40,7 @@ Apply the fixed specs:
 kubectl apply -f labs/admission/solution
 ```
 
-The Deployments should all get up to scale, and the app should be running at to http://localhost:30016
+The Deployments should all get up to scale, and the app should be running at http://localhost:30016
+
+___
+> Back to the [exercises](README.md).

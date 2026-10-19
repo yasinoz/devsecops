@@ -21,9 +21,9 @@ It means your cluster can be secured more cleanly, because you don't need a clus
 
 - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) - the GitOps project in the CNCF
 
-- [ArgoCD command line](https://argoproj.github.io/argo-cd/user-guide/commands/argocd/)
+- [ArgoCD command line](https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd/)
 
-- [Application CRD spec](https://argoproj.github.io/argo-cd/operator-manual/application.yaml)
+- [Application CRD spec](https://argo-cd.readthedocs.io/en/stable/operator-manual/application.yaml)
 
 - [GitOps with Kubernetes and Argo](https://eltons.show/episodes/ecs-c3/) - my YouTube walkthrough
 
@@ -112,13 +112,15 @@ Add the new Git server as a remote for this repo and push a copy of the content:
 
 ```
 # add the local Git server:
-git remote add labs-argo http://localhost:30300/courselabs/labs.git
+git remote add labs-argo http://localhost:30300/student/labs.git
 
-# push to the expected branch name:
-git push labs-argo main:master
+git push labs-argo main
 ```
 
-> This version of ArgoCD expects to find a branch named `master` in the Git repo. This repo uses `main` as the branch name, so the push command uses the expected name in the Git server.
+> Older versions of this lab pushed `main:master`, because the ArgoCD version
+> of the day defaulted to a `master` branch. ArgoCD tracks `HEAD` by default
+> now - the Git server's own default branch - so pushing `main` is enough and
+> there's no need for a second branch name.
 
 Now connect the ArgoCD CLI to the ArgoCD server, **using your password from the Secret**:
 
@@ -140,7 +142,7 @@ argocd app create whoami --repo http://gitea.infra.svc.cluster.local:3000/studen
 
 > Creating the app stores the definition in Kubernetes, and we've set the sync policy to _auto_ - so it will be deployed straight away.
 
-You can also create apps by deploying Kubernetes YAML. Here's an alternative version of the [whoami application](./specs/apps/whoami.yaml) we could use.
+You can also create apps by deploying Kubernetes YAML. Here's the same application as an [Application object](./specs/apps/whoami.yaml) - it uses `targetRevision: HEAD` so it follows whatever the Git server's default branch is called.
 
 📋 Check the details of the new application with the Argo CLI.
 
@@ -186,7 +188,7 @@ ___
 Deleting apps in ArgoCD doesn't remove the running application - unless you use the cascade flag:
 
 ```
-argocd app delete lab whoami --cascade
+argocd app delete whoami --cascade
 ```
 
 > ArgoCD asks you to confirm you really want to do this :)

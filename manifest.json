@@ -476,10 +476,16 @@
               "readme": "labs/static-analysis/README.md",
               "hints": "labs/static-analysis/hints.md",
               "solution": "labs/static-analysis/solution.md"
+            },
+            "tr": {
+              "readme": "labs/static-analysis/README.tr.md",
+              "hints": "labs/static-analysis/hints.tr.md",
+              "solution": "labs/static-analysis/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -500,10 +506,16 @@
               "readme": "labs/scanning/README.md",
               "hints": "labs/scanning/hints.md",
               "solution": "labs/scanning/solution.md"
+            },
+            "tr": {
+              "readme": "labs/scanning/README.tr.md",
+              "hints": "labs/scanning/hints.tr.md",
+              "solution": "labs/scanning/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -524,10 +536,16 @@
               "readme": "labs/golden-images/README.md",
               "hints": "labs/golden-images/hints.md",
               "solution": "labs/golden-images/solution.md"
+            },
+            "tr": {
+              "readme": "labs/golden-images/README.tr.md",
+              "hints": "labs/golden-images/hints.tr.md",
+              "solution": "labs/golden-images/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -549,10 +567,16 @@
               "readme": "labs/argo/README.md",
               "hints": "labs/argo/hints.md",
               "solution": "labs/argo/solution.md"
+            },
+            "tr": {
+              "readme": "labs/argo/README.tr.md",
+              "hints": "labs/argo/hints.tr.md",
+              "solution": "labs/argo/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -574,10 +598,16 @@
               "readme": "labs/admission/README.md",
               "hints": "labs/admission/hints.md",
               "solution": "labs/admission/solution.md"
+            },
+            "tr": {
+              "readme": "labs/admission/README.tr.md",
+              "hints": "labs/admission/hints.tr.md",
+              "solution": "labs/admission/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -599,10 +629,16 @@
               "readme": "labs/container-security/README.md",
               "hints": "labs/container-security/hints.md",
               "solution": "labs/container-security/solution.md"
+            },
+            "tr": {
+              "readme": "labs/container-security/README.tr.md",
+              "hints": "labs/container-security/hints.tr.md",
+              "solution": "labs/container-security/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         }
       ]
@@ -611,7 +647,7 @@
   "stats": {
     "total": 19,
     "en": 19,
-    "tr": 13,
+    "tr": 19,
     "by_status": {
       "needs-review": 19
     }

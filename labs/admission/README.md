@@ -135,7 +135,7 @@ You'll see all the existing violations of the rule, and it should be clear what'
 
 </details><br/>
 
-Rego is not a straightforward language - but it is a generic way of defining policies. Trivy uses Rego for its [Kubernetes misconfiguration policy library](https://github.com/aquasecurity/appshield/tree/master/kubernetes).
+Rego is not a straightforward language - but it is a generic way of defining policies. Trivy uses Rego for its [misconfiguration check library](https://github.com/aquasecurity/trivy-checks) (which used to live in a repo called appshield).
 
 ## Verify the OPA rules
 
