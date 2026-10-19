@@ -62,7 +62,7 @@ trivy image python:3.4-alpine
 
 Lots of issues here, including high and critical severities. One of them is this [buffer over-read vulnerability](https://avd.aquasec.com/nvd/cve-2019-15903) which doesn't sound good.
 
-> This is an official image but it's two years old. Official images aren't removed from Docker Hub when new versions are released because that would break people's builds - but its your responsibility to keep your dependencies updated.
+> This is an official image, but Python 3.4 went end-of-life in 2019 - the image is a decade old. Official images aren't removed from Docker Hub when new versions are released, because that would break people's builds; keeping your dependencies current is your responsibility, not the registry's.
 
 This Trivy container is set up to talk to your local Docker Engine, so you can scan your own images as well as those on Docker Hub.
 
@@ -101,7 +101,7 @@ You'll see 40+ critical errors...
 
 Trivy can also scan source code folders, but it doesn't analyse your code (which is what SonarQube does in the [static analysis lab](../static-analysis/README.md)). Trivy looks for library lists (e.g. `package-lock.json` for Node.js apps) and it scans each library for CVEs.
 
-📋 Try scanning the Python depdencies in `/labs/scanning/python`
+📋 Try scanning the Python dependencies in `/labs/scanning/python`
 
 <details>
   <summary>Not sure how?</summary>
@@ -124,7 +124,7 @@ You can also scan public Git repos. This scans the repo for my Kubernetes book w
 trivy repository https://github.com/sixeyed/kiamol
 ```
 
-You'll see there's a critical issue with the AWS SDK I use in one of my Node.js applications. 
+You'll see findings in the application dependencies - which ones depends on when you run it, because Trivy's database is updated constantly and the repo changes too. That is the point: a scan is a snapshot of what is known today.
 
 > Your pipeline can include library scanning - and scanning repositories for any open-source projects you use - **before** the build stage, so if there are any critical issues the build fails quickly and can be fixed.
 
@@ -157,7 +157,7 @@ The downside is that developers won't use that workflow, so issues only get foun
 
 - [hello-world-cs/Dockerfile](./hello-world-cs/Dockerfile) - builds .NET app with a stage to scan the application image; the Trivy command is set to look for HIGH severity issues, and return a non-zero exit code if there are any
 
-Run the build and verify the Trivy test runs. Do you get an image? If there are failures, thay could be with the OS tools - in which case you can fix them with a single change to the Dockerfile.
+Run the build and verify the Trivy test runs. Do you get an image? If there are failures, they could be with the OS tools - in which case you can fix them with a single change to the Dockerfile.
 
 > Stuck? Try [hints](hints.md) or check the [solution](solution.md).
 

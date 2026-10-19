@@ -8,7 +8,7 @@ COPY . .
 RUN mvn package
 
 # app
-FROM courselabs/java:jre-21.12 
+FROM courselabs/java:jre-26.10 
 
 WORKDIR /app
 COPY --from=builder /usr/src/helloworld/target/helloworld-0.1.0.jar .

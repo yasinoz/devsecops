@@ -13,17 +13,17 @@ upstream: labs/static-analysis
 
 Static analysis tools inspect the source code of your applications, looking for known issues. The tools use a database of issues which can include poor coding practices, code which is difficult to maintain, and known security problems. [SonarQube](https://www.sonarqube.org) is one of the most popular analysers. It supports multiple languages with databases which include best practices and CVEs.
 
-There are commercial versions of SonarQube but we'll run the free community edition. It runs as a server, and you can trigger the analysis when you build your code. A SonarQube client on your dektop or build server sends the code for analysis and prints the results. Any issues are stored in the SonarQube server, and you can configure critical issues to fail the build.
+There are commercial versions of SonarQube but we'll run the free community edition. It runs as a server, and you can trigger the analysis when you build your code. A SonarQube client on your desktop or build server sends the code for analysis and prints the results. Any issues are stored in the SonarQube server, and you can configure critical issues to fail the build.
 
 ## Reference
 
 - [SonarQube on Docker Hub](https://hub.docker.com/_/sonarqube)
 
-- [Try out SonarQube](https://docs.sonarqube.org/latest/setup/get-started-2-minutes/)
+- [Try out SonarQube](https://docs.sonarsource.com/sonarqube-server/latest/try-out-sonarqube/)
 
-- [SonarQube with .NET apps](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+- [SonarQube with .NET apps](https://docs.sonarsource.com/sonarqube-server/latest/analyzing-source-code/scanners/dotnet/introduction/)
 
-- [SonarQube with Java apps and Maven](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/)
+- [SonarQube with Java apps and Maven](https://docs.sonarsource.com/sonarqube-server/latest/analyzing-source-code/scanners/sonarscanner-for-maven/)
 
 - [SonarQube in the CNCF DevSecOps radar](https://radar.cncf.io/2021-09-devsecops)
 
@@ -40,7 +40,14 @@ SonarQube can take a minute or two to spin up. When the container is running, lo
 - login: `admin`
 - password: `admin`
 
-It will ask you to set new password, `admin2` is fine.
+It will ask you to set a new password - anything that isn't `admin` will do.
+
+> ⚠️ The container runs SonarQube 26 (the upstream lab was written for 9.2).
+> The concepts are unchanged but some screens have moved - the project creation
+> wizard in particular. Where the steps below don't match what you see, the
+> labels in the UI are close enough to follow; the
+> [SonarQube docs](https://docs.sonarsource.com/sonarqube-server/latest/) are
+> authoritative.
 
 This is a new SonarQube server with no projects set up, but you can browse the rules it uses.
 
@@ -55,7 +62,7 @@ The coding rules in the UI show helpful documentation for all the rules:
 
 - http://localhost:9000/coding_rules?languages=cs&types=VULNERABILITY - security vulnerabilities for C# apps
 
-- http://localhost:9000/coding_rules?languages=cs&open=csharpsquid%3AS5445&types=VULNERABILITY - a known OWASP vulnerabilty for C#
+- http://localhost:9000/coding_rules?languages=cs&open=csharpsquid%3AS5445&types=VULNERABILITY - a known OWASP vulnerability for C#
 
 </details>
 
@@ -68,13 +75,15 @@ We'll create a new project we can use to analyse some .NET Code.
 
 Browse to http://localhost:9000/projects/create and configure the new project:
 
-- select _Manually_ (SonarQube can integrate with other services, but we'll set it up manually)
+- choose the option to create a **local project** (SonarQube can integrate
+  with GitHub, GitLab and others; we're setting this one up by hand)
 
-- set the _Project key_ to be `hello-world-cs`
+- set the _Project key_ (and display name) to `hello-world-cs`
 
-- click _Set Up_
+- when asked about the baseline for new code, the global setting is fine
 
-- create a token, call it anything e.g. `devops`
+- choose to analyse the project **locally** and generate a token - call it
+  anything, e.g. `devops`
 
 - SonarQube displays the token - we'll use this later for authentication, so copy the token (it looks like `d19405a6925267bbcd52221c407bc01c2010c82b` but yours will be different)
 
@@ -112,7 +121,9 @@ Now we can pass the token as a build argument for this [.NET Dockerfile](./hello
 docker build -t hello-world-cs --build-arg SONAR_TOKEN=$SONAR_TOKEN ./labs/static-analysis/hello-world-cs
 
 # if you're using Linux then the `host.docker.internal` address may not be set -
-# you can run this instead:
+# you can run this instead. The legacy builder is needed here because
+# 'docker build --network' is a classic-builder flag; expect a deprecation
+# warning:
 export DOCKER_BUILDKIT=0
 
 docker build -t hello-world-cs --build-arg SONAR_TOKEN=$SONAR_TOKEN --build-arg SONAR_URL=http://sonarqube:9000 --network infra_default ./labs/static-analysis/hello-world-cs
@@ -135,7 +146,7 @@ You can see all the details in the UI:
 
 ## Failing Builds with Quality Gates
 
-There are a few issues with the project. Ideally we want the build to fail if there are significant security issues. We can do that by setting a [quality gate](https://docs.sonarqube.org/latest/user-guide/quality-gates/). The gate specifies the conditions the project needs to meet for it to pass analysis.
+There are a few issues with the project. Ideally we want the build to fail if there are significant security issues. We can do that by setting a [quality gate](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/analysis-functions/quality-gates/). The gate specifies the conditions the project needs to meet for it to pass analysis.
 
 Browse to http://localhost:9000/quality_gates/. You'll see a default gate already there called _Sonar way_. This only operates on new code - changes which have been made since the previous analysis. We want a quality gate which runs on all code:
 

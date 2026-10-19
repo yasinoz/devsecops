@@ -13,9 +13,9 @@ RUN mvn package
 
 RUN if [ "$SONAR_TOKEN" != "" ] ; then \
         mvn sonar:sonar \
-        -Dsonar.projectKey=h$SONAR_PROJECT \
+        -Dsonar.projectKey=$SONAR_PROJECT \
         -Dsonar.host.url=$SONAR_URL \
-        -Dsonar.login=$SONAR_TOKEN \
+        -Dsonar.token=$SONAR_TOKEN \
         -Dsonar.qualitygate.wait=$SONAR_ENFORCE_GATE ; \
     fi
 

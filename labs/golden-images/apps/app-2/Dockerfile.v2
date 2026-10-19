@@ -1,4 +1,4 @@
-FROM courselabs/java:jdk-21.12 AS builder
+FROM courselabs/java:jdk-26.10 AS builder
 
 WORKDIR /src
 COPY HelloWorld.java .
@@ -7,7 +7,7 @@ RUN mkdir -p /out/bin && \
     javac -d /out/bin HelloWorld.java
 
 # app image
-FROM courselabs/java:jre-21.12 
+FROM courselabs/java:jre-26.10 
 
 WORKDIR /app
 COPY --from=builder /out/bin/HelloWorld.class .

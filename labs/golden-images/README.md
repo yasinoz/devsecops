@@ -13,7 +13,7 @@ upstream: labs/golden-images
 
 Docker Hub is a great place to find open-source software, pre-packaged and ready to run. But anyone can push public images to Docker Hub so you can't necessarily trust what you find there. Official images can be trusted, but they're updated frequently and you need to keep on top of the updates.
 
-Letting developers use any base image for their apps is not a good idea. They could unkowingly use a malicious image which has a backdoor opened, or is running a bitcoin miner. Requiring official images to be the base is a better policy, but you could end up with lots of versions and variations which costs efficiency and make it harder to secure your apps. 
+Letting developers use any base image for their apps is not a good idea. They could unknowingly use a malicious image which has a backdoor opened, or is running a bitcoin miner. Requiring official images to be the base is a better policy, but you could end up with lots of versions and variations which costs efficiency and make it harder to secure your apps. 
 
 Building your own set of base images - _golden images_ - and mandating that all apps need to use those is the best approach. It lets you curate your own approved list of images and tailor them as you need.
 
@@ -23,7 +23,7 @@ Let's understand the problem first. These two Java apps use different base image
 
 - [app-1/Dockerfile](./apps/app-1/Dockerfile) - uses the deprecated `java` image, and it's the JDK version used for compiling and running the app
 
-- [app-2/Dockerfile](./apps/app-2/Dockerfile) - uses OpenJDK 11, with a multi-stage build with the JDK for compilation and the JRE at runtime; these are  Debian-based images
+- [app-2/Dockerfile](./apps/app-2/Dockerfile) - uses Eclipse Temurin, with a multi-stage build using the JDK for compilation and the JRE at runtime; these are Debian-based images
 
 Build both apps with Compose:
 
@@ -44,7 +44,7 @@ docker image ls "courselabs/app*:v1"
 
 You'll see that app-2 is about a 200MB image and app-1 is over 600MB.
 
-Inspec the images to check the layer IDs:
+Inspect the images to check the layer IDs:
 
 ```
 docker inspect courselabs/app-1:v1
@@ -68,9 +68,9 @@ To build your own base library, you need to decide on the platforms and variants
 
 This library has two sets of images for Java apps:
 
-- [JDK based on Debian](./library/java/debian/jdk/Dockerfile) and [JRE based on Debian](./library/java/debian/jre/Dockerfile). These use the slim OS versions, and they're pinned to a specific OpenJDK release - but not to a specific OS release because the official image doesn't provide that level of granularity
+- [JDK based on Debian](./library/java/debian/jdk/Dockerfile) and [JRE based on Debian](./library/java/debian/jre/Dockerfile). These build on the official Eclipse Temurin images, pinned to a Java release - but not to a specific OS release, because the official image doesn't offer that level of granularity
 
-- [JDK based on Alpine](./library/java/alpine/jdk/Dockerfile) and [JRE based on Alpine](./library/java/alpine/jre/Dockerfile). These have a fully-versioned deployment - based on an explicit version of Alpine with an explicit version of OpenJDK. The versions are set in build arguments so it's easy to bump them when there's a new release
+- [JDK based on Alpine](./library/java/alpine/jdk/Dockerfile) and [JRE based on Alpine](./library/java/alpine/jre/Dockerfile). These are fully versioned - an explicit Alpine release with an explicit OpenJDK apk version. The versions are build arguments so they're easy to bump. The trade-off is upkeep: when Alpine rebuilds the package the apk version string changes and you have to follow it. (That is exactly what broke the upstream version of this lab - it pinned a package from Alpine 3.15, which went end-of-life.)
 
 - [library/docker-compose.yml](./library/docker-compose.yml) - has the build details for the library images and uses a custom naming convention
 
@@ -91,14 +91,14 @@ Check the sizes and tags of the new library images:
 docker image ls "courselabs/java*"
 ```
 
-The Alpine versions are about 2/3 the size of the Debian variants:
+The Alpine versions are smaller than the Debian variants - the numbers below are from one run, yours will differ as the base images change:
 
 ```
 REPOSITORY        TAG                IMAGE ID       CREATED              SIZE
-courselabs/java   jdk-21.12          dbe839e1d807   About a minute ago   271MB       
-courselabs/java   jre-21.12          ad98b2279e7f   About a minute ago   184MB       
-courselabs/java   jre-debian-21.12   79786bc38074   2 weeks ago          221MB       
-courselabs/java   jdk-debian-21.12   0d6d8cde8cc0   2 weeks ago          422MB
+courselabs/java   jdk-26.10          dbe839e1d807   About a minute ago   271MB       
+courselabs/java   jre-26.10          ad98b2279e7f   About a minute ago   184MB       
+courselabs/java   jre-debian-26.10   79786bc38074   2 weeks ago          221MB       
+courselabs/java   jdk-debian-26.10   0d6d8cde8cc0   2 weeks ago          422MB
 ```
 
 Now we have a set of images we can mandate for Java applications - with Alpine being preferred, but Debian available for additional compatibility.
@@ -131,10 +131,10 @@ docker image ls "courselabs/app*:v2"
 
 They're both under 200MB - almost the same size as the golden JRE image. The application binaries are so small they don't add much to the base image.
 
-Inspec the base image and application images to check the layer IDs:
+Inspect the base image and application images to check the layer IDs:
 
 ```
-docker inspect courselabs/java:jre-21.12
+docker inspect courselabs/java:jre-26.10
 
 docker inspect courselabs/app-1:v2
 
@@ -145,7 +145,7 @@ There are two layers in the JRE image - the Alpine layer plus the OpenJDK layer.
 
 </details>
 
-On my system the original v1 app images use 864MB of disk space (221MB+643MB), because they don't share any layers. The v2 apps use 184MB between them, which is the JRE image they both share.
+In one run the original v1 app images took around 860MB of disk between them, because they share no layers. The v2 apps took about 185MB in total - the JRE image they both share. Your exact figures will differ; the ratio is the point.
 
 > You can use a tool like [Anchore](https://anchore.com) in your build to check the base images in your Dockerfiles, so builds will fail if the base images are not from the library
 
@@ -190,9 +190,9 @@ You'll want to regularly prune your system if you build lots of images. A schedu
 
 We have another Java app which should use our golden image, and it has a couple of other issues:
 
-- [app-3/Dockerfile](./apps/app-3/Dockerfile) - the image uses Maven for the build; we don't have a golden image for that, but it isn't used in the final app image, so that can stay as it is. The runtime image is yet another `openjdk` variant.
+- [app-3/Dockerfile](./apps/app-3/Dockerfile) - the image uses Maven for the build; we don't have a golden image for that, but it isn't used in the final app image, so that can stay as it is. The runtime image is yet another official Java variant rather than one from our library.
 
-- [app-3/pom.xml](./apps/app-3/pom.xml) - in Maven the POM file lists out all of the dependencies the application uses. But the current setup doesn't explicitly use the latest versions of the libraries so you we don't have a full audit trail.
+- [app-3/pom.xml](./apps/app-3/pom.xml) - in Maven the POM file lists out all of the dependencies the application uses. But the current setup doesn't explicitly use the latest versions of the libraries so we don't have a full audit trail.
 
 The setup will give you a working image, but you can't tell from SCM which versions of the libraries are installed:
 
