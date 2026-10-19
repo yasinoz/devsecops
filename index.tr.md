@@ -51,11 +51,11 @@ Jenkins ile otomasyon, container imajları ve sürüm pipeline'ları.
 | Lab | Süre | Gerekir |
 |---|---|---|
 | [Jenkins ile Otomasyon](labs/jenkins/README.tr.md) | 45 dk | docker |
-| [Container İmajları Derlemek](labs/images/README.md) _(EN)_ | 40 dk | docker |
-| [Registry Üzerindeki İmajlara Erişmek](labs/registries/README.md) _(EN)_ | 30 dk | docker |
-| [Çok Aşamalı Build](labs/multi-stage/README.md) _(EN)_ | 40 dk | docker |
-| [Compose ile Uygulama Derlemek](labs/compose-build/README.md) _(EN)_ | 45 dk | docker |
-| [Jenkins ile Docker İmajı Derlemek](labs/pipeline/README.md) _(EN)_ | 60 dk | docker |
+| [Container İmajları Derlemek](labs/images/README.tr.md) | 40 dk | docker |
+| [Registry Üzerindeki İmajlara Erişmek](labs/registries/README.tr.md) | 30 dk | docker |
+| [Çok Aşamalı Build](labs/multi-stage/README.tr.md) | 40 dk | docker |
+| [Compose ile Uygulama Derlemek](labs/compose-build/README.tr.md) | 45 dk | docker |
+| [Jenkins ile Docker İmajı Derlemek](labs/pipeline/README.tr.md) | 60 dk | docker |
 
 ## Gözlemlenebilirlik
 

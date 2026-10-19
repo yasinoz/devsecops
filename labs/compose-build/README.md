@@ -15,9 +15,9 @@ Docker Compose models can include build-time details, so you can build multiple 
 
 ## Reference
 
-- [Compose build spec](https://docs.docker.com/compose/compose-file/compose-file-v3/#build)
+- [Compose build spec](https://docs.docker.com/reference/compose-file/build/)
 
-- [Using environment variables in Compose files](https://docs.docker.com/compose/environment-variables/) 
+- [Using environment variables in Compose files](https://docs.docker.com/compose/how-tos/environment-variables/) 
 
 <details>
   <summary>CLI overview</summary>
@@ -36,7 +36,7 @@ docker compose push --help
 
 ## Building with Compose
 
-All the source code for the random number app we've been usingis in the `rng` folder, along with the Dockerfile and a Compose file: 
+All the source code for the random number app we've been using is in the `rng` folder, along with the Dockerfile and a Compose file: 
 
 - [rng/docker-compose.yml](./rng/docker-compose.yml) - includes the context and Dockerfile paths
 

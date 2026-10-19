@@ -88,10 +88,16 @@
               "readme": "labs/images/README.md",
               "hints": "labs/images/hints.md",
               "solution": "labs/images/solution.md"
+            },
+            "tr": {
+              "readme": "labs/images/README.tr.md",
+              "hints": "labs/images/hints.tr.md",
+              "solution": "labs/images/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -112,10 +118,16 @@
               "readme": "labs/registries/README.md",
               "hints": "labs/registries/hints.md",
               "solution": "labs/registries/solution.md"
+            },
+            "tr": {
+              "readme": "labs/registries/README.tr.md",
+              "hints": "labs/registries/hints.tr.md",
+              "solution": "labs/registries/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -136,10 +148,16 @@
               "readme": "labs/multi-stage/README.md",
               "hints": "labs/multi-stage/hints.md",
               "solution": "labs/multi-stage/solution.md"
+            },
+            "tr": {
+              "readme": "labs/multi-stage/README.tr.md",
+              "hints": "labs/multi-stage/hints.tr.md",
+              "solution": "labs/multi-stage/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -160,10 +178,16 @@
               "readme": "labs/compose-build/README.md",
               "hints": "labs/compose-build/hints.md",
               "solution": "labs/compose-build/solution.md"
+            },
+            "tr": {
+              "readme": "labs/compose-build/README.tr.md",
+              "hints": "labs/compose-build/hints.tr.md",
+              "solution": "labs/compose-build/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -184,10 +208,16 @@
               "readme": "labs/pipeline/README.md",
               "hints": "labs/pipeline/hints.md",
               "solution": "labs/pipeline/solution.md"
+            },
+            "tr": {
+              "readme": "labs/pipeline/README.tr.md",
+              "hints": "labs/pipeline/hints.tr.md",
+              "solution": "labs/pipeline/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         }
       ]
@@ -539,7 +569,7 @@
   "stats": {
     "total": 19,
     "en": 19,
-    "tr": 1,
+    "tr": 6,
     "by_status": {
       "needs-review": 19
     }

@@ -41,17 +41,22 @@ docker history --help
 
 Images can be built in a hierarchy - you may start with an OS image which sets up a particular Linux distro, then build on top of that to add your application runtime.
 
-Before we build any images we'll set the Docker to use the original build engine:
+Before we build any images, let's make the build output verbose so you can
+see every Dockerfile instruction as it runs:
 
 ```
 # on macOS or Linux:
-export DOCKER_BUILDKIT=0
+export BUILDKIT_PROGRESS=plain
 
 # OR with PowerShell:
-$env:DOCKER_BUILDKIT=0
+$env:BUILDKIT_PROGRESS='plain'
 ```
 
-> [BuildKit](https://docs.docker.com/develop/develop-images/build_enhancements/) is the new Docker build engine. It produces the same images as the original engine, but the printed output doesn't show the Dockerfile instructions being executed. We're using the original Engine so you can see all the steps.
+> [BuildKit](https://docs.docker.com/build/buildkit/) is Docker's build engine
+> and has been the default since Docker 23. By default it collapses the output
+> into a tidy summary, which hides the individual instructions. Setting
+> `BUILDKIT_PROGRESS=plain` prints every step, which is what you want while
+> you're learning the Dockerfile syntax.
 
 We'll build a really simple base image:
 
@@ -85,7 +90,7 @@ docker image ls 'courselabs/*'
 The new base image doesn't add anything to the [official Ubuntu image](https://hub.docker.com/_/ubuntu), which is available in lots of different [versions](https://hub.docker.com/_/ubuntu?tab=tags&page=1&ordering=last_updated).
 
 
-📋 Pull the main Ubuntu image, then pull the image for Ubuntu version 20.04.
+📋 Pull the main Ubuntu image, then pull the image for Ubuntu version 24.04.
 
 
 <details>
@@ -95,7 +100,7 @@ The new base image doesn't add anything to the [official Ubuntu image](https://h
 docker pull ubuntu
 
 # image versions are set in the tag name:
-docker pull ubuntu:20.04
+docker pull ubuntu:24.04
 ```
 
 </details><br/>
@@ -106,7 +111,11 @@ List all your Ubuntu images and your own base image:
 docker image ls --filter reference=ubuntu --filter reference=courselabs/base
 ```
 
-> You'll see they all have the same ID - they're actually all aliases for a single image
+> Look at the IDs. `courselabs/base` and `ubuntu` share one - they're aliases
+> for the same image, because the base Dockerfile uses the same version that
+> the `latest` tag currently points to. `ubuntu:24.04` has a different ID: it
+> is a different image. That's the whole point of pinning a version - `latest`
+> moves, a version tag doesn't.
 
 ## Commands and entrypoints
 
