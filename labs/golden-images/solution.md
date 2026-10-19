@@ -2,7 +2,7 @@
 
 The Dockerfile is a simple update to use the golden image in the final stage:
 
-- [lab/Dockerfile](lab/Dockerfile) - uses `courselabs/java:jre-21.12 ` for the runtime
+- [lab/Dockerfile](lab/Dockerfile) - uses `courselabs/java:jre-26.10 ` for the runtime
 
 The POM should be updated so that Micrometer uses an explicit version instead of a range, and the JAR plugin uses the latest:
 
@@ -20,13 +20,13 @@ Check the app images:
 docker image ls app-3
 ```
 
-On my system the v2 image is about 30% smaller:
+In one run the v2 image came out around 30% smaller (your numbers will differ):
 
 ```
 REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
 app-3        v1        90f85a6e8be0   2 minutes ago   221MB
 app-3        v2        cbc2c31a0685   2 minutes ago   184MB
-````
+```
 
 And if you inspect the images to see the layers:
 
