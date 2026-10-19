@@ -1,3 +1,14 @@
+---
+title: Searching Logs with Kibana
+lang: en
+slug: kibana
+section: observability
+order: 5
+duration: 45
+requires: [docker]
+status: needs-review
+upstream: labs/kibana
+---
 # Kibana
 
 Kibana is the web front-end for Elasticsearch. It lets you search and filter across indices, using a simplified query language or the full DSL. 
@@ -225,8 +236,11 @@ Then add an index pattern in Kibana to query the new data, and use the _Discover
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/kibana/compose.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.

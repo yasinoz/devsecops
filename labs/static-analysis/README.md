@@ -1,3 +1,14 @@
+---
+title: Static Code Analysis
+lang: en
+slug: static-analysis
+section: security
+order: 1
+duration: 45
+requires: [docker]
+status: needs-review
+upstream: labs/static-analysis
+---
 # Static Code Analysis
 
 Static analysis tools inspect the source code of your applications, looking for known issues. The tools use a database of issues which can include poor coding practices, code which is difficult to maintain, and known security problems. [SonarQube](https://www.sonarqube.org) is one of the most popular analysers. It supports multiple languages with databases which include best practices and CVEs.
@@ -138,7 +149,7 @@ Browse to http://localhost:9000/quality_gates/. You'll see a default gate alread
 
 Your new quality gate should look like this:
 
-![](/img/static-analysis-gate.png)
+![](../../img/static-analysis-gate.png)
 
 Now we can set the .NET project to use that quality gate, and the analysis will fail if the overall security rating is too low.
 
@@ -187,8 +198,11 @@ Start by running the build with analysis enabled - **you don't need to create a 
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/static-analysis/infra/docker-compose.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.

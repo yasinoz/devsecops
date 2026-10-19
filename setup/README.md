@@ -1,136 +1,231 @@
-# Set Up Docker and Git
+---
+title: Environment Setup
+lang: en
+slug: setup
+section: index
+order: 0
+status: updated
+upstream: setup/README.md
+---
+# Environment Setup
 
-We'll use lots of tools in the course and they each have their own dependencies and configuration. To simplify we'll use Docker containers to run all the components, so you don't need to install a ton of software.
+The labs use a lot of tools — Jenkins, Prometheus, Elasticsearch, Trivy and
+more. You won't install any of them. Everything runs in containers, so you
+need exactly two things on your machine: **Docker** and **Git**.
 
-> You don't need any Docker experience for this course, everything will be scripted out for you.
+> You don't need Docker experience for this course. Every command is given to you.
 
-We'll also use [Git](https://git-scm.com) for source control, so you'll need a client on your machine to talk to GitHub.
+## 1. Git
 
-## Git Client - Mac, Windows or Linux
+Git is free and open source:
 
-Git is a free, open source tool for source control:
+- [Install Git](https://git-scm.com/downloads) (Windows, macOS, Linux)
 
-- [Install Git](https://git-scm.com/downloads)
+On Windows this also gives you **Git Bash**, which is a usable shell if you'd
+rather not use PowerShell.
 
-## Docker Desktop - Mac or Windows
+## 2. Docker
 
-If you're on macOS or Windows 10, Docker Desktop is for you:
+### Windows and macOS — Docker Desktop
 
 - [Install Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-The download and install takes a few minutes. When it's done, run the _Docker_ app and you'll see the Docker whale logo in your taskbar (Windows) or menu bar (macOS).
+The install takes a few minutes and may want a restart on Windows. When it's
+done, start **Docker Desktop** and wait for the whale icon in the taskbar
+(Windows) or menu bar (macOS) to stop animating.
 
-> On Windows 10 the install may need a restart before you get here.
+> **Licensing note.** Docker Desktop is free for personal use, education and
+> small businesses, but larger organisations need a paid subscription. If your
+> employer's rules rule it out, use [Rancher Desktop](https://rancherdesktop.io)
+> or [Podman Desktop](https://podman-desktop.io) — the `docker` commands in
+> these labs work with both.
 
-## **OR** Docker Engine - Linux
+### Linux — Docker Engine
 
 <details>
   <summary>Running Docker on Linux</summary>
 
-> If you're using WSL on Windows 10, it's much easier to use Docker Desktop which integrates with your WSL distro.
+If you're using WSL on Windows, install Docker Desktop instead — it integrates
+with your WSL distro and is much less work.
 
-Docker Engine is the background service which runs containers. You can install it - along with the Docker command line - for lots of different Linux distros:
+- [Install Docker Engine](https://docs.docker.com/engine/install/) (includes
+  the Compose plugin)
 
- - [Install Docker Engine](https://docs.docker.com/engine/install/)
- - [Install Docker Compose](https://docs.docker.com/compose/install/)
-
-On a new install of Docker, make sure the service is running and add yourself to the `docker` group so you don't need to use `sudo` for the Docker CLI:
+Then make sure the service is running and add yourself to the `docker` group so
+you don't need `sudo` for every command:
 
 ```
-sudo service docker start   # you'll be prompted for your password
+sudo systemctl start docker
 
 sudo usermod -aG docker $USER
 
 newgrp docker
 ```
 
-**OPTIONAL** - you can set Docker to automatically start when your machine starts (using `systemd`):
+To start Docker automatically on boot:
 
 ```
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
 
+> Being in the `docker` group is equivalent to root access on the host. That's
+> fine on your own lab machine; it is a deliberate decision on a shared one.
+
 </details><br />
 
-## Check your setup
+## 3. Check your setup
 
-When you have Git and Docker installed you should be able to run these commands and get some output:
+Three commands. You need output from all three.
 
 ```
 git --version
 ```
 
-I'm using Git for Windows and my output is:
-
-```
-git version 2.31.1.windows.1
-```
-
-Then run:
-
 ```
 docker version
 ```
 
-I'm using Docker Desktop on Windows and mine says:
-
-```
-Client:
- Cloud integration: 1.0.14
- Version:           20.10.6
- API version:       1.41
- Go version:        go1.16.3
- Git commit:        370c289
- Built:             Fri Apr  9 22:49:36 2021
- OS/Arch:           windows/amd64
- Context:           default
- Experimental:      true
-
-Server: Docker Engine - Community
- Engine:
-  Version:          20.10.6
-  API version:      1.41 (minimum version 1.12)
-  Go version:       go1.13.15
-  Git commit:       8728dd2
-  Built:            Fri Apr  9 22:44:56 2021
-  OS/Arch:          linux/amd64
-...
-```
-
-> Make sure you see two sets of results: `Client:` and `Server:`
-
-<details>
-  <summary>Do this if you get a permission denied error on Linux</summary>
-
-Add your user to the `docker` group:
-
-```
-sudo usermod -aG docker $USER
-
-# logout and log back in again
-
-# OR run: 
-su $USER   
-```
-
-</details><br/>
-
-And then:
+Make sure you see **two** sections, `Client:` and `Server:`. Client only means
+the Docker engine isn't running — start Docker Desktop and wait.
 
 ```
 docker compose version
 ```
 
-My output is:
+> ⚠️ Note the **space**: `docker compose`, not `docker-compose`. The old
+> `docker-compose` (v1) command reached end of life in June 2023 and is no
+> longer shipped. Every lab here uses the v2 syntax. If you find a
+> `docker-compose` call anywhere in these labs, that's a bug — please report it.
+
+Version numbers don't need to match anyone else's. If a command errors, fix it
+now — nothing in this course works without a running Docker engine.
+
+<details>
+  <summary>Permission denied on Linux?</summary>
+
+Add your user to the `docker` group and start a new session:
 
 ```
-docker compose version 1.29.1, build c34c88b2
-docker-py version: 5.0.0
-CPython version: 3.9.0
-OpenSSL version: OpenSSL 1.1.1g  21 Apr 2020
+sudo usermod -aG docker $USER
+
+# log out and back in, or:
+su $USER
 ```
 
-> Your details and version numbers may be different - that's fine. If you get errors then we need to look into it, because you'll need to have Docker running for all of the exercises.
+</details><br />
 
-> ❗ If you're running Docker Desktop on Windows, make sure you're in _Linux container mode_. This is the default mode, but if you've changed to using Windows containers (from the whale toolbar menu), then you'll need to switch back.
+<details>
+  <summary>Windows: "no matching manifest for windows/amd64"?</summary>
+
+Docker Desktop is in *Windows container* mode. Right-click the whale icon and
+choose **Switch to Linux containers**. Linux mode is the default and is what
+these labs need.
+
+</details><br />
+
+## 4. Sign in to Docker Hub
+
+Create a [free Docker Hub account](https://hub.docker.com/signup) and log in:
+
+```
+docker login
+```
+
+This isn't bureaucracy. Docker Hub limits anonymous image pulls **per IP
+address**. In a classroom everyone shares one public IP, so the limit gets used
+up by the third student and the rest see:
+
+```
+toomanyrequests: You have reached your pull rate limit
+```
+
+Authenticated accounts get a much higher allowance, counted per user instead of
+per IP. One `docker login` saves the whole room.
+
+## 5. Kubernetes (only for the last three labs)
+
+The GitOps, admission control and container security labs need a cluster. Any
+single-node cluster works. Pick one:
+
+### Docker Desktop (easiest)
+
+**Settings → Kubernetes → Enable Kubernetes → Apply & Restart.** Takes a few
+minutes on first run.
+
+### k3d, kind or minikube
+
+<details>
+  <summary>Alternatives if you're not using Docker Desktop</summary>
+
+All three run a cluster inside Docker containers:
+
+```
+# k3d
+k3d cluster create labs --port "30000-30100:30000-30100@server:0"
+
+# kind
+kind create cluster --name labs
+
+# minikube
+minikube start
+```
+
+> The labs reach services through **NodePorts** in the 30000+ range. With k3d
+> you need the port mapping shown above; with kind you need an
+> `extraPortMappings` config; with minikube use `minikube service` or
+> `minikube tunnel`.
+
+</details><br />
+
+Check it:
+
+```
+kubectl version
+
+kubectl get nodes
+```
+
+You need `Ready` for at least one node, and a `kubectl` client of **1.30 or
+newer**.
+
+## 6. Give Docker enough memory
+
+Elasticsearch, Kibana and SonarQube are heavy. On Docker Desktop:
+
+**Settings → Resources** → set memory to at least **6 GB** (8 GB is
+comfortable).
+
+If a container dies on its own with exit code 137, it ran out of memory — that
+is the symptom to remember.
+
+## 7. Get the labs
+
+```
+git clone https://github.com/yasinoz/devsecops.git
+
+cd devsecops
+```
+
+Run every lab command from this folder, not from inside the lab directory.
+Paths in the labs are written relative to the repo root:
+
+```
+docker compose -f labs/jenkins/infra/docker-compose.yml up -d
+```
+
+> **Windows line endings.** This repo pins line endings to LF via
+> `.gitattributes`, which matters: a shell script checked out with CRLF fails
+> inside a Linux container with `bad interpreter`. If you cloned before that
+> file existed, re-clone.
+
+## Optional but useful
+
+- [Visual Studio Code](https://code.visualstudio.com) — browse the repo, read
+  the Dockerfiles, edit YAML with validation
+- [Windows Terminal](https://aka.ms/terminal) — tabs, which you'll want
+- `kubectl` [autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)
+
+## You're ready
+
+Back to the [lab index](../index.md).

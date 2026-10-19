@@ -1,3 +1,14 @@
+---
+title: Golden Image Libraries
+lang: en
+slug: golden-images
+section: security
+order: 3
+duration: 50
+requires: [docker]
+status: needs-review
+upstream: labs/golden-images
+---
 # Golden Image Libraries
 
 Docker Hub is a great place to find open-source software, pre-packaged and ready to run. But anyone can push public images to Docker Hub so you can't necessarily trust what you find there. Official images can be trusted, but they're updated frequently and you need to keep on top of the updates.
@@ -196,8 +207,13 @@ Your goal is to fix up those files to use the golden JRE image for the runtime, 
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/golden-images/apps/docker-compose.yml down
+docker compose -f ./labs/golden-images/library/docker-compose.yml down
+docker compose -f labs/golden-images/apps/docker-compose-v2.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.

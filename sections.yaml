@@ -1,0 +1,186 @@
+# DevSecOps track - bolum ve lab tanimlari (iki dilli).
+#
+# manifest.json bu dosyadan + lab README frontmatter'larindan uretilir:
+#   python ../_platform/tools/make-manifest.py .
+#
+# status degerleri:
+#   upstream     - henuz dokunulmadi, 2021 hali
+#   needs-review - modernize edildi, canli test EDILMEDI
+#   updated      - modernize edildi VE ucтan uca calistirildi
+
+track:
+  slug: devsecops
+  titles:
+    en: DevSecOps Labs
+    tr: DevSecOps Laboratuvarları
+  summaries:
+    en: Hands-on labs for DevOps and DevSecOps practices - CI/CD, observability and security in depth.
+    tr: DevOps ve DevSecOps pratikleri için uygulamalı laboratuvarlar — CI/CD, gözlemlenebilirlik ve katmanlı güvenlik.
+  repo:
+    owner: yasinoz
+    name: devsecops
+    branch: main
+
+sections:
+  - slug: cicd
+    order: 1
+    titles:
+      en: CI/CD Pipeline
+      tr: CI/CD Pipeline
+    summaries:
+      en: Build automation with Jenkins, container images and release pipelines.
+      tr: Jenkins ile otomasyon, container imajları ve sürüm pipeline'ları.
+    labs:
+      - slug: jenkins
+        order: 1
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Automation with Jenkins
+          tr: Jenkins ile Otomasyon
+      - slug: images
+        order: 2
+        duration: 40
+        requires: [docker]
+        titles:
+          en: Building Container Images
+          tr: Container İmajları Derlemek
+      - slug: registries
+        order: 3
+        duration: 30
+        requires: [docker]
+        titles:
+          en: Accessing Images on Registries
+          tr: Registry Üzerindeki İmajlara Erişmek
+      - slug: multi-stage
+        order: 4
+        duration: 40
+        requires: [docker]
+        titles:
+          en: Multi-Stage Builds
+          tr: Çok Aşamalı Build
+      - slug: compose-build
+        order: 5
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Building Apps with Compose
+          tr: Compose ile Uygulama Derlemek
+      - slug: pipeline
+        order: 6
+        duration: 60
+        requires: [docker]
+        titles:
+          en: Building Docker Images with Jenkins
+          tr: Jenkins ile Docker İmajı Derlemek
+
+  - slug: observability
+    order: 2
+    titles:
+      en: Observability
+      tr: Gözlemlenebilirlik
+    summaries:
+      en: Metrics, logs and distributed traces - knowing what your system is doing.
+      tr: Metrikler, loglar ve dağıtık izler — sisteminizin ne yaptığını bilmek.
+    labs:
+      - slug: prometheus
+        order: 1
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Collecting Metrics with Prometheus
+          tr: Prometheus ile Metrik Toplamak
+      - slug: prometheus/metrics
+        order: 2
+        duration: 40
+        requires: [docker]
+        titles:
+          en: Exporting Metrics
+          tr: Metrik Yayınlamak
+      - slug: grafana
+        order: 3
+        duration: 40
+        requires: [docker]
+        titles:
+          en: Visualizing Metrics with Grafana
+          tr: Grafana ile Metrikleri Görselleştirmek
+      - slug: elasticsearch
+        order: 4
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Storing Logs in Elasticsearch
+          tr: Logları Elasticsearch'te Saklamak
+      - slug: kibana
+        order: 5
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Searching Logs with Kibana
+          tr: Kibana ile Log Aramak
+      - slug: tracing
+        order: 6
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Distributed Tracing
+          tr: Dağıtık İzleme
+      - slug: jaeger
+        order: 7
+        duration: 35
+        requires: [docker]
+        titles:
+          en: Visualizing Traces with Jaeger
+          tr: Jaeger ile İzleri Görselleştirmek
+
+  - slug: security
+    order: 3
+    titles:
+      en: Security in Depth
+      tr: Katmanlı Güvenlik
+    summaries:
+      en: Shifting security left - static analysis, scanning, golden images and policy enforcement.
+      tr: Güvenliği öne almak — statik analiz, tarama, altın imajlar ve politika uygulama.
+    labs:
+      - slug: static-analysis
+        order: 1
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Static Code Analysis
+          tr: Statik Kod Analizi
+      - slug: scanning
+        order: 2
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Security Scanning
+          tr: Güvenlik Taraması
+      - slug: golden-images
+        order: 3
+        duration: 50
+        requires: [docker]
+        titles:
+          en: Golden Image Libraries
+          tr: Altın İmaj Kütüphaneleri
+      - slug: argo
+        order: 4
+        duration: 60
+        requires: [docker, kubernetes]
+        titles:
+          en: GitOps with ArgoCD
+          tr: ArgoCD ile GitOps
+      - slug: admission
+        order: 5
+        duration: 60
+        requires: [docker, kubernetes]
+        titles:
+          en: Enforcing Workload Policies
+          tr: İş Yükü Politikalarını Uygulamak
+      - slug: container-security
+        order: 6
+        duration: 50
+        requires: [docker, kubernetes]
+        titles:
+          en: Container Security Controls
+          tr: Container Güvenlik Kontrolleri

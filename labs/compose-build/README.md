@@ -1,3 +1,14 @@
+---
+title: Building Apps with Compose
+lang: en
+slug: compose-build
+section: cicd
+order: 5
+duration: 45
+requires: [docker]
+status: needs-review
+upstream: labs/compose-build
+---
 # Building Apps with Compose
 
 Docker Compose models can include build-time details, so you can build multiple container images using one Docker Compose command. Using override files lets you customize the image references and set labels to track the image back to the source code.
@@ -179,11 +190,14 @@ Pull the API image from the tag in the second build and check if it's the same a
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f core.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.
 
 And if you're not in the `devsecops` root directory, change back to it:
 

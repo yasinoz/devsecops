@@ -1,3 +1,14 @@
+---
+title: Collecting Metrics with Prometheus
+lang: en
+slug: prometheus
+section: observability
+order: 1
+duration: 45
+requires: [docker]
+status: needs-review
+upstream: labs/prometheus
+---
 # Prometheus
 
 [Prometheus](https://prometheus.io) is an open-source monitoring solution. It's a [CNCF](https://www.cncf.io) project (under the same foundation as Kubernetes), and it runs a whole suite of monitoring components.
@@ -52,7 +63,8 @@ The simplest query just needs the metric name.
 
 Enter `process_cpu_seconds_total` in the query expression and hit _Execute_. You'll see two metric values in the output:
 
-![](../../img/prometheus-cpu_console.png)
+> The _Table_ tab shows one row per series, with the metric name, its
+> labels and the current value.
 
 That tells you how much CPU time the node exporter and the document processor have used.
 
@@ -102,7 +114,8 @@ Prometheus calls this result an _instant vector_, because it's just showing the 
 
 Hit the _Graph_ button and you'll see the results over a range of time, plotted into a graph where you can select the time range:
 
-![](../../img/prometheus-processed-graph.png)
+> The _Graph_ tab draws one line per series. With a counter the line
+> only ever climbs — that is what makes `rate()` useful.
 
 That metric is a counter, so the graph continually increases. 
 
@@ -113,11 +126,13 @@ That metric is a counter, so the graph continually increases.
 
 `fulfilment_in_flight_total` is a gauge metric, so the graph will show values going up and down:
 
-![](../../img/prometheus-gauge-graph.png)
+> A gauge goes up and down, so its graph looks like a sawtooth rather
+> than a staircase.
 
 `fulfilment_requests_total` has multiple metrics for different `status` labels; Prometheus plots a line for each metric:
 
-![](../../img/prometheus-labels-graph.png)
+> Each label combination becomes its own line, and the legend under the
+> graph names them.
  
 </details><br/>
 
@@ -245,8 +260,12 @@ Use the API to query the values of the `fulfilment_in_flight_total` metric for t
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/prometheus/prometheus.yml down
+docker compose -f labs/prometheus/apps.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.

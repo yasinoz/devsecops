@@ -1,7 +1,7 @@
 services:
 
   fulfilment-api:
-    image: courselabs/fulfilment-api
+    image: courselabs/fulfilment-api:25.03
     ports:
       - "8071:80"
     environment:
@@ -11,7 +11,7 @@ services:
       - fulfilment 
 
   fulfilment-authz:
-    image: courselabs/fulfilment-authz
+    image: courselabs/fulfilment-authz:25.03
     ports:
       - "8072:80"
     environment:
@@ -22,7 +22,7 @@ services:
       - fulfilment 
 
   fulfilment-web:
-    image: courselabs/fulfilment-web
+    image: courselabs/fulfilment-web:25.03
     ports:
       - "8070:80"
     environment:

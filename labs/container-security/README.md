@@ -1,3 +1,14 @@
+---
+title: Container Security Controls
+lang: en
+slug: container-security
+section: security
+order: 6
+duration: 50
+requires: [docker, kubernetes]
+status: needs-review
+upstream: labs/container-security
+---
 # Container Security
 
 It's fairly straightforward to model your apps in Kubernetes and get them running, but there's more work to do before you get to production - and security is one of the main areas.

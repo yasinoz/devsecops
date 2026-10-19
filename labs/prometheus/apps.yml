@@ -6,7 +6,7 @@ services:
       - metrics
 
   fulfilment-api:
-    image: courselabs/fulfilment-api
+    image: courselabs/fulfilment-api:25.03
     ports:
       - 8080:80
     networks: 
@@ -14,7 +14,7 @@ services:
       - metrics
 
   fulfilment-processor:
-    image: courselabs/fulfilment-processor
+    image: courselabs/fulfilment-processor:25.03
     environment:
       - Observability__Metrics__IncludeRuntime=true
     networks: 

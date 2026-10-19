@@ -1,3 +1,14 @@
+---
+title: Building Docker Images with Jenkins
+lang: en
+slug: pipeline
+section: cicd
+order: 6
+duration: 60
+requires: [docker]
+status: needs-review
+upstream: labs/pipeline
+---
 # Building Docker Images with Jenkins
 
 You can run containers which have access to the Docker engine - so the app inside the container can use the Docker CLI to run other containers or build images. That makes for a nice clean CI/CD setup, where you run Jenkins in a container using pipelines which build your applications with multi-stage Dockerfiles. The pipelines can also run containers from the new images to smoke test the functionality.
@@ -16,7 +27,7 @@ With this approach your whole build infrastructure is portable. You can run a Je
 
 We'll start by building [this Dockerfile](./docker/Dockerfile), using [this Jenkinsfile](./docker/Jenkinsfile). That will package a pre-built Java app into a Docker image and run a container from the image. If the build or the test stages fail then the pipeline fails.
 
-Start by running Jenkins and Gogs using this [Docker Compose spec](./infra/docker-compose.yml):
+Start by running Jenkins and Gitea using this [Docker Compose spec](./infra/docker-compose.yml):
 
 ```
 docker compose -f labs/pipeline/infra/docker-compose.yml up -d
@@ -24,29 +35,36 @@ docker compose -f labs/pipeline/infra/docker-compose.yml up -d
 
 > The Jenkins service is configured to mount the Docker socket, which is how the container can talk to the Docker Engine where it's running.
 
-This is a new Gogs server, so we'll need to set it up for our repo:
+This is a new Gitea server with an empty database, so create your user
+first:
+
+```
+docker compose -f labs/pipeline/infra/docker-compose.yml exec -u git gitea gitea admin user create --admin --username student --password student --email student@labs.local --must-change-password=false
+```
+
+Then set it up for our repo:
 
 - browse to http://localhost:3000
 
-- sign in with username `courselabs` and password `student`
+- sign in with username `student` and password `student`
 
 - click the plus icon `+` in the _My Repositories_ section to create a new repo
 
 - call the repo `devsecops` and click _Create Repository_
 
-Add your Gogs server as a remote and push the repo to it:
+Add your Gitea server as a remote and push the repo to it:
 
 ```
 # you may already have this set up from the Jenkins lab - ignore any errors you see:
-git remote add gogs http://localhost:3000/courselabs/devsecops.git
+git remote add gitea http://localhost:3000/student/devsecops.git
 
-git push gogs main
+git push gitea main
 ```
 
 Now we can create a pipeline in Jenkins with:
 
 - job name = `docker`
-- Git URL = `http://gogs:3000/courselabs/devsecops.git`
+- Git URL = `http://gitea:3000/student/devsecops.git`
 - branch specifier = `refs/heads/main`
 - Jenkinsfile path = `labs/pipeline/docker/Jenkinsfile`
 
@@ -56,7 +74,7 @@ Now we can create a pipeline in Jenkins with:
   <summary>Not sure how?</summary>
 
 - browse to http://localhost:8080
-- log in with username `courselabs` and password `student`
+- log in with username `student` and password `student`
 - click on _New item_ in the left nav
 - select _Pipeline_ as the project type
 - in the pipeline window select _Pipeline script from SCM_ in the dropdown
@@ -87,7 +105,7 @@ There's nothing special about multi-stage builds - any Docker builds we can run 
 
 - [multi-stage/Jenkinsfile](./multi-stage/Jenkinsfile) - builds the image using environment variables to generate the tag, then runs a test container
 
-Those files are already in your Gogs server, so you can create a new pipeline in Jenkins to run the script in `labs/pipeline/multi-stage/Jenkinsfile`.
+Those files are already in your Gitea server, so you can create a new pipeline in Jenkins to run the script in `labs/pipeline/multi-stage/Jenkinsfile`.
 
 📋 Create and run a new pipeline called `multi-stage`.
 
@@ -202,7 +220,7 @@ git add labs/pipeline/compose/Jenkinsfile
 
 git commit -m 'Added push'
 
-git push gogs main
+git push gitea main
 ```
 
 📋 Build the `compose` job again and verify the images are built and pushed to Docker Hub under your username.
@@ -220,7 +238,7 @@ If you get an error message it should be clear what the issue is. When you get t
 
 </details>
 
-> You probably don't have Jenkins, Gogs or .NET installed on your machine. But now you can build and push Docker images for a .NET app with a fully automated pipeline, which brings in all the dependencies it needs.
+> You probably don't have Jenkins, Gitea or .NET installed on your machine. But now you can build and push Docker images for a .NET app with a fully automated pipeline, which brings in all the dependencies it needs.
 
 
 ## Lab
@@ -240,23 +258,26 @@ There are some additional Compose overrides we can use to build images with the 
 
 Extend the [Jenkinsfile](compose/Jenkinsfile) to add those tags and push them to Docker Hub as part of the build. The goal is for each build to push the specific image tag and update the other tags, so they work as aliases for the same image digest:
 
-![](/img/pipeline-lab.png)
+![](../../img/pipeline-lab.png)
 
-You'll need to push your Jenkinsfile changes to Gogs and run a new build in Jenkins. When you have it all working, pull the `latest` image using Docker on your machine. Can you find the build information and Git hash from the metadata?
+You'll need to push your Jenkinsfile changes to Gitea and run a new build in Jenkins. When you have it all working, pull the `latest` image using Docker on your machine. Can you find the build information and Git hash from the metadata?
 
 > Stuck? Try [hints](hints.md) or check the [solution](solution.md).
 
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/pipeline/infra/docker-compose.yml down
 ```
 
-And remove the Gogs remote:
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.
+
+And remove the Gitea remote:
 
 ```
-git remote rm gogs
+git remote rm gitea
 ```

@@ -1,47 +1,117 @@
-Welcome to the DevSecOps labs.
+---
+title: DevSecOps Labs
+lang: en
+slug: index
+section: index
+order: 0
+status: updated
+upstream: index.md
+---
+# DevSecOps Labs
 
-These are hands-on resources to help you learn DevOps and DevSecOps practices.
+Hands-on labs for DevOps and DevSecOps practices. Everything runs on your own
+machine with Docker — no cloud account, no credit card.
+
+> 🇹🇷 [Türkçe sürüm](index.tr.md)
 
 ## Pre-reqs
 
- - [Set up Docker and a Git client](setup/README.md) 
- - Download your repo
-    - Open a terminal (PowerShell on Windows; any shell on Linux/macOS) 
-    - Run: `git clone https://github.com/courselabs/devsecops.git`
-    - Open the folder: `cd devsecops`
-- _Optional_
-    -   Install [Visual Studio Code](https://code.visualstudio.com) (free - Windows, macOS and Linux) to browse the repo and documentation
+Work through these **before** the first lab:
+
+1. **[Set up your environment](setup/README.md)** — Docker, Git and a terminal.
+2. **Get the labs:**
+
+   ```
+   git clone https://github.com/yasinoz/devsecops.git
+   cd devsecops
+   ```
+
+3. **Sign in to Docker Hub** (free account). This is not optional in a
+   classroom: Docker Hub limits anonymous image pulls *per IP address*, so
+   twenty students sharing one office connection will hit the limit and see
+   `toomanyrequests` halfway through a lab.
+
+   ```
+   docker login
+   ```
+
+4. _Optional but recommended_ — [Visual Studio Code](https://code.visualstudio.com)
+   to browse the repo and edit files.
+
+Some labs in the last section need a **Kubernetes cluster**. The setup guide
+covers the options; the simplest is enabling Kubernetes in Docker Desktop.
+
+<!-- labs:start -->
 
 ## CI/CD Pipeline
 
-- [Using Jenkins and Jenkinsfiles](labs/jenkins/README.md)
-- [Building container images](labs/images/README.md)
-- [Using image registries](labs/registries/README.md)
-- [Multi-stage builds](labs/multi-stage/README.md)
-- [Building distributed apps](labs/compose-build/README.md)
-- [CI/CD with Jenkins](labs/pipeline/README.md) 
+Build automation with Jenkins, container images and release pipelines.
+
+| Lab | Time | Needs |
+|---|---|---|
+| [Automation with Jenkins](labs/jenkins/README.md) | 45 min | docker |
+| [Building Container Images](labs/images/README.md) | 40 min | docker |
+| [Accessing Images on Registries](labs/registries/README.md) | 30 min | docker |
+| [Multi-Stage Builds](labs/multi-stage/README.md) | 40 min | docker |
+| [Building Apps with Compose](labs/compose-build/README.md) | 45 min | docker |
+| [Building Docker Images with Jenkins](labs/pipeline/README.md) | 60 min | docker |
 
 ## Observability
 
-- [Collecting metrics with Prometheus](./labs/prometheus/README.md)
-- [Visualizing metrics with Grafana](./labs/grafana/README.md)
-- [Storing logs in Elasticsearch](./labs/elasticsearch/README.md)
-- [Searching logs with Kibana](./labs/kibana/README.md)
-- [Distributed tracing](./labs/tracing/README.md) 
-- [Visualizing traces with Jaeger](./labs/jaeger/README.md)
+Metrics, logs and distributed traces - knowing what your system is doing.
+
+| Lab | Time | Needs |
+|---|---|---|
+| [Collecting Metrics with Prometheus](labs/prometheus/README.md) | 45 min | docker |
+| [Exporting Metrics](labs/prometheus/metrics/README.md) | 40 min | docker |
+| [Visualizing Metrics with Grafana](labs/grafana/README.md) | 40 min | docker |
+| [Storing Logs in Elasticsearch](labs/elasticsearch/README.md) | 45 min | docker |
+| [Searching Logs with Kibana](labs/kibana/README.md) | 45 min | docker |
+| [Distributed Tracing](labs/tracing/README.md) | 45 min | docker |
+| [Visualizing Traces with Jaeger](labs/jaeger/README.md) | 35 min | docker |
 
 ## Security in Depth
 
-- [Static analysis](./labs/static-analysis/README.md)
-- [Security scanning](./labs/scanning/README.md)
-- [Building a golden image library](./labs/golden-images/README.md)
-- [GitOps with ArgoCD](./labs/argo/README.md)
-- [Enforcing workload policies](./labs/admission/README.md)
-- [Container security controls](./labs/container-security/README.md)
+Shifting security left - static analysis, scanning, golden images and policy enforcement.
 
-### Credits
+| Lab | Time | Needs |
+|---|---|---|
+| [Static Code Analysis](labs/static-analysis/README.md) | 45 min | docker |
+| [Security Scanning](labs/scanning/README.md) | 45 min | docker |
+| [Golden Image Libraries](labs/golden-images/README.md) | 50 min | docker |
+| [GitOps with ArgoCD](labs/argo/README.md) | 60 min | docker, kubernetes |
+| [Enforcing Workload Policies](labs/admission/README.md) | 60 min | docker, kubernetes |
+| [Container Security Controls](labs/container-security/README.md) | 50 min | docker, kubernetes |
 
-Created by [@EltonStoneman](https://twitter.com/EltonStoneman) ([sixeyed](https://github.com/sixeyed)): Freelance Consultant and Trainer. Author of [Learn Docker in a Month of Lunches](https://www.manning.com/books/learn-docker-in-a-month-of-lunches), [Learn Kubernetes in a Month of Lunches](https://www.manning.com/books/learn-kubernetes-in-a-month-of-lunches) and [many Pluralsight courses](https://pluralsight.pxf.io/c/1197078/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fauthors%2Felton-stoneman).
+<!-- labs:end -->
 
-  
+## How a lab works
 
+Every lab follows the same shape:
+
+- **Reference** — links to the real documentation. Use these at work, not the lab.
+- **Walkthrough** — guided steps. Commands are copy-pasteable.
+- 📋 **Tasks** — you work these out yourself. The answer is hidden in a
+  `Not sure?` block right underneath, so try first and then check.
+- **Lab** — a harder exercise with no walkthrough. `hints.md` nudges you,
+  `solution.md` gives the answer.
+- **Cleanup** — always run it, or the next lab will fight for the same ports.
+
+## Status and known gaps
+
+The labs were modernised from a 2021 source; see
+[MODERNIZASYON.md](MODERNIZASYON.md) for exactly what changed, what is verified,
+and what still needs a hands-on run. Labs marked `beta` on the website have
+been updated but not yet run end to end.
+
+Found something broken? Open an issue — that is genuinely useful, because a
+lab that fails in class is worse than no lab.
+
+## Credits
+
+Derived from [courselabs/devsecops](https://github.com/courselabs/devsecops) by
+[Elton Stoneman](https://github.com/sixeyed), used and redistributed under
+CC BY-SA 4.0. See [ATTRIBUTION.md](ATTRIBUTION.md).
+
+Turkish translation, modernisation and lab tooling by
+[Mehmet Yasin Özkasapoğlu](https://github.com/yasinoz) — `sudo2go`.

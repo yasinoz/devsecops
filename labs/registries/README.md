@@ -1,3 +1,14 @@
+---
+title: Accessing Images on Registries
+lang: en
+slug: registries
+section: cicd
+order: 3
+duration: 30
+requires: [docker]
+status: needs-review
+upstream: labs/registries
+---
 
 # Accessing Images on Registries
 
@@ -208,3 +219,12 @@ Cleanup by removing all containers:
 ```
 docker rm -f $(docker ps -aq)
 ```
+
+> On **PowerShell** the command substitution syntax is different:
+>
+> ```
+> docker rm -f @(docker ps -aq)
+> ```
+>
+> ⚠️ Either version removes **every** container on your machine, not just the
+> ones from this lab. Run `docker ps` first if you have other work running.

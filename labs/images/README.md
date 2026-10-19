@@ -1,3 +1,14 @@
+---
+title: Building Container Images
+lang: en
+slug: images
+section: cicd
+order: 2
+duration: 40
+requires: [docker]
+status: needs-review
+upstream: labs/images
+---
 # Building Container Images
 
 *Images* are the packages which containers run from. You'll build an image for each component of your application, and the image has all the pre-requisites installed and configured, ready to run.
@@ -230,9 +241,9 @@ docker inspect nginx:1.31.7-alpine
 And you can check Alpine too:
 
 ```
-docker pull alpine:3.14
+docker pull alpine:3.24
 
-docker inspect alpine:3.14
+docker inspect alpine:3.24
 ```
 
 </details><br/>
@@ -242,7 +253,7 @@ docker inspect alpine:3.14
 Here's the full image hierarchy:
 
 ```
-alpine:3.14
+alpine:3.24
 └─ nginx:1.31.7-alpine
     └─ courselabs/web 
 ```
@@ -267,3 +278,12 @@ Cleanup by removing all containers:
 ```
 docker rm -f $(docker ps -aq)
 ```
+
+> On **PowerShell** the command substitution syntax is different:
+>
+> ```
+> docker rm -f @(docker ps -aq)
+> ```
+>
+> ⚠️ Either version removes **every** container on your machine, not just the
+> ones from this lab. Run `docker ps` first if you have other work running.

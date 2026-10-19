@@ -1,33 +1,58 @@
 # Lab Solution
 
-The simplest way is to copy the previous job:
+The quickest way is to copy the job you already have:
 
 - browse to http://localhost:8080/view/all/newJob
-- set the job name to be `hello-world`
-- select _Pipeline_ as the job type
-- in the _Copy from_ box, enter `manual-gate`
+- set the job name to `hello-world`
+- choose _Pipeline_ as the type
+- in the _Copy from_ box at the bottom, enter `manual-gate`
+- click _OK_
 
-In the build definintion, scroll to _Build triggers_ and select _Poll SCM_. That sets up a schedule to check for changes from the Git server; enter this in the _Schedule_ box:
+In the job config, scroll to _Triggers_ and tick **Poll SCM**. That sets a
+schedule for checking the Git server for changes. Enter this in the _Schedule_
+box:
 
 ```
-* * * * * 
+* * * * *
 ```
 
-> This means Jenkins will check the Git repo every minute, and if there have been any changes since the last build then a new one is triggered.
+> Five stars means every minute. Jenkins checks the repo, and if anything has
+> changed since the last build it triggers a new one. Polling is wasteful
+> compared to a webhook, but it works without the Git server needing to reach
+> Jenkins — which is why it's still common.
 
-Change the script path to `labs/jenkins/hello-world/Jenkinsfile`, then save and build the job - it fails.
+Change the _Script Path_ to `labs/jenkins/hello-world/Jenkinsfile`, then save
+and build. It **fails**.
 
-Check the logs or the console output - the _Test_ stage fails with this log line:
+Open the build and read the console output. The _Test_ stage fails with:
 
-_Error: Could not find or load main class HelloWorkd.java_
+```
+Error: Could not find or load main class HelloWorkd
+```
 
-`HelloWorkd`> Looks like a typo :)
+`HelloWorkd`. That's a typo — the class is `HelloWorld`.
 
-Change the line `java HelloWorkd` in the Jenkinsfile to `java HelloWorld` in the file `labs/jenkins/hello-world/Jenkinsfile`. My fixes are in [this Jenkinsfile](./lab\Jenkinsfile)
+Fix the `java HelloWorkd` line in `labs/jenkins/hello-world/Jenkinsfile` so it
+reads `java HelloWorld`. A corrected copy is in
+[this Jenkinsfile](./lab/Jenkinsfile) if you want to compare.
 
-Then commit and push your changes. Back in Jenkins, wait for the build to trigger from the SCM change (or click _Build Now_). 
+Then commit and push:
 
-All will be well. Check the output page for the build and you'll see a list of archived artifacts, containing the Java class file.
+```
+git add labs/jenkins/hello-world/Jenkinsfile
+
+git commit -m 'Fix class name typo'
+
+git push gitea main
+```
+
+Back in Jenkins, wait up to a minute for the SCM poll to trigger the build (or
+click _Build Now_ if you're impatient).
+
+This time it passes. On the build page you'll see an **Archived Artifacts**
+section containing `HelloWorld.class` — that comes from the `archiveArtifacts`
+step in the `post { success { ... } }` block of the Jenkinsfile. Archiving is
+how you keep the output of a build after the workspace is cleaned up.
 
 ___
 > Back to the [exercises](README.md).

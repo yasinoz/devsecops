@@ -1,3 +1,14 @@
+---
+title: Visualizing Traces with Jaeger
+lang: en
+slug: jaeger
+section: observability
+order: 7
+duration: 35
+requires: [docker]
+status: needs-review
+upstream: labs/jaeger
+---
 # Running Jaeger
 
 [Jaeger](https://www.jaegertracing.io) is a distributed tracing system - it collects and stores traces, and gives you a web UI to find and visualize them. Jaeger originally used its own data format, but it also supports OpenTelemetry.
@@ -154,8 +165,12 @@ Use Jaeger to plot the call stack for submitting documents; which method on whic
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/jaeger/jaeger.yml down
+docker compose -f labs/jaeger/apps.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.

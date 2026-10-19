@@ -1,48 +1,100 @@
+---
+title: Automation with Jenkins
+lang: en
+slug: jenkins
+section: cicd
+order: 1
+duration: 45
+requires: [docker]
+status: needs-review
+upstream: labs/jenkins
+---
 # Automation with Jenkins
 
-[Jenkins](https://jenkins.io) is probably the most popular automation server around - but popular in terms of being well used rather than being liked. It's been around a long time and one of the main features is its extensibility: it has a plugin framework with over [1800 published plugins](https://plugins.jenkins.io) which you can use to build any type of application, or integrate with any third-party system. There's a web UI you can use to define jobs, which get stored on the server's filesystem.
+[Jenkins](https://jenkins.io) is probably the most widely used automation
+server around — widely used rather than widely loved. It has been going a long
+time and its main feature is extensibility: a plugin framework with more than
+1,800 published plugins, so it can build any kind of application and integrate
+with any third-party system. There's a web UI for defining jobs, and those job
+definitions get stored on the server's filesystem.
 
-The UI and the plugins are one of the main reasons people don't like Jenkins. Plugins are prone to security flaws so they need frequent updates, but they can be fiddly to automate. You tend to find Jenkins servers are maintained long after they should have been decomissioned, because no-one's sure if they'd be able to recreate the exact set of plugins and load all the job definitions from the old server. We'll use Jenkins in a different way, with minimal plugins and job definitions stored in source control.
+The UI and the plugins are also the main reasons people dislike Jenkins.
+Plugins are a recurring source of security advisories so they need frequent
+updates, and they're fiddly to automate. You often find Jenkins servers kept
+alive long past their retirement date, because nobody is confident they could
+recreate the exact set of plugins and reload the job definitions on a new
+server.
+
+We'll use Jenkins the other way round: **minimal plugins, job definitions in
+source control.**
 
 ## Reference
 
 - [Jenkinsfile walkthrough](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/)
-
-- [Using Declarative Jenkins Pipelines](https://www.pluralsight.com/courses/using-declarative-jenkins-pipelines) - Pluralsight course
-
-- [Using and Managing Jenkins Plugins](https://www.pluralsight.com/courses/using-managing-jenkins-plugins) - Pluralsight course
+- [Declarative Pipeline syntax](https://www.jenkins.io/doc/book/pipeline/syntax/)
+- [Pipeline steps reference](https://www.jenkins.io/doc/pipeline/steps/)
+- [Configuration as Code (JCasC)](https://www.jenkins.io/projects/jcasc/)
 
 ## Running Jenkins
 
-Start by running Jenkins inside a Docker container, along with a local Git server (using Gogs):
+Start Jenkins and a local Git server ([Gitea](https://about.gitea.com)):
 
 ```
 docker compose -f labs/jenkins/infra/docker-compose.yml up -d
 ```
 
-> This is a custom setup of Jenkins with a few plugins already installed. It's built from [this Dockerfile](https://github.com/courselabs/docker-images/blob/main/src/jenkins/Dockerfile) if you want to see how it's automated.
+> The Jenkins image is [built from this Dockerfile](../../images/jenkins/Dockerfile).
+> The plugins and the admin user are baked in with
+> [Configuration as Code](../../images/jenkins/casc.yaml), so there's no setup
+> wizard and no `initialAdminPassword` to dig out of the logs.
 
-Browse to Jenkins at http://localhost:8080. You may see a page saying "Jenkins is getting ready to work" - it can take a few minutes for a new server to come online. When you see the home page, click the log in link and sign in with these admin credentials:
+Check both containers are running:
 
-- username: `courselabs`
+```
+docker compose -f labs/jenkins/infra/docker-compose.yml ps
+```
+
+### Set up the Git server
+
+Gitea starts with an empty database, so create a user for yourself:
+
+```
+docker compose -f labs/jenkins/infra/docker-compose.yml exec -u git gitea gitea admin user create --admin --username student --password student --email student@labs.local --must-change-password=false
+```
+
+> `--must-change-password=false` matters: without it Gitea forces a password
+> change at first login, which breaks the Jenkins credentials later in the lab.
+
+Browse to Gitea at http://localhost:3000 and sign in with `student` / `student`.
+
+### Sign in to Jenkins
+
+Browse to http://localhost:8080. It may take a minute on first start — Jenkins
+is loading its plugins. Sign in with:
+
+- username: `student`
 - password: `student`
 
-Check out the UI - it's slightly "web 1.0". The left nav takes you to the main options, including the menu to manage Jenkins; the central section will show a list of jobs once you have created some. 
+Have a look around. It's resolutely "web 1.0". The left nav has the main
+options including _Manage Jenkins_; the middle of the page lists your jobs once
+you have some.
 
 ## Creating a Freestyle Job
 
-We'll create a classic Jenkins job - using the freestyle type where you build up the steps using the web UI:
+Let's start with a classic Jenkins job — the *freestyle* type, where you build
+the steps up in the web UI:
 
 - click _Create a job_ on the home screen
-- call the new job `lab-1`
-- set the job type to be _Freestyle project_
+- name it `lab-1`
+- choose _Freestyle project_
 - click _OK_
 
-This creates the new job. There are different sections of the UI which represent typical stages of a build - source code connection details, the build triggers and the build steps.
+The config page has sections for the typical parts of a build: source code,
+build triggers, build steps.
 
-We'll use this job to run a simple script which prints some text:
+We'll run a simple script that prints some text:
 
-- scroll down to the _Build_ section
+- scroll to the _Build Steps_ section
 - click _Add build step_
 - select _Execute shell_
 - paste this into the _Command_ box:
@@ -53,197 +105,225 @@ echo "This is build number: $BUILD_NUMBER of job: $JOB_NAME"
 
 - click _Save_
 
-> Jenkins populates [a set of environment variables](http://localhost:8080/env-vars.html/) when it runs the job, which are accessible in the job steps. This script prints out the build number - which is an incrementing count of the number of times the job has run - and the job name.
+> Jenkins sets [a bunch of environment variables](http://localhost:8080/env-vars.html/)
+> when it runs a job, and your steps can read them. This script prints the build
+> number — which increments every run — and the job name.
 
-Now you're in the main job window. The left nav lets you configure the job again, and the central section will show the recent runs of the job.
+You're now on the job page. The left nav lets you reconfigure it; the middle
+shows recent runs.
 
-Click _Build Now_ to run the job. When the build finishes check the output in http://localhost:8080/job/lab-1/1/console
+Click _Build Now_. When it finishes, check the output at
+http://localhost:8080/job/lab-1/1/console
 
-📋 Build the job again - how is the output different?
+📋 Run the job again — how is the output different?
 
 <details>
   <summary>Not sure?</summary>
 
-Click _Build Now_ again. When the job completes you can see the output at http://localhost:8080/job/lab-1/2/console
+Click _Build Now_ again. When it completes the output is at
+http://localhost:8080/job/lab-1/2/console
 
-The job name is the same, but the number has incremented.
+The job name is the same; the build number has incremented.
 
 </details><br/>
 
-There are other tools installed in this Jenkins server, which you would use in a real pipeline. What happens if you print the version of the Java compiler, the Docker command line or the Kubernetes command line in the script?
+This Jenkins server has other tools installed, the kind you'd use in a real
+pipeline. What happens if you print their versions?
 
-📋 Edit the job to print the version numbers of `javac`, `docker` and `kubectl`.
+📋 Edit the job to print the versions of `javac` and `docker`, and then to list
+Kubernetes nodes with `kubectl get nodes`.
 
 <details>
   <summary>Not sure how?</summary>
 
-Click _Configure_ in the job page to edit the job. 
-
-You can add a new build step or update the _Command_ box in the existing step to print version numbers:
+Click _Configure_ on the job page. Update the _Command_ box:
 
 ```
+javac --version
+
 docker version
 
-javac --version
-
-kubectl version
+kubectl get nodes
 ```
 
-Click _Save_.
+Click _Save_, then _Build Now_.
 
 </details><br/>
 
-When you build the updated job, it will fail. Shell commands always return with an exit code, usually 0 means OK and non-zero means the command failed. The Kubernetes CLI errors because it can't connect to a Kubernetes environment. The exit code is non-zero so Jenkins takes that as a failure so the job step fails. 
+The build **fails**. Shell commands return an exit code: 0 means success,
+anything else means failure. `javac` and `docker` work — the Docker CLI is in
+the image and the container has the host's Docker socket mounted. But
+`kubectl get nodes` has no cluster to talk to, so it exits non-zero, and
+Jenkins marks the step as failed.
 
-If there were other steps after this one, they wouldn't run because the job exits when a step fails.
+If there were more steps after this one they would not run: the job stops at
+the first failure.
 
-> This is the old-school way of using Jenkins. Where does the job definition live? How would you migrate it to a new Jenkins server? The better option is to use [pipelines](https://www.jenkins.io/doc/book/pipeline/), which use plugins that are already installed on this server.
+> So where does this job definition actually live? On the Jenkins server's
+> filesystem. How would you move it to a new server? How would you review a
+> change to it? This is why we use [pipelines](https://www.jenkins.io/doc/book/pipeline/)
+> instead, with the definition in source control.
 
-## Pipelines and the Blue Ocean UI
+## Pipelines
 
-The pipeline feature comes with the `workflow-aggregator` and `blueocean` plugins. Those give you the new way of defining and managing jobs, where the job definition is stored in source control.
+Pipelines come from the `workflow-aggregator` plugin, which is already
+installed. A pipeline job runs a script — a *Jenkinsfile* — written in a
+declarative syntax.
 
-Browse to the Jenkins homepage and select _Open Blue Ocean_ from the left nav. You'll see your original build job - click to open it in the new UI, where you can start a new build and view the logs.
+> Older versions of this lab used the *Blue Ocean* UI for a visual pipeline
+> editor. Blue Ocean is no longer maintained; the built-in Pipeline UI with
+> the Stage View is what Jenkins ships today, and it's what we'll use.
 
-We'll create a new pipeline job instead. Browse back to main Blue Ocean UI at http://localhost:8080/blue and click _New pipeline_.
+Create a new job:
 
-📋 Set up the new pipeline to connect to your Git server, running at http://gogs:3000/courselabs/labs.git - it uses the same credentials as Jenkins.
-
-<details>
-  <summary>Not sure how?</summary>
-
-- Select _Git_ in the source code list (not _GitHub_! we're using our own Git server)
-
-- Set the _Repository URL_ to http://gogs:3000/courselabs/labs.git 
-
-- Set _Username_ to `courselabs` and _Password_ to `student`
-
-- Click _Create Credential_ - the login details are stored in Jenkins
-
-- Click _Create Pipeline_
-
-- Click _Create Pipeline_ again :)
-
-</details><br/>
-
-> The Jenkins container is on the same Docker network as the Gogs container, so it can access it using the DNS name `gogs`. 
-
-Your new pipeline starts empty. Click the plus icon `+` in the pipeline visualizer to add a new stage. Call the stage `audit`. Then click _Add step_ to add a step to the stage:
-
-- Select _Shell Script_ as the step type
-
-- Paste this into the script text box:
-
-```
-echo "This is build number: $BUILD_NUMBER of job: $JOB_NAME"
-
-javac --version
-```
-
-> The UI may not preserve the line spaces correctly, you can ignore that.
-
-Click _Save_ and then _Save & run_. Jenkins creates the pipeline definition and uploads it to the Git server. Wait a moment and the build will automatically start. The build should succeed - check the output to see the message.
-
-📋 Browse to your Git repo at http://localhost:3000/courselabs/labs - where is the build definition stored?
-
-<details>
-  <summary>Not sure?</summary>
-
-There's a single file in the repo called `Jenkinsfile`. Open it and you'll see the pipeline definition, with the stage called `audit` containing the shell script to print version numbers.
-
-</details><br/>
-
-The UI to build a pipeline is useful, but typically you'll create the Jenkinsfile in your source repo and edit the text directly when you change the pipeline. 
-
-## Storing Pipelines in Source Code
-
-We'll use [this Jenkinsfile](./manual-gate/Jenkinsfile) for our next build. It has multiple stages but it should be fairly clear what it's doing. An interesting point is the _Deploy_ stage which used an `input` block to ask a user for confirmation.
-
-To run the pipeline, first we'll push the `devsecops` repo to our local Git server so Jenkins can use it.
-
-Open Gogs at http://localhost:3000 and sign in with username `courselabs` and password `student`. Under the _My Repositories_ section you'll see the `labs` repository; click the plus icon to create a new repo:
-
-- set _Repository Name_ to `devsecops`
-
-- leave all other options with the defaults
-
-- click _Create Repository_
-
-Now you can add your local Gogs server as a remote for the course repo, and push the contents:
-
-```
-git remote add gogs http://localhost:3000/courselabs/devsecops.git
-
-git push gogs main
-```
-
-> You'll need to log in with your Git client - use the usual credentials.
-
-Check the repo at http://localhost:3000/courselabs/devsecops, and you'll see all the lab content. This is like your own private GitHub.
-
-Browse back to Jenkins at http://localhost:8080/view/all/newJob to create a new job:
-
-- call it `manual-gate`
-
-- select _Pipeline_ as the job type
-
+- browse to http://localhost:8080/view/all/newJob
+- name it `lab-2`
+- choose _Pipeline_
 - click _OK_
 
-This is the classic UI - you can still use it to work with new pipelines. Scroll to the _Pipeline_ section:
+Scroll to the _Pipeline_ section at the bottom. Leave the definition as
+_Pipeline script_ and paste this in:
 
-- select _Pipeline script from SCM_ in the dropdown
-- set the SCM to _Git_
-- set the _Repository URL_ to `http://gogs:3000/courselabs/devsecops.git`
-- change the _Branch Specifier_ from `*/master` to `refs/heads/main`
-- set the _Script Path_ to `labs/jenkins/manual-gate/Jenkinsfile`
+```
+pipeline {
+    agent any
+    stages {
+        stage('Audit') {
+            steps {
+                echo "This is build number: ${env.BUILD_NUMBER} of job: ${env.JOB_NAME}"
+                sh 'javac --version'
+            }
+        }
+    }
+}
+```
 
-Save and run the build. It will pause after the _Test_ stage and wait for user input.
+Click _Save_, then _Build Now_.
 
-📋 In the job UI is it clear how you can progress the _Deploy_ stage and complete the build?
+📋 Open the job page. How is the display different from the freestyle job?
 
 <details>
   <summary>Not sure?</summary>
 
-You'll see boxes representing each stage of the pipeline - earlier stages are green to show they've suceeded. The _Deploy_ box is blue and it says _Paused_:
+You get a **Stage View** — a grid with one column per stage, showing how long
+each one took and whether it passed. With a single stage it isn't impressive;
+add stages and it becomes the fastest way to see where a build spends its time
+and where it breaks.
 
-![](/img/jenkins-manual-gate.png)
-
-Click the blue box and you'll see the confirmation window with the options defined in the Jenkinsfile. Click _Do it!_ and the build will continue.
+Click into the build and then _Console Output_ for the full log.
 
 </details><br/>
 
-Input blocks are very useful as you can automate the full deployment in the pipeline, but still have manual approval for different stages.
+This is better than a freestyle job, but the definition is still stored in
+Jenkins. Next we'll move it into Git.
+
+## Storing Pipelines in Source Control
+
+We'll use [this Jenkinsfile](./manual-gate/Jenkinsfile) next. It has several
+stages, and the interesting one is _Deploy_: it uses an `input` block to ask a
+human for confirmation before continuing.
+
+First we need the lab repo on our local Git server so Jenkins can fetch it.
+
+In Gitea at http://localhost:3000, click the **+** in the top right and choose
+_New Repository_:
+
+- set _Repository Name_ to `devsecops`
+- leave everything else at the defaults
+- click _Create Repository_
+
+Now add your local Gitea server as a remote for this repo and push:
+
+```
+git remote add gitea http://localhost:3000/student/devsecops.git
+
+git push gitea main
+```
+
+> Your Git client will ask for credentials — use `student` / `student`.
+
+Check http://localhost:3000/student/devsecops and you'll see all the lab
+content. It's your own private GitHub.
+
+Back in Jenkins, create another job at http://localhost:8080/view/all/newJob:
+
+- name it `manual-gate`
+- choose _Pipeline_
+- click _OK_
+
+Scroll to the _Pipeline_ section:
+
+- set _Definition_ to **Pipeline script from SCM**
+- set _SCM_ to **Git**
+- set _Repository URL_ to `http://gitea:3000/student/devsecops.git`
+- click _Add_ next to _Credentials_, choose _Jenkins_, and add a
+  **Username with password** credential: username `student`, password
+  `student`. Then select it in the dropdown.
+- change _Branch Specifier_ from `*/master` to `refs/heads/main`
+- set _Script Path_ to `labs/jenkins/manual-gate/Jenkinsfile`
+
+> Jenkins uses `gitea` as the hostname, not `localhost`. Both containers are on
+> the same Docker network, so Jenkins resolves `gitea` by DNS. From *your*
+> machine the same server is `localhost:3000`, because that's the published
+> port.
+
+Save and run the build. It gets through _Build_ and _Test_, then stops and
+waits for you.
+
+📋 In the job UI, how do you let the _Deploy_ stage proceed and finish the build?
+
+<details>
+  <summary>Not sure?</summary>
+
+The Stage View shows a box per stage; the finished ones are green. The _Deploy_
+box is paused and waiting.
+
+![Jenkins waiting at a manual gate](../../img/jenkins-manual-gate.png)
+
+Hover over the paused stage and click the prompt (or open the build and use the
+_Paused for Input_ link). You'll get the confirmation dialog defined in the
+Jenkinsfile. Click _Do it!_ and the build continues.
+
+</details><br/>
+
+`input` blocks are genuinely useful: you can automate the entire deployment and
+still require a human decision at the point where that matters.
 
 ## Lab
 
-Now it's your turn :) There's another pipeline defined in this repo which builds and runs a simple Java app. The [Jenkinsfile](hello-world/Jenkinsfile) is at `labs/jenkins/hello-world/Jenkinsfile`:
+Your turn. There's another pipeline in this repo that builds and runs a simple
+Java app. The [Jenkinsfile](hello-world/Jenkinsfile) is at
+`labs/jenkins/hello-world/Jenkinsfile`:
 
 - create a new job to run that pipeline
-- include a build trigger to poll SCM for changes every minute
-- the build will fail :) You'll need to update the Jenkinsfile and push changes to your Gogs server to fix it
-- when you get the build running, where can you find the compiled binaries?
+- add a build trigger that polls SCM for changes every minute
+- the build will fail :) You'll need to fix the Jenkinsfile and push the change
+  to your Gitea server
+- once it's building, where do the compiled binaries end up?
 
-Use these commands to push your updated Jenkinsfile:
+Use these commands to push your fix:
 
 ```
 git add labs/jenkins/hello-world/Jenkinsfile
+
 git commit -m 'Lab solution'
-git push gogs
+
+git push gitea main
 ```
 
-> Stuck? Try [hints](hints.md) or check the [solution](solution.md).
+> Stuck? Try the [hints](hints.md) or check the [solution](solution.md).
 
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Remove the lab containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/jenkins/infra/docker-compose.yml down
 ```
 
-And remove the Gogs remote:
+And remove the Gitea remote so it doesn't confuse later labs:
 
 ```
-git remote rm gogs
+git remote rm gitea
 ```

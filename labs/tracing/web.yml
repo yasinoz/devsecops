@@ -1,7 +1,7 @@
 services:
 
   fulfilment-web:
-    image: courselabs/fulfilment-web
+    image: courselabs/fulfilment-web:25.03
     ports:
       - "8070:80"
     networks:

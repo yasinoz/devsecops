@@ -1,0 +1,547 @@
+{
+  "schema": 1,
+  "generated": "2026-10-19",
+  "track": {
+    "slug": "devsecops",
+    "titles": {
+      "en": "DevSecOps Labs",
+      "tr": "DevSecOps Laboratuvarları"
+    },
+    "summaries": {
+      "en": "Hands-on labs for DevOps and DevSecOps practices - CI/CD, observability and security in depth.",
+      "tr": "DevOps ve DevSecOps pratikleri için uygulamalı laboratuvarlar — CI/CD, gözlemlenebilirlik ve katmanlı güvenlik."
+    }
+  },
+  "repo": {
+    "owner": "yasinoz",
+    "name": "devsecops",
+    "branch": "main"
+  },
+  "raw_base": "https://raw.githubusercontent.com/yasinoz/devsecops/main",
+  "web_base": "https://github.com/yasinoz/devsecops/blob/main",
+  "setup": {
+    "en": "setup/README.md",
+    "tr": "setup/README.tr.md"
+  },
+  "languages": [
+    "en",
+    "tr"
+  ],
+  "sections": [
+    {
+      "slug": "cicd",
+      "order": 1,
+      "titles": {
+        "en": "CI/CD Pipeline",
+        "tr": "CI/CD Pipeline"
+      },
+      "summaries": {
+        "en": "Build automation with Jenkins, container images and release pipelines.",
+        "tr": "Jenkins ile otomasyon, container imajları ve sürüm pipeline'ları."
+      },
+      "labs": [
+        {
+          "slug": "jenkins",
+          "order": 1,
+          "titles": {
+            "en": "Automation with Jenkins",
+            "tr": "Jenkins ile Otomasyon"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/jenkins",
+          "docs": {
+            "en": {
+              "readme": "labs/jenkins/README.md",
+              "hints": "labs/jenkins/hints.md",
+              "solution": "labs/jenkins/solution.md"
+            },
+            "tr": {
+              "readme": "labs/jenkins/README.tr.md",
+              "hints": "labs/jenkins/hints.tr.md",
+              "solution": "labs/jenkins/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
+          "slug": "images",
+          "order": 2,
+          "titles": {
+            "en": "Building Container Images",
+            "tr": "Container İmajları Derlemek"
+          },
+          "duration": 40,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/images",
+          "docs": {
+            "en": {
+              "readme": "labs/images/README.md",
+              "hints": "labs/images/hints.md",
+              "solution": "labs/images/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "registries",
+          "order": 3,
+          "titles": {
+            "en": "Accessing Images on Registries",
+            "tr": "Registry Üzerindeki İmajlara Erişmek"
+          },
+          "duration": 30,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/registries",
+          "docs": {
+            "en": {
+              "readme": "labs/registries/README.md",
+              "hints": "labs/registries/hints.md",
+              "solution": "labs/registries/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "multi-stage",
+          "order": 4,
+          "titles": {
+            "en": "Multi-Stage Builds",
+            "tr": "Çok Aşamalı Build"
+          },
+          "duration": 40,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/multi-stage",
+          "docs": {
+            "en": {
+              "readme": "labs/multi-stage/README.md",
+              "hints": "labs/multi-stage/hints.md",
+              "solution": "labs/multi-stage/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "compose-build",
+          "order": 5,
+          "titles": {
+            "en": "Building Apps with Compose",
+            "tr": "Compose ile Uygulama Derlemek"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/compose-build",
+          "docs": {
+            "en": {
+              "readme": "labs/compose-build/README.md",
+              "hints": "labs/compose-build/hints.md",
+              "solution": "labs/compose-build/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "pipeline",
+          "order": 6,
+          "titles": {
+            "en": "Building Docker Images with Jenkins",
+            "tr": "Jenkins ile Docker İmajı Derlemek"
+          },
+          "duration": 60,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/pipeline",
+          "docs": {
+            "en": {
+              "readme": "labs/pipeline/README.md",
+              "hints": "labs/pipeline/hints.md",
+              "solution": "labs/pipeline/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "observability",
+      "order": 2,
+      "titles": {
+        "en": "Observability",
+        "tr": "Gözlemlenebilirlik"
+      },
+      "summaries": {
+        "en": "Metrics, logs and distributed traces - knowing what your system is doing.",
+        "tr": "Metrikler, loglar ve dağıtık izler — sisteminizin ne yaptığını bilmek."
+      },
+      "labs": [
+        {
+          "slug": "prometheus",
+          "order": 1,
+          "titles": {
+            "en": "Collecting Metrics with Prometheus",
+            "tr": "Prometheus ile Metrik Toplamak"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/prometheus",
+          "docs": {
+            "en": {
+              "readme": "labs/prometheus/README.md",
+              "hints": "labs/prometheus/hints.md",
+              "solution": "labs/prometheus/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "prometheus/metrics",
+          "order": 2,
+          "titles": {
+            "en": "Exporting Metrics",
+            "tr": "Metrik Yayınlamak"
+          },
+          "duration": 40,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/prometheus/metrics",
+          "docs": {
+            "en": {
+              "readme": "labs/prometheus/metrics/README.md",
+              "hints": "labs/prometheus/metrics/hints.md",
+              "solution": "labs/prometheus/metrics/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "grafana",
+          "order": 3,
+          "titles": {
+            "en": "Visualizing Metrics with Grafana",
+            "tr": "Grafana ile Metrikleri Görselleştirmek"
+          },
+          "duration": 40,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/grafana",
+          "docs": {
+            "en": {
+              "readme": "labs/grafana/README.md",
+              "hints": "labs/grafana/hints.md",
+              "solution": "labs/grafana/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "elasticsearch",
+          "order": 4,
+          "titles": {
+            "en": "Storing Logs in Elasticsearch",
+            "tr": "Logları Elasticsearch'te Saklamak"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/elasticsearch",
+          "docs": {
+            "en": {
+              "readme": "labs/elasticsearch/README.md",
+              "hints": "labs/elasticsearch/hints.md",
+              "solution": "labs/elasticsearch/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "kibana",
+          "order": 5,
+          "titles": {
+            "en": "Searching Logs with Kibana",
+            "tr": "Kibana ile Log Aramak"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/kibana",
+          "docs": {
+            "en": {
+              "readme": "labs/kibana/README.md",
+              "hints": "labs/kibana/hints.md",
+              "solution": "labs/kibana/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "tracing",
+          "order": 6,
+          "titles": {
+            "en": "Distributed Tracing",
+            "tr": "Dağıtık İzleme"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/tracing",
+          "docs": {
+            "en": {
+              "readme": "labs/tracing/README.md",
+              "hints": "labs/tracing/hints.md",
+              "solution": "labs/tracing/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "jaeger",
+          "order": 7,
+          "titles": {
+            "en": "Visualizing Traces with Jaeger",
+            "tr": "Jaeger ile İzleri Görselleştirmek"
+          },
+          "duration": 35,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/jaeger",
+          "docs": {
+            "en": {
+              "readme": "labs/jaeger/README.md",
+              "hints": "labs/jaeger/hints.md",
+              "solution": "labs/jaeger/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "security",
+      "order": 3,
+      "titles": {
+        "en": "Security in Depth",
+        "tr": "Katmanlı Güvenlik"
+      },
+      "summaries": {
+        "en": "Shifting security left - static analysis, scanning, golden images and policy enforcement.",
+        "tr": "Güvenliği öne almak — statik analiz, tarama, altın imajlar ve politika uygulama."
+      },
+      "labs": [
+        {
+          "slug": "static-analysis",
+          "order": 1,
+          "titles": {
+            "en": "Static Code Analysis",
+            "tr": "Statik Kod Analizi"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/static-analysis",
+          "docs": {
+            "en": {
+              "readme": "labs/static-analysis/README.md",
+              "hints": "labs/static-analysis/hints.md",
+              "solution": "labs/static-analysis/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "scanning",
+          "order": 2,
+          "titles": {
+            "en": "Security Scanning",
+            "tr": "Güvenlik Taraması"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/scanning",
+          "docs": {
+            "en": {
+              "readme": "labs/scanning/README.md",
+              "hints": "labs/scanning/hints.md",
+              "solution": "labs/scanning/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "golden-images",
+          "order": 3,
+          "titles": {
+            "en": "Golden Image Libraries",
+            "tr": "Altın İmaj Kütüphaneleri"
+          },
+          "duration": 50,
+          "requires": [
+            "docker"
+          ],
+          "status": "needs-review",
+          "path": "labs/golden-images",
+          "docs": {
+            "en": {
+              "readme": "labs/golden-images/README.md",
+              "hints": "labs/golden-images/hints.md",
+              "solution": "labs/golden-images/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "argo",
+          "order": 4,
+          "titles": {
+            "en": "GitOps with ArgoCD",
+            "tr": "ArgoCD ile GitOps"
+          },
+          "duration": 60,
+          "requires": [
+            "docker",
+            "kubernetes"
+          ],
+          "status": "needs-review",
+          "path": "labs/argo",
+          "docs": {
+            "en": {
+              "readme": "labs/argo/README.md",
+              "hints": "labs/argo/hints.md",
+              "solution": "labs/argo/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "admission",
+          "order": 5,
+          "titles": {
+            "en": "Enforcing Workload Policies",
+            "tr": "İş Yükü Politikalarını Uygulamak"
+          },
+          "duration": 60,
+          "requires": [
+            "docker",
+            "kubernetes"
+          ],
+          "status": "needs-review",
+          "path": "labs/admission",
+          "docs": {
+            "en": {
+              "readme": "labs/admission/README.md",
+              "hints": "labs/admission/hints.md",
+              "solution": "labs/admission/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        },
+        {
+          "slug": "container-security",
+          "order": 6,
+          "titles": {
+            "en": "Container Security Controls",
+            "tr": "Container Güvenlik Kontrolleri"
+          },
+          "duration": 50,
+          "requires": [
+            "docker",
+            "kubernetes"
+          ],
+          "status": "needs-review",
+          "path": "labs/container-security",
+          "docs": {
+            "en": {
+              "readme": "labs/container-security/README.md",
+              "hints": "labs/container-security/hints.md",
+              "solution": "labs/container-security/solution.md"
+            }
+          },
+          "langs": [
+            "en"
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "total": 19,
+    "en": 19,
+    "tr": 1,
+    "by_status": {
+      "needs-review": 19
+    }
+  }
+}

@@ -1,8 +1,27 @@
+# Elasticsearch - tek dugumlu lab kurulumu.
+#
+# Upstream, guvenligi kapatilmis hazir bir docker.elastic.co/elasticsearch/elasticsearch:9.5.5
+# imaji kullaniyordu. Artik resmi imaji kullaniyoruz ve 8.x'ten itibaren
+# guvenlik (TLS + kimlik dogrulama) VARSAYILAN olarak acik geliyor. Lab
+# komutlari duz HTTP ile curl attigi icin burada bilincli olarak kapatiyoruz.
+#
+# URETIMDE ASLA BOYLE YAPILMAZ: kimlik dogrulamasi olmayan Elasticsearch,
+# internete acildiginda saniyeler icinde taranip silinir.
+
 services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5
-    ports: 
+    environment:
+      # Kume kesfi yok - tek dugum
+      discovery.type: single-node
+      # Lab icin guvenligi kapat (yukaridaki nota bakin)
+      xpack.security.enabled: "false"
+      xpack.security.enrollment.enabled: "false"
+      # Heap'i sabitle: varsayilan container belleginin yarisini alir ve
+      # 6 GB'lik Docker Desktop'ta diger lab servislerini acliga dusurur.
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    ports:
       - 9200:9200
     networks:
       - logging
