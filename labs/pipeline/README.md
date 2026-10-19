@@ -17,11 +17,11 @@ With this approach your whole build infrastructure is portable. You can run a Je
 
 ## References
 
-- [Accessing the Docker Engine from inside a container]()
+- [Accessing the Docker Engine from inside a container](https://docs.docker.com/engine/security/#docker-daemon-attack-surface)
 
-- [Saving credentials in Jenkins]()
+- [Saving credentials in Jenkins](https://www.jenkins.io/doc/book/using/using-credentials/)
 
-- [Working with credentials in pipelines]()
+- [Working with credentials in pipelines](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#handling-credentials)
 
 ## Build a Simple Java Image
 
@@ -156,7 +156,7 @@ So this is a .NET app. To be sure we're not cheating, run this command inside th
 
 ```
 # this will fail
-docker exec infra_jenkins_1 dotnet --version
+docker compose -f labs/pipeline/infra/docker-compose.yml exec jenkins dotnet --version
 ```
 
 > You'll see a `not found in $PATH` error because there is no .NET in the container. That's OK though because it's a multi-stage build and the compilation will run inside containers.
@@ -201,7 +201,7 @@ When you have a Docker Hub account, you can browse to [your settings](https://hu
 
 Now create a credential in Jenkins:
 
-- browse to http://localhost:8080/credentials/store/system/domain/_/
+- browse to _Manage Jenkins_ > _Credentials_ > _System_ > _Global credentials_ (http://localhost:8080/manage/credentials/store/system/domain/_/)
 - click _Add Credentials_ and make sure the _Kind_ is _Username with password_
 - enter your Docker Hub username (**not** your email address) in the _Username_ field
 - enter your access token in the _Password_ field
@@ -230,7 +230,7 @@ git push gitea main
 
 Check all the build stages. If the _Push_ stage fails, check the logs. The issue will be a problem authenticating to Docker Hub:
 
-- check your `docker-id` credentials in Jenkins are correct
+- check your `docker-hub` credentials in Jenkins are correct
 - check your `REPOSITORY` environment variable matches the Docker Hub ID in the credentials
 - verify the images are being built with the expected image name, containing your Docker Hub ID
 

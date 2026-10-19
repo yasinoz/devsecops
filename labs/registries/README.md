@@ -62,12 +62,12 @@ $dockerId='<your-docker-hub-id>'
 Now you can build an image, including your Docker ID in the  name:
 
 ```
-docker build -t ${dockerId}/curl:21.06 -f labs/images/curl/Dockerfile.v2 labs/images/curl
+docker build -t ${dockerId}/curl:26.10 -f labs/images/curl/Dockerfile.v2 labs/images/curl
 
 docker image ls '*/curl'
 ```
 
-📋 Now push your own `curl:21.06` image to Docker Hub.
+📋 Now push your own `curl:26.10` image to Docker Hub.
 
 <details>
   <summary>Not sure how?</summary>
@@ -77,7 +77,7 @@ docker image ls '*/curl'
 docker login -u ${dockerId}
 
 # push your image:
-docker push ${dockerId}/curl:21.06
+docker push ${dockerId}/curl:26.10
 ```
 
 </details><br/>
@@ -98,12 +98,12 @@ Image names (properly called *references*) are built from three parts:
 
 A single image can have multiple references, which are like aliases - they're not copies of the image, they're different names for the same image.
 
-Tags are typically used for versioning, so you can assume that `sixeyed/curl:20.09` and `sixeyed/curl:21.06` are different versions of the same app, published by the same owner.
+Tags are typically used for versioning, so you can assume that `sixeyed/curl:26.09` and `sixeyed/curl:26.10` are different versions of the same app, published by the same owner.
 
 Add a new reference for your image using the `tag` command:
 
 ```
-docker tag ${dockerId}/curl:21.06 ${dockerId}/curl:21.07
+docker tag ${dockerId}/curl:26.10 ${dockerId}/curl:26.11
 
 docker image ls '*/curl'
 ```
@@ -117,7 +117,7 @@ docker image ls '*/curl'
 
 ```
 # you can push individual tags:
-docker push ${dockerId}/curl:21.07
+docker push ${dockerId}/curl:26.11
 
 # or all local tags for the repository:
 docker push --all-tags ${dockerId}/curl
@@ -136,7 +136,7 @@ All registries work in the same way, so they're pretty much interchangeable. You
 In a local environment you can host your own registry, running in a container, using the official [Docker Registry](https://hub.docker.com/_/registry) image:
 
 ```
-docker run -d -p 5000:5000 --name registry registry:2.7.1
+docker run -d -p 5000:5000 --name registry registry:3.1.2
 
 docker logs registry
 ```
@@ -189,7 +189,7 @@ docker pull localhost:5000/alpine
 
 ```
 # you can use any string in the image tag:
-docker tag alpine localhost:5000/alpine:21.07
+docker tag alpine localhost:5000/alpine:26.11
 
 docker tag alpine localhost:5000/alpine:local
 
@@ -208,7 +208,7 @@ Image references have enough detail for Docker to find the registry, and identif
 
 Docker uses defaults for the registry and the tag. What are those defaults? What is the full reference for the image `kiamol/ch05-pi`?
 
-Not all official images are on Docker Hub. Microsoft uses its own image registry *MCR* at `mcr.microsoft.com`. What command would you use to pull version `5.0` of the `dotnet/runtime` image from MCR?
+Not all official images are on Docker Hub. Microsoft uses its own image registry *MCR* at `mcr.microsoft.com`. What command would you use to pull version `10.0` of the `dotnet/runtime` image from MCR?
 
 > Stuck? Try [hints](hints.md) or check the [solution](solution.md).
 ___

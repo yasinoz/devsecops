@@ -34,7 +34,9 @@ These are samples in the major languages:
 
 ## Multi-Stage Dockerfiles
 
-We'll start by using the original build engine so it's clear what's happening in the build - later we'll switch to BuildKit which has better performance:
+We'll start with the *legacy* build engine, because it runs every stage in
+order and that makes the structure of a multi-stage Dockerfile obvious. Then
+we'll switch to BuildKit and compare:
 
 ```
 # on macOS or Linux:
@@ -43,6 +45,11 @@ export DOCKER_BUILDKIT=0
 # OR with PowerShell:
 $env:DOCKER_BUILDKIT=0
 ```
+
+> You'll see a warning: _"DEPRECATED: The legacy builder is deprecated and
+> will be removed in a future release."_ That's expected. BuildKit has been
+> the default since Docker 23 and the legacy builder is on its way out — we
+> use it here for one build only, to see the contrast.
 
 Here's a [simple multi-stage Dockerfile](./simple/Dockerfile):
 
@@ -75,9 +82,9 @@ docker run simple
 
 # BuildKit and build targets
 
-BuildKit is an alternative build engine in Docker. It's heavily optimized for multi-stage builds, running stages in parallel and skipping stages if the output isn't used.
+BuildKit is Docker's build engine and the default since Docker 23. It's heavily optimized for multi-stage builds, running stages in parallel and skipping stages if the output isn't used.
 
-Switch to BuildKit by setting an environment variable:
+Switch back to BuildKit by setting the environment variable (or just unsetting the one above):
 
 ```
 # on macOS or Linux:
@@ -144,11 +151,11 @@ Real multi-stage builds use an SDK (Software Development Kit) image to compile t
 
 The images you use and the commands you run are different for each language, but you'll find [official images on Docker Hub for all the major platforms](https://hub.docker.com/search?q=&type=image&image_filter=official&category=languages), including:
 
-- [maven](https://hub.docker.com/_/maven) and [gradle](https://hub.docker.com/_/gradle) to build Java apps - using [openjdk]() for the runtime image
+- [maven](https://hub.docker.com/_/maven) and [gradle](https://hub.docker.com/_/gradle) to build Java apps - using [eclipse-temurin](https://hub.docker.com/_/eclipse-temurin) for the runtime image (Docker Hub's `openjdk` image is deprecated)
 - [python](https://hub.docker.com/_/python) - has Pip installed for dependencies
 - [node](https://hub.docker.com/_/node) for Node.js apps - this has NPM so you can install packages in the build stage
 - [golang](https://hub.docker.com/_/golang) for Go apps - they don't need a runtime so the final image can start from [scratch](https://hub.docker.com/_/scratch)
-- [dotnet/sdk](https://hub.docker.com/_/microsoft-dotnet-sdk/) for .NET Core/5 apps, using [dotnet/runtime](https://hub.docker.com/_/microsoft-dotnet-runtime/) or [dotnet/aspnet](https://hub.docker.com/_/microsoft-dotnet-aspnet/) for the final app image
+- [dotnet/sdk](https://hub.docker.com/_/microsoft-dotnet-sdk/) for .NET apps, using [dotnet/runtime](https://hub.docker.com/_/microsoft-dotnet-runtime/) or [dotnet/aspnet](https://hub.docker.com/_/microsoft-dotnet-aspnet/) for the final app image
 
 We won't cover different languages in detail. The [whoami Dockerfile](./whoami/Dockerfile) shows how the pattern works, using a Go application:
 
