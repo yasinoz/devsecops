@@ -74,16 +74,25 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
 
 ### İlk dersten önce mutlaka çalıştırılmalı
 
-1. **`ghcr.io/yasinoz/labs-jenkins:1.0.0` imajı henüz yayınlanmadı.**
-   `.github/workflows/build-images.yml` iş akışını bir kez elle çalıştırmanız
-   gerekiyor (Actions → "Lab imajlarini derle" → Run workflow). O zamana kadar
-   Jenkins ve pipeline lablarında compose `build` ile yerelde derleyecek:
+1. **`ghcr.io/yasinoz/labs-jenkins:1.0.0` yayınlandı ve erişilebilir.** ✅
+
+   CI iş akışı (`build-images.yml`) çalıştı, imaj `linux/amd64` ve
+   `linux/arm64` olarak GHCR'a gitti (Apple Silicon öğrenciler kapsandı) ve
+   anonim çekmeye açık — öğrencinin GHCR'a giriş yapması gerekmiyor
+   (doğrulandı: anonim manifest sorgusu HTTP 200).
+
+   Eklenti sürümleri pinlenmedi (bkz. `images/jenkins/plugins.txt` içindeki
+   açıklama), bu yüzden imajı yeniden derlerseniz eklenti sürümleri
+   değişebilir. `1.0.0` etiketi sabit kaldığı sürece ders tekrar edilebilir.
+
+   GHCR erişilemezse compose yerelde derler (hem `image` hem `build` tanımlı):
    ```
    docker compose -f labs/jenkins/infra/docker-compose.yml build
    ```
-   Eklenti sürümleri pinlenmedi (bkz. `images/jenkins/plugins.txt` içindeki
-   açıklama), bu yüzden derleme çıktısı zamanla değişebilir. İmaj bir kez
-   GHCR'a gidince etiket sabitlenir.
+
+   **Yine de doğrulanmadı:** imajın İÇİ. Jenkins'in gerçekten eklentilerle
+   açıldığı, `casc.yaml`'ın okunduğu ve student/student ile giriş yapıldığı
+   çalıştırılarak teyit edilmedi.
 
 2. **Jenkins lab'ı** — Gitea'da kullanıcı oluşturma, kimlik bilgisi ekleme ve
    `input` bloğunun duraklattığı aşamanın yerleşik arayüzde nasıl göründüğü.
