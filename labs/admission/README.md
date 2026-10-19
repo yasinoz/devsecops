@@ -31,7 +31,7 @@ We'll deploy admission rules with Gatekeeper - which is another CNCF project. It
 
 OPA Gatekeeper is another complex component, where you trade the overhead of managing it with the issues of running your own controllers:
 
-- [opa-gatekeeper/3.5.yaml](./specs/opa-gatekeeper/3.5.yaml) - deploys custom resources to describe admission rules, RBAC for the controller and a Service and Deployment to run it
+- [opa-gatekeeper/v3.23.1.yaml](./specs/opa-gatekeeper/v3.23.1.yaml) - deploys custom resources to describe admission rules, RBAC for the controller and a Service and Deployment to run it
 
 _Deploy OPA:_
 
