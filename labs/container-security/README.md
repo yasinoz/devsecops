@@ -13,7 +13,7 @@ upstream: labs/container-security
 
 It's fairly straightforward to model your apps in Kubernetes and get them running, but there's more work to do before you get to production - and security is one of the main areas.
 
-Application security in Kubernetes is mostly concerned with securing containers, which is mostly about apply Linux security measures. There are lots of controls you can apply, but not all applications support them.
+Application security in Kubernetes is mostly concerned with securing containers, which is mostly about applying Linux security measures. There are lots of controls you can apply, but not all applications support them.
 
 You'll need to understand the OS features your apps need because applying controls can break them - Go applications might run fine on a read-only filesystem whereas Java apps will fail.
 
@@ -23,7 +23,7 @@ You'll need to understand the OS features your apps need because applying contro
 
 - [Managing resources for Pod containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
-- [OAWSP cheat sheet for Kubernetes](https://cheatsheetseries.owasp.org/cheatsheets/Kubernetes_Security_Cheat_Sheet.html)
+- [OWASP cheat sheet for Kubernetes](https://cheatsheetseries.owasp.org/cheatsheets/Kubernetes_Security_Cheat_Sheet.html)
 
 - [CKS - Certified Kubernetes Security Specialist certification](https://www.cncf.io/certification/cks/)
 
@@ -43,7 +43,7 @@ The Pi app runs in a single Pod, and you can check the site via the Service at h
 
 There's nothing special in the [Deployment spec](./specs/pi/deployment.yaml) relating to security. 
 
-By default Kubernetes mounts a volume in every Pod which contain an authentication token, so applications inside the Pod can use the Kubernetes API server. Applications like Prometheus and Fluentd need access to the API so they can find Pods and other objects - but almost no business apps need to do that.
+By default Kubernetes mounts a volume in every Pod which contains an authentication token, so applications inside the Pod can use the Kubernetes API server. Applications like Prometheus and Fluentd need access to the API so they can find Pods and other objects - but almost no business apps need to do that.
 
 The token is there in the Pi app:
 
@@ -53,7 +53,9 @@ kubectl exec deploy/pi-web -- cat /var/run/secrets/kubernetes.io/serviceaccount/
 
 That's all you need to authenticate with the Kubernetes cluster (you can use tokens like this with Kubectl), and then you'd have all the same permissions as the Pod.
 
-This Pod is using the default [Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) - which is a Kubernetes identity system Pods to access the API. Other users may have given that account extra permissions for their requirements, and if an attacker compromises the Pi app then they could have free access to read Secrets or delete running applications.
+> Since Kubernetes 1.21 these are *bound* tokens - short-lived and tied to > this Pod and audience, so a stolen one expires. That reduces the blast > radius; it does not remove it, which is why we still take the mount away.
+
+This Pod is using the default [Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) - which is the Kubernetes identity Pods use to access the API. Other users may have given that account extra permissions for their requirements, and if an attacker compromises the Pi app then they could have free access to read Secrets or delete running applications.
 
 [fix-1.yaml](./specs/pi/fixes/fix-1.yaml) creates a custom ServiceAccount which is set to not mount the authentication token, and the Pod spec uses that account.
 
@@ -95,7 +97,7 @@ The Pi application is running without any compute restrictions. Try computing Pi
 
 - `requests` set the amount of CPU and memory your app needs to run; Kubernetes uses this when it decides which node should run the Pod, based on the amount of resources available on the nodes
 
-- `limits` set the hard limits of CPU and memory the app can use. CPU is restricted, so if you set 0.5 cores then the app can run at 100% CPU and only max out 0.5 cores on the server. Memory is restricted to, and if the app tries to use more than the limit then the Pod can be killed with an out-of-memory error.
+- `limits` set the hard limits of CPU and memory the app can use. CPU is restricted, so if you set 0.5 cores then the app can run at 100% CPU and only max out 0.5 cores on the server. Memory is restricted too, and if the app tries to use more than the limit then the Pod can be killed with an out-of-memory error.
 
 📋 Apply the fix. Does calculating Pi to 100K dp still cause a CPU spike?
 
@@ -167,17 +169,23 @@ This app continues to run as expected, but for some applications removing permis
 
 [fix-4.yaml](./specs/pi/fixes/fix-4.yaml) configures the app to listen on port 5001 inside the container, so that removes the need for privileged access to port 80 - the application needs to support this.
 
+```
+kubectl apply -f labs/container-security/specs/pi/fixes/fix-4.yaml
+```
+
+> The app keeps working at http://localhost:30020 even though the container > port changed, because the [Service](./specs/pi/service.yaml) targets the > port by **name** (`http`) rather than by number. Hard-coding `80` there > would have left the Service pointing at nothing.
+
 ___
 ## Lab
 
-This is not the end of security - it's only the beginning. Securing containers is a multi-layered approach which starts with your securing your images, but the hardened Pi app is a good step up from the default Pod security.
+This is not the end of security - it's only the beginning. Securing containers is a multi-layered approach which starts with securing your images, but the hardened Pi app is a good step up from the default Pod security.
 
 Not every app will work with those controls applied though. Here's a [Deployment for the whoami app](./specs/whoami/deployment.yaml) with all the security controls commented out.
 
 Your job is to work out which set of controls can be applied without breaking the app. Start by deploying it as-is:
 
 ```
-k apply -f labs/container-security/specs/whoami
+kubectl apply -f labs/container-security/specs/whoami
 ```
 
 Verify you can use the app at http://localhost:30022/. Then add in the security controls until you have as many enabled as you can, with the app still working.

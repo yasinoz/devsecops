@@ -1,3 +1,12 @@
+# ArgoCD Application nesnesi: 'argocd app create' komutunun YAML karsiligi.
+#
+# Upstream bu dosyada var OLMAYAN bir repo ve yol gosteriyordu
+# (kiamol/kiamol.git ve labs/argo/project/helm/whoami); bu haliyle
+# uygulanirsa ArgoCD senkronizasyonu "repo not found" ile basarisiz oluyordu.
+# Artik labin kendi Gitea reposunu ve gercek yolu gosteriyor.
+#
+# targetRevision: HEAD -> Git sunucusunun varsayilan dalini izler. Boylece
+# dal adinin main mi master mi oldugu onemli olmuyor.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -5,14 +14,15 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: whoami
+    namespace: default
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: labs/argo/project/helm/whoami
-    repoURL: http://gitea.infra.svc.cluster.local:3000/kiamol/kiamol.git
+    path: labs/argo/project/whoami
+    repoURL: http://gitea.infra.svc.cluster.local:3000/student/labs.git
+    targetRevision: HEAD
   syncPolicy:
-    automated: 
-      selfHeal: true 
+    automated:
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true

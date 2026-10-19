@@ -141,7 +141,15 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
 | ✅ | index, setup | EN yeniden yazıldı + TR çevrildi |
 | ✅ | **CI/CD (6)** | jenkins, images, registries, multi-stage, compose-build, pipeline |
 | ✅ | **Gözlemlenebilirlik (7)** | prometheus, prometheus/metrics, grafana, elasticsearch, kibana, tracing, jaeger |
-| ⬜ | **Katmanlı Güvenlik (6)** | static-analysis, scanning, golden-images, argo, admission, container-security |
+| ✅ | **Katmanlı Güvenlik (6)** | static-analysis, scanning, golden-images, argo, admission, container-security |
+
+**DevSecOps track'inin çevirisi tamamlandı: 19/19 lab + index + setup.**
+
+Lint tümüyle temiz: `compose`, `pins`, `stale`, `i18n`, `links`,
+`frontmatter`, `parity` — hepsi 0 bulgu. CI'da artık `i18n` ve `parity`
+**hata** kontrolü (repoda `.github/i18n-required` dosyası var): eksik bir TR
+karşılığı ya da TR/EN arasında düşmüş bir adım build'i kırar. Henüz
+çevrilmekte olan diğer üç repoda aynı kontrol bilgilendirme amaçlı kalıyor.
 
 Çeviri sırasında her lab'ın İngilizcesi de gözden geçirildi; bulunan içerik
 hataları (kırık komut, kaymış arayüz anlatımı, boş bağlantı, yazım hatası) EN

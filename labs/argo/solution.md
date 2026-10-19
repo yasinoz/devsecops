@@ -9,7 +9,7 @@ git add labs/argo/project/whoami/deployment.yaml
 
 git commit -m 'Bump to build -4'
 
-git push labs-argo main:master
+git push labs-argo main
 ```
 
 If you quickly browse back to the ArgoCD web page at https://localhost:30881/applications/whoami you'll see the two old Pods being removed and three new Pods being started.
@@ -22,7 +22,7 @@ kubectl delete deploy whoami
 
 Check the web UI again and you'll see new Pods being created to replace the deleted ones. 
 
-Test the app at http://localhost:30010 and you'll see its still working.
+Test the app at http://localhost:30010 and you'll see it's still working.
 
 ___
 > Back to the [exercises](README.md).

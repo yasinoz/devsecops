@@ -77,12 +77,12 @@ Güvenliği öne almak — statik analiz, tarama, altın imajlar ve politika uyg
 
 | Lab | Süre | Gerekir |
 |---|---|---|
-| [Statik Kod Analizi](labs/static-analysis/README.md) _(EN)_ | 45 dk | docker |
-| [Güvenlik Taraması](labs/scanning/README.md) _(EN)_ | 45 dk | docker |
-| [Altın İmaj Kütüphaneleri](labs/golden-images/README.md) _(EN)_ | 50 dk | docker |
-| [ArgoCD ile GitOps](labs/argo/README.md) _(EN)_ | 60 dk | docker, kubernetes |
-| [İş Yükü Politikalarını Uygulamak](labs/admission/README.md) _(EN)_ | 60 dk | docker, kubernetes |
-| [Container Güvenlik Kontrolleri](labs/container-security/README.md) _(EN)_ | 50 dk | docker, kubernetes |
+| [Statik Kod Analizi](labs/static-analysis/README.tr.md) | 45 dk | docker |
+| [Güvenlik Taraması](labs/scanning/README.tr.md) | 45 dk | docker |
+| [Altın İmaj Kütüphaneleri](labs/golden-images/README.tr.md) | 50 dk | docker |
+| [ArgoCD ile GitOps](labs/argo/README.tr.md) | 60 dk | docker, kubernetes |
+| [İş Yükü Politikalarını Uygulamak](labs/admission/README.tr.md) | 60 dk | docker, kubernetes |
+| [Container Güvenlik Kontrolleri](labs/container-security/README.tr.md) | 50 dk | docker, kubernetes |
 
 <!-- labs:end -->
 

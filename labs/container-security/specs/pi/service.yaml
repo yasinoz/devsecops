@@ -10,6 +10,9 @@ spec:
   ports:
     - name: http
       port: 8020
-      targetPort: 80
+      # Adlandirilmis port: Deployment'ta 'http' diye isimlendirilen porta
+      # gider. fix-4 uygulamayi 80'den 5001'e tasiyor; sayi sabitlenseydi
+      # Service bos bir porta trafik gonderip site olurdu.
+      targetPort: http
       nodePort: 30020
   type: NodePort

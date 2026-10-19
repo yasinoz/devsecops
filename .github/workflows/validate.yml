@@ -65,13 +65,23 @@ jobs:
             echo "sections.yaml yok - frontmatter kontrolu atlandi"
           fi
 
-      - name: Ceviri durumu (bilgilendirme)
-        # Ceviri henuz tamamlanmadi; bu adim hata saymaz. Tum lablar
-        # cevrildiginde '|| true' kaldirilacak.
+      - name: Ceviri tamligi ve TR/EN yapisal esitlik
+        # Cevirisi TAMAMLANMIS repolarda bu bir HATA kontrolu: repoda
+        # .github/i18n-required dosyasi varsa eksik TR karsiligi ya da
+        # TR/EN arasinda dusmus bir adim CI'i kirar. Henuz cevrilmekte olan
+        # repolarda yalnizca bilgilendirme amacli calisir.
         run: |
-          python platform/tools/lab-lint.py repo \
-            --versions platform/VERSIONS.yaml \
-            --only i18n,parity || true
+          if [ -f repo/.github/i18n-required ]; then
+            echo "i18n zorunlu - eksik ceviri CI'i kirar"
+            python platform/tools/lab-lint.py repo \
+              --versions platform/VERSIONS.yaml \
+              --only i18n,parity --warn-as-error
+          else
+            echo "i18n bilgilendirme amacli (ceviri surmekte)"
+            python platform/tools/lab-lint.py repo \
+              --versions platform/VERSIONS.yaml \
+              --only i18n,parity || true
+          fi
 
   compose-syntax:
     runs-on: ubuntu-latest
