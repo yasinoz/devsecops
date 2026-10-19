@@ -1,5 +1,5 @@
 # specifying an exact version makes the build repeatable
-FROM alpine:3.13
+FROM alpine:3.24
 
 # using the no-cache option creates a smaller image
 RUN apk add --no-cache curl

@@ -1,14 +1,12 @@
-version: "3.7"
-
 services:
 
   gogs:
-    image: courselabs/gogs:0.12.3
+    image: ghcr.io/yasinoz/labs-gitea:1.0.0
     ports:
       - "3000:3000"
 
   jenkins:
-    image: courselabs/jenkins:2.319.1
+    image: ghcr.io/yasinoz/labs-jenkins:1.0.0
     ports:
       - "8080:8080"
     volumes:

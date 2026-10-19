@@ -169,7 +169,7 @@ SDK images are typically very large, having the whole build toolset. You don't w
   <summary>Not sure how?</summary>
 
 ```
-docker pull golang:1.16.4-alpine
+docker pull golang:1.27.2-alpine
 
 docker image ls -f reference=whoami -f reference=golang
 ```

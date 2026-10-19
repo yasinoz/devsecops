@@ -1,1 +1,1 @@
-FROM openjdk:11.0.13-jre-slim-buster
+FROM eclipse-temurin:25-jre

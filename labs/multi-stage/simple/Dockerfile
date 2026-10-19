@@ -1,5 +1,5 @@
 # pretend to install some packages
-FROM alpine:3.13 AS base
+FROM alpine:3.24 AS base
 RUN echo 'Adding deps...' > /deps.txt
 
 # pretend build
