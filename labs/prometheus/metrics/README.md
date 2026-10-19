@@ -75,21 +75,21 @@ fulfilment_in_flight_total 46
 
 Prometheus uses labels to record different aspects of the same type of data, so the `fulfilment_requests_total` metric includes counters for the number of documents processed and the number which have failed.
 
-📋 Why doesn't the app also record a count of sucessfully processed documents?
+📋 Why doesn't the app also record a count of successfully processed documents?
 
 <details>
   <summary>Need some help?</summary>
 
 More labels means more data to record, so you shouldn't produce metrics which can be calculated reliably from other metrics.
 
-You can always determine the succesful count by subtracting the number of failures from the total:
+You can always determine the successful count by subtracting the number of failures from the total:
 
 ```
 fulfilment_requests_total{status="failed"} 180
 fulfilment_requests_total{status="processed"} 4403
 ```
 
-=> succesfully processed = 4403-180 = 4223
+=> successfully processed = 4403-180 = 4223
 
 </details><br/>
 
@@ -149,7 +149,7 @@ You'll see a lot more metrics, recording system information and details about th
 <details>
   <summary>Need some help?</summary>
 
-The exporter is written in Go - you'll see lots of metrics about the Go runtime:
+The exporter is written in Go - you'll see lots of metrics about the Go runtime (your Go version will differ):
 
 ```
 # HELP go_goroutines Number of goroutines that currently exist.
@@ -179,7 +179,7 @@ docker run -d -p 8080:80 courselabs/fulfilment-api:25.03
 
 > Browse to the metrics at http://localhost:8080/actuator/prometheus
 
-These metrics include a lot of detail about the JVM (the Java runtime), and the performance of Tomcat (the HTTP server). There's no code in the app to record these, they're all part of [Spring Boot's metrics collection](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.metrics.supported).
+These metrics include a lot of detail about the JVM (the Java runtime), and the performance of Tomcat (the HTTP server). There's no code in the app to record these, they're all part of [Spring Boot's metrics collection](https://docs.spring.io/spring-boot/reference/actuator/metrics.html).
 
 Try browsing to some application endpoints:
 
@@ -215,7 +215,7 @@ http_server_requests_seconds_sum=0.258512
 
 </details><br/>
 
-Summaries record two pieces of data for each metric - how often it has happened, and the total amount of time it took for all occurences. That lets you calculate averages without storing too much data. 
+Summaries record two pieces of data for each metric - how often it has happened, and the total amount of time it took for all occurrences. That lets you calculate averages without storing too much data. 
 
 ## Lab
 

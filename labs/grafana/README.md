@@ -13,6 +13,13 @@ upstream: labs/grafana
 
 [Grafana](https://grafana.com/oss/grafana/) is a web-based UI for visualizing data. It can consume data from many different sources, and it's particularly well matched with Prometheus. You might use the Prometheus UI to fine-tune your queries, and then you'd take the PromQL and use it in Grafana.
 
+> ⚠️ **Screenshots in this lab were taken on Grafana 8.** The containers now
+> run Grafana 13, where the navigation is substantially different. The written
+> steps below have been updated for the current UI; the images are kept because
+> they still show *what you are aiming for*, not *where to click*. Menu labels
+> move between Grafana releases - if a label has moved again, the
+> [Grafana docs](https://grafana.com/docs/grafana/latest/) are authoritative.
+
 ## Reference
 
 - [Using Prometheus as a data source](https://grafana.com/docs/grafana/latest/datasources/prometheus/)
@@ -23,7 +30,7 @@ upstream: labs/grafana
 
 Grafana is a cross-platform app, written in Go. You can [download Grafana](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1) for different platforms - but we'll run in a Docker container:
 
-- [grafana.yml](./grafana.yml) - spcifies containers for Prometheus and Grafana
+- [grafana.yml](./grafana.yml) - specifies containers for Prometheus and Grafana
 - [prometheus.yml](./config/prometheus.yml) - the Prometheus config we'll be using; sets up scraping for various apps, and adds the `tier` label
 
 Run the metrics components:
@@ -43,19 +50,21 @@ Sign in with the default credentials - you'll be asked to create a new password,
 - username: `admin`
 - password: `admin`
 
-The homepage has a link to create a data source:
+In current Grafana you add a data source from **Connections > Data sources**:
 
-![](../../img/grafana-first-run.png)
+![Grafana home screen (Grafana 8)](../../img/grafana-first-run.png)
 
 📋 Add a Prometheus data source, with the URL `http://prometheus:9090` and test it.
 
 <details>
   <summary>Need some help?</summary>
 
-Click the _Add data source_ panel from the homepage, or browse to http://localhost:3000/datasources/new.
+Open **Connections > Data sources** from the left nav and click
+_Add new data source_ (or browse straight to
+http://localhost:3000/connections/datasources/new).
 
 - Select Prometheus as the data source type
-- Enter `http://prometheus:9090` as the URL
+- Enter `http://prometheus:9090` in the _Prometheus server URL_ field
 - Leave all other fields as they are
 
 > Click _Save & test_ and you'll see the message _Data source is working_.
@@ -66,9 +75,9 @@ That's all the setup you need - now you can create a dashboard with panels to qu
 
 ## Create an uptime panel
 
-Click on the plus icon from the left menu and select _Create...Dashboard_. You'll see a screen like this:
+Open **Dashboards** from the left nav, then **New > New dashboard**. You'll see an empty dashboard like this:
 
-![](../../img/grafana-empty-dashboard.png)
+![Empty dashboard (Grafana 8)](../../img/grafana-empty-dashboard.png)
 
 Every visualization is a panel within a dashboard.
 
@@ -77,9 +86,9 @@ Every visualization is a panel within a dashboard.
 <details>
   <summary>Need some help?</summary>
 
-Click _Add empty panel_ and enter `up` in the query panel. You'll see a preview of the visualization, which is not quite what we want:
+Click _+ Add visualization_, pick your Prometheus data source, and enter `up` in the query editor. You'll see a preview of the visualization, which is not quite what we want:
 
-![](../../img/grafana-up-preview.png)
+![Default time series preview of the up metric (Grafana 8)](../../img/grafana-up-preview.png)
 
 </details><br/>
 
@@ -97,7 +106,7 @@ Now it's time to find your way around :)
 
 Here's what you're aiming for:
 
-![](../../img/grafana-uptime-table.png)
+![Target uptime as a table with ok/OFFLINE value mappings](../../img/grafana-uptime-table.png)
 
 <details>
   <summary>Need some help?</summary>
@@ -111,9 +120,9 @@ In the display options:
 
 - change type to Table
 
-In the _Transform_ panel:
+In the _Transformations_ tab (next to _Query_):
 
-- Select _Organize fields_ 
+- Select _Organize fields by name_ 
     - hide all except instance and value
     - rename value to Status
 
@@ -126,7 +135,7 @@ Back in display options:
     - add a mapping for value=1 to display `ok`
     - click _Apply_
 
-Click _Apply_ at the top-right to update your panel and return to the dashboard.
+Click _Back to dashboard_ at the top-right to return to the dashboard (then _Save dashboard_ to keep it).
 
 </details><br/>
 
@@ -148,7 +157,7 @@ docker compose -f labs/grafana/apps.yml up -d
 
 If you watch long enough you'll see processor instance 1 flicks between `ok` and `OFFLINE`. The table we have shows the current status, and it would also be useful to see the history of each component's uptime.
 
-Click the add panel icon in the top menu (it's the bar chart with a plus sign), and select _Add an empty panel_.
+Click _Add_ in the top menu and choose _Visualization_ to add a second panel.
 
 Last time we used a transform to hide labels, but we can do that in the query too:
 
@@ -163,7 +172,7 @@ We're getting there, just some tidying up to do.
 
 This is the goal:
 
-![](../../img/grafana-uptime-timeline.png)
+![Target uptime as a state timeline, green for ok and red for OFFLINE](../../img/grafana-uptime-timeline.png)
 
 <details>
   <summary>Need some help?</summary>
@@ -183,7 +192,7 @@ In the query panel:
 
 - set the legend format to `{{instance}}`
 
-Click _Apply_.
+Click _Back to dashboard_.
 
 </details><br/>
 
@@ -196,9 +205,10 @@ Grafana can be fiddly to work with - but once you have your dashboard designed, 
 
 In the lab we'll carry on with a custom dashboard, but so you can see what a real dashboard looks like, there's one stored in the file `labs/grafana/dashboards/app.json` you can load:
 
-- click the plus `+` icon from the left nav and choose _Import_
-- click _Upload JSON file_ and navigate to the path for the `app.json` file
-- click _Import_
+- open **Dashboards** from the left nav, then **New > Import**
+- click _Upload dashboard JSON file_ and navigate to the path for the
+  `app.json` file
+- select your Prometheus data source if you are prompted, then click _Import_
 
 These visualizations are all powered by the metrics from the container apps you have running. You can reduce the timescale from the dropdown in the top-right and show metrics from the last 30 minutes to see how Grafana shows trends.
 
@@ -214,7 +224,7 @@ For this lab we'll stick with instance uptime, but your job is to split the dash
 
 Each row should have a current status table and an timeline for the instances in that tier, something like this:
 
-![](../../img/grafana-uptime-dashboard.png)
+![Uptime dashboard split into infrastructure, web and backend rows](../../img/grafana-uptime-dashboard.png)
 
 Save your dashboard as JSON so you can load it into another Grafana instance later.
 

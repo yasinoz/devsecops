@@ -36,3 +36,6 @@ fulfilment_processing_seconds_bucket{le="6"} 15623
 => number of documents which took between 4 and 6 seconds to process = 15623-9270 = 6353
 
 There's enough information in a histogram to calculate percentiles, e.g. 95% of requests were processed within _y_ seconds.
+
+___
+> Back to the [exercises](README.md).

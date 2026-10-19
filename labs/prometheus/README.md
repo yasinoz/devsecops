@@ -52,7 +52,11 @@ docker compose -f labs/prometheus/apps.yml up -d
 
 > Refresh the status page at http://localhost:9090/targets and you'll see the targets come online
 
-Switch to the [Graph page using the Classic UI](http://localhost:9090/classic/graph). The dropdown shows you a list of all the metrics collected.
+Open the _Query_ page in the Prometheus UI (the default page at http://localhost:9090). The metric picker next to the expression box lists all the metrics collected.
+
+> Older versions of this lab linked to `/classic/graph`. Prometheus 3 replaced
+> the UI, and the classic one now needs `--enable-feature=old-ui` at startup,
+> so that URL returns a 404.
 
 The simplest query just needs the metric name.
 
@@ -68,7 +72,7 @@ Enter `process_cpu_seconds_total` in the query expression and hit _Execute_. You
 
 That tells you how much CPU time the node exporter and the document processor have used.
 
-Query `app_info` and you'll see output like this:
+Query `app_info` and you'll see output like this (your version numbers will differ - these images are rebuilt over time):
 
 |Element|Value|
 |-|-|
@@ -88,7 +92,7 @@ Prometheus also records a timestamp for each metric, so for every piece of data 
 
 ## Time-series data
 
-The _Console_ view in the Graph page just shows the most recent metric value. Prometheus is currently scraping each target every 30 seconds and recording all metrics in its time-series database.
+The _Table_ tab just shows the most recent metric value. Prometheus is currently scraping each target every 30 seconds and recording all metrics in its time-series database.
 
 You can use the Graph page to explore that data.
 
@@ -112,7 +116,7 @@ Querying `fulfilment_requests_total{status="processed"}` shows just the processe
 
 Prometheus calls this result an _instant vector_, because it's just showing the data for one instant - the most recent value collected.
 
-Hit the _Graph_ button and you'll see the results over a range of time, plotted into a graph where you can select the time range:
+Switch to the _Graph_ tab and you'll see the results over a range of time, plotted into a graph where you can select the time range:
 
 > The _Graph_ tab draws one line per series. With a counter the line
 > only ever climbs — that is what makes `rate()` useful.
@@ -247,7 +251,7 @@ The `up` metric is a gauge. Prometheus metrics can be any decimal value, but thi
  
 </details><br/>
 
-The API response shows the timestamp for every metric, aalong with the `instance` and `job` labels. The metric name is actually stored as a label too: `__name__`.
+The API response shows the timestamp for every metric, along with the `instance` and `job` labels. The metric name is actually stored as a label too: `__name__`.
 
 ## Lab
 
