@@ -19,7 +19,7 @@ We'll run the full ELK stack (Elasticsearch, Logstash and Kibana) in containers:
 Start the containers and watch the Kibana logs:
 
 ```
-docker-compose -f labs/kibana/compose.yml up -d
+docker compose -f labs/kibana/compose.yml up -d
 
 docker logs courselabs_kibana_1 -f
 ```

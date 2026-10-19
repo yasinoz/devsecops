@@ -222,9 +222,9 @@ docker inspect courselabs/web
 The base image is Nginx running on Alpine:
 
 ```
-docker pull nginx:1.21.4-alpine
+docker pull nginx:1.31.7-alpine
 
-docker inspect nginx:1.21.4-alpine
+docker inspect nginx:1.31.7-alpine
 ```
 
 And you can check Alpine too:
@@ -243,7 +243,7 @@ Here's the full image hierarchy:
 
 ```
 alpine:3.14
-└─ nginx:1.21.4-alpine
+└─ nginx:1.31.7-alpine
     └─ courselabs/web 
 ```
 

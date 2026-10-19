@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-11 AS builder
+FROM maven:3.10-eclipse-temurin-25-noble AS builder
 
 WORKDIR /usr/src/helloworld
 COPY pom.xml .

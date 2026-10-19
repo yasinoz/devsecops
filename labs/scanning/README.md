@@ -2,15 +2,15 @@
 
 Scanners inspect the binaries in a filesystem or a container image, looking for known vulnerabilities. They typically use multiple databases to determine what application the binary is from, what version of the app and whether there are any CVEs (Common Vulnerabilities and Exposures) for that version.
 
-There are several tools for scanning container images - [Clair](https://quay.github.io/clair/) and [Snyk](https://snyk.io) are popular options. We'll be using [Trivy](https://aquasecurity.github.io/trivy/v0.21.1/) which is free, open source and runs in containers, so it can be integrated nicely into a pipeline. Trivy can scan the binaries in container images, and also run static analysis on Dockerfiles and Kubernetes manifests. 
+There are several tools for scanning container images - [Clair](https://quay.github.io/clair/) and [Snyk](https://snyk.io) are popular options. We'll be using [Trivy](https://trivy.dev/latest/docs/) which is free, open source and runs in containers, so it can be integrated nicely into a pipeline. Trivy can scan the binaries in container images, and also run static analysis on Dockerfiles and Kubernetes manifests. 
 
 ## References
 
-- [Trivy documentation](https://aquasecurity.github.io/trivy/v0.21.1/)
+- [Trivy documentation](https://trivy.dev/latest/docs/)
 
 - [Trivy on GitHub](https://github.com/aquasecurity/trivy) 
 
-- [Trivy policies for misconfiguration](https://aquasecurity.github.io/trivy/v0.21.1/misconfiguration/policy/builtin/)
+- [Trivy policies for misconfiguration](https://trivy.dev/latest/docs/misconfiguration/policy/builtin/)
 
 - [Trivy in the CNCF DevSecOps radar](https://radar.cncf.io/2021-09-devsecops)
 
@@ -21,7 +21,7 @@ Trivy is a command line tool, but we don't need to install it on our machines, w
 Run a Trivy container - this [Docker Compose file](./docker-compose.yml) mounts your local repo folder mounted into the container filesystem, so Trivy can see those files:
 
 ```
-docker-compose -f labs/scanning/docker-compose.yml run trivy
+docker compose -f labs/scanning/docker-compose.yml run trivy
 ```
 
 You're connected to the Trivy container. Check the commands you can run, and then scan an image on Docker Hub:
@@ -29,7 +29,7 @@ You're connected to the Trivy container. Check the commands you can run, and the
 ```
 trivy
 
-trivy image sixeyed/whoami:21.04
+trivy image sixeyed/whoami:24.07
 ```
 
 > On the first run Trivy will download the vulnerabilities database, which can take a minute or two

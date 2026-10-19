@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-11 AS builder
+FROM maven:3.10-eclipse-temurin-25-noble AS builder
 ARG SONAR_PROJECT='hello-world-java'
 ARG SONAR_URL='http://host.docker.internal:9000'
 ARG SONAR_TOKEN=''
@@ -20,7 +20,7 @@ RUN if [ "$SONAR_TOKEN" != "" ] ; then \
     fi
 
 # app
-FROM openjdk:11.0.12-jre-slim-buster
+FROM eclipse-temurin:25-jre
 
 WORKDIR /app
 COPY --from=builder /usr/src/helloworld/target/helloworld-0.1.0.jar .

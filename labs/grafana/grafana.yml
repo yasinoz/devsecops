@@ -1,9 +1,7 @@
-version: '3.7'
-
 services:
 
   prometheus:
-    image: courselabs/prometheus:v2.28.1
+    image: prom/prometheus:v3.15.0
     ports: 
       - 9090:9090
     volumes:
@@ -12,7 +10,7 @@ services:
       - metrics
 
   grafana:
-    image: courselabs/grafana:8.0.5
+    image: grafana/grafana:13.2.4
     ports: 
       - 3000:3000
     networks:

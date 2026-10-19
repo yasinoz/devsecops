@@ -1,4 +1,4 @@
-FROM golang:1.16.4-alpine AS builder
+FROM golang:1.27.2-alpine AS builder
 ENV CGO_ENABLED=0
 
 RUN apk --no-cache --no-progress add \

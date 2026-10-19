@@ -1,0 +1,15 @@
+# Satir sonlarini LF'e sabitle.
+#
+# Neden onemli: Windows'ta clone eden ogrencinin .sh dosyasi CRLF olursa
+# container icinde "bad interpreter: no such file or directory" hatasi alir
+# ve lab ilk adimda patlar. Dockerfile/entrypoint/compose icin de ayni risk.
+* text=auto eol=lf
+
+# Ikili dosyalar
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.woff binary
+*.ttf  binary
+*.class binary
+*.rar  binary

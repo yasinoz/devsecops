@@ -1,9 +1,7 @@
-version: '3.7'
-
 services:
 
   elasticsearch:
-    image: courselabs/elasticsearch:7.10
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5
     ports: 
       - 9200:9200
     networks:
