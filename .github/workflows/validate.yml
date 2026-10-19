@@ -81,20 +81,29 @@ jobs:
       - name: Tum compose dosyalarini dogrula
         run: |
           # 'docker compose config' dosyayi ayristirir ve degiskenleri cozer;
-          # sozdizimi hatasi varsa burada yakalanir.
+          # gercek sozdizimi hatasi varsa burada yakalanir.
           #
-          # OVERRIDE PARCALARI: compose-build labi katmanli dosyalar kullaniyor
-          # (core.yml + dev.yml gibi, 'docker compose -f a -f b' ile birlesiyor).
-          # Bir override parcasi tek basina gecerli bir proje DEGIL: servisin
-          # image/build alani taban dosyadan geliyor. Bu durumu hata saymiyoruz,
-          # atlandi diye raporluyoruz.
+          # Hangi dosyalar compose sayilir: 'services:' SIFIRINCI KOLONDA
+          # olanlar. Girintili 'services:' iceren Kubernetes manifestleri ve
+          # Helm values.yaml dosyalari (Calico, kubewatch) aksi halde compose
+          # sanilip hata uretiyordu.
+          #
+          # YERINDE DOGRULANAMAYANLAR hata sayilmaz:
+          #  * Override parcasi: lablar katmanli compose kullaniyor
+          #    (core.yml + dev.yml, 'docker compose -f a -f b'). Parca tek
+          #    basina gecerli bir proje degil - servisin image/build alani
+          #    ya da secret/config tanimi taban dosyadan geliyor.
+          #  * Tasinarak kullanilan sablon: bazi cozum dosyalari once ust
+          #    dizine kopyalanip calistiriliyor (solution.md'de anlatiliyor),
+          #    dolayisiyla goreli env_file yolu ancak kopyadan sonra cozuluyor.
           fail=0
           while IFS= read -r f; do
-            grep -qE '^[[:space:]]*services[[:space:]]*:' "$f" || continue
+            grep -qE '^services[[:space:]]*:' "$f" || continue
             if out=$(docker compose -f "$f" config 2>&1); then
               echo "ok        $f"
-            elif echo "$out" | grep -q 'has neither an image nor a build context'; then
-              echo "override  $f  (tek basina dogrulanamaz, atlandi)"
+            elif echo "$out" | grep -qE 'has neither an image nor a build context|refers to undefined (secret|config|network|volume)|env file .* not found'; then
+              echo "atlandi   $f"
+              echo "          ($(echo "$out" | head -1 | cut -c1-110))"
             else
               echo "::error file=$f::compose ayristirma hatasi"
               echo "$out" | head -20
