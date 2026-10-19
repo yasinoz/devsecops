@@ -1,0 +1,28 @@
+# Lab pipeline'lari icin gerekli eklentiler.
+#
+# Upstream kaynak 'blueocean' kullaniyordu; Blue Ocean artik bakimsiz ve
+# Jenkins'in yerlesik Pipeline arayuzu + pipeline-stage-view onun yerini
+# aldi. Lab adimlari yerlesik arayuze tasindi.
+
+# Pipeline cekirdegi
+workflow-aggregator
+pipeline-stage-view
+
+# Kaynak kontrolu
+git
+
+# Pipeline icinden Docker kullanimi
+docker-workflow
+
+# Kimlik bilgileri (Git sunucusu, registry)
+credentials
+credentials-binding
+plain-credentials
+
+# Yapilandirmayi koddan yonetme - casc.yaml bununla okunuyor
+configuration-as-code
+
+# Gunluk hayat kalitesi
+timestamper
+ws-cleanup
+build-timeout

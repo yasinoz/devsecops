@@ -1,0 +1,61 @@
+name: Lab imajlarini derle
+
+# images/ altindaki ozel lab imajlarini GHCR'a yayinlar.
+#
+# Neden GHCR: Docker Hub anonim cekme limiti IP basina uygulaniyor. Ayni
+# NAT arkasindaki 20 ogrencinin sinifi limiti aninda doldurup "toomanyrequests"
+# almasi gercek bir risk. GHCR'da bu sinir yok.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'images/**'
+      - '.github/workflows/build-images.yml'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Imaj etiketi'
+        default: '1.0.0'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - name: labs-jenkins
+            context: images/jenkins
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: QEMU (arm64 icin)
+        uses: docker/setup-qemu-action@v3
+
+      - name: Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: GHCR'a giris
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Derle ve yayinla
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.image.context }}
+          # Apple Silicon kullanan ogrenciler icin arm64 zorunlu
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}:${{ inputs.tag || '1.0.0' }}
+            ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

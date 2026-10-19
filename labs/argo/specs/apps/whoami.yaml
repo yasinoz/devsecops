@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: labs/argo/project/helm/whoami
-    repoURL: http://gogs.infra.svc.cluster.local:3000/kiamol/kiamol.git
+    repoURL: http://gitea.infra.svc.cluster.local:3000/kiamol/kiamol.git
   syncPolicy:
     automated: 
       selfHeal: true 

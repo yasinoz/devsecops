@@ -1,3 +1,14 @@
+---
+title: Exporting Metrics
+lang: en
+slug: prometheus/metrics
+section: observability
+order: 2
+duration: 40
+requires: [docker]
+status: needs-review
+upstream: labs/prometheus/metrics
+---
 # Exporting Metrics
 
 In a distributed architecture, each of your components exposes an HTTP endpoint, publishing all the metrics relevant to that component. The metrics format is standard, and you'll want to capture metrics at different levels of detail.
@@ -14,7 +25,7 @@ In a distributed architecture, each of your components exposes an HTTP endpoint,
 Start by running a simple server application. It's a mock document processor, and it records metrics about the work it's doing:
 
 ```
-docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor
+docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor:25.03
 ```
 
 > Browse to the metrics endpoint at http://localhost:9110/metrics
@@ -89,7 +100,7 @@ Remove the processor container and start a new one, configured to expose platfor
 ```
 docker rm -f processor
 
-docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor
+docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor:25.03
 ```
 
 > Browse to the metrics endpoint again at http://localhost:9110/metrics
@@ -163,7 +174,7 @@ Application servers like Tomcat and ASP.NET should publish usage metrics, like t
 Run a Java REST API which uses Tomcat and the [micrometer client library](https://micrometer.io):
 
 ```
-docker run -d -p 8080:80 courselabs/fulfilment-api
+docker run -d -p 8080:80 courselabs/fulfilment-api:25.03
 ```
 
 > Browse to the metrics at http://localhost:8080/actuator/prometheus
@@ -222,3 +233,12 @@ Cleanup by removing all containers:
 ```
 docker rm -f $(docker ps -aq)
 ```
+
+> On **PowerShell** the command substitution syntax is different:
+>
+> ```
+> docker rm -f @(docker ps -aq)
+> ```
+>
+> ⚠️ Either version removes **every** container on your machine, not just the
+> ones from this lab. Run `docker ps` first if you have other work running.

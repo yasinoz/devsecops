@@ -1,3 +1,14 @@
+---
+title: GitOps with ArgoCD
+lang: en
+slug: argo
+section: security
+order: 4
+duration: 60
+requires: [docker, kubernetes]
+status: needs-review
+upstream: labs/argo
+---
 # GitOps with ArgoCD
 
 GitOps turns the CI/CD approach on its head - instead of an external automation server pushing changes into the cluster, a tool inside the cluster monitors a Git repo and pulls in any changes.
@@ -87,15 +98,15 @@ ArgoCD monitors the repo, and whenever there is a change - so the running app is
 
 We'll run a local Git server to make the deployment simple:
 
-- [gogs/gogs.yaml](./specs/gogs/gogs.yaml) is the same Gogs server we've used before, but configured to run in Kubernetes 
+- [gitea/gitea.yaml](./specs/gitea/gitea.yaml) is the same Gitea server we used in the Jenkins lab, configured to run in Kubernetes
 
 Deploy the Git server:
 
 ```
-kubectl apply -f labs/argo/specs/gogs
+kubectl apply -f labs/argo/specs/gitea
 ```
 
-Browse to http://localhost:30300/ and when the site is ready, sign in with username `courselabs` and password `student`.
+Browse to http://localhost:30300/ and when the site is ready, sign in with username `student` and password `student`.
 
 Add the new Git server as a remote for this repo and push a copy of the content:
 
@@ -124,7 +135,7 @@ argocd cluster list
 Create an application for the app in the `labs/argo/project/whoami` folder - that folder contains a simple whoami app spec:
 
 ```
-argocd app create whoami --repo http://gogs.infra.svc.cluster.local:3000/courselabs/labs.git --path labs/argo/project/whoami --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy auto --self-heal
+argocd app create whoami --repo http://gitea.infra.svc.cluster.local:3000/student/labs.git --path labs/argo/project/whoami --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy auto --self-heal
 ```
 
 > Creating the app stores the definition in Kubernetes, and we've set the sync policy to _auto_ - so it will be deployed straight away.
@@ -180,7 +191,7 @@ argocd app delete lab whoami --cascade
 
 > ArgoCD asks you to confirm you really want to do this :)
 
-Then delete the lab namespaces, which will remove ArgoCD and Gogs:
+Then delete the lab namespaces, which will remove ArgoCD and Gitea:
 
 ```
 kubectl delete ns -l kubernetes.courselabs.co=argo

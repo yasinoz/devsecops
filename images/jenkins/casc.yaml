@@ -1,0 +1,43 @@
+# Jenkins Configuration as Code - lab ortami.
+#
+# Bu dosya sayesinde Jenkins ilk acilista hazir geliyor: kurulum sihirbazi,
+# eklenti secimi ve ilk yonetici parolasi (initialAdminPassword) adimlari yok.
+#
+# Giris bilgileri (lab ortami, kasitli olarak basit):
+#   kullanici: student
+#   parola  : student
+
+jenkins:
+  systemMessage: |
+    sudo2go labs - Jenkins lab ortami.
+    Bu sunucu yapilandirmasi koddan gelir (casc.yaml). Uretim icin degildir.
+
+  numExecutors: 2
+  mode: NORMAL
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: student
+          password: student
+          name: Lab Student
+
+  authorizationStrategy:
+    loggedInAuthenticationStrategy:
+      allowAnonymousRead: false
+
+  # Lab ortami: CSRF korumasini acik birakiyoruz, kapatmak gerekmiyor.
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+
+unclassified:
+  location:
+    url: http://localhost:8080/
+    adminAddress: labs@example.local
+
+security:
+  # Lab pipeline'lari script onay bekleyip takilmasin
+  scriptApproval:
+    approvedSignatures: []

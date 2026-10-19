@@ -1,14 +1,30 @@
+# Elasticsearch + Logstash + Kibana - tek dugumlu lab kurulumu.
+#
+# Guvenlik bilincli olarak kapali: lab komutlari duz HTTP kullaniyor ve
+# 8.x'ten itibaren resmi imajlarda guvenlik varsayilan acik geliyor.
+# Uretimde boyle yapilmaz - bkz. labs/elasticsearch/compose.yml notu.
+
 services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5
-    ports: 
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      xpack.security.enrollment.enabled: "false"
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    ports:
       - 9200:9200
     networks:
       - logging
 
   logstash:
     image: docker.elastic.co/logstash/logstash:9.5.5
+    environment:
+      # Logstash'in kendi izleme verisini ES'e yazmasini istemiyoruz;
+      # lab'da gercek veriyle karisiyor.
+      xpack.monitoring.enabled: "false"
+      LS_JAVA_OPTS: -Xms512m -Xmx512m
     volumes:
       - ./data:/data
       - ./pipelines:/pipelines
@@ -18,7 +34,13 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana:9.5.5
-    ports: 
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      # Kibana 8+ kayitli nesneleri sifrelemek icin sabit bir anahtar ister.
+      # Verilmezse her yeniden baslatmada rastgele uretir ve kaydedilmis
+      # dashboard'lar acilmaz. Lab icin sabit, uretim icin gizli olmali.
+      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: a7f3c1e9b5d2084617fa93cb5e70d4821c9b36af
+    ports:
       - 5601:5601
     networks:
       - logging

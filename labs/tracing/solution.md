@@ -25,7 +25,7 @@ Activity.ActivitySourceName: OpenTelemetry.Instrumentation.AspNetCore
 Activity.DisplayName: Index
 Activity.Kind:        Server
 Activity.StartTime:   2021-07-19T16:02:30.7422710Z
-Activity.Duration:    00:00:00.0193704
+Activity.Duration:    00:00.0193704
 Activity.TagObjects:
     http.host: localhost:8070
     http.method: GET

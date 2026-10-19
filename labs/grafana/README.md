@@ -1,3 +1,14 @@
+---
+title: Visualizing Metrics with Grafana
+lang: en
+slug: grafana
+section: observability
+order: 3
+duration: 40
+requires: [docker]
+status: needs-review
+upstream: labs/grafana
+---
 # Grafana
 
 [Grafana](https://grafana.com/oss/grafana/) is a web-based UI for visualizing data. It can consume data from many different sources, and it's particularly well matched with Prometheus. You might use the Prometheus UI to fine-tune your queries, and then you'd take the PromQL and use it in Grafana.
@@ -212,8 +223,12 @@ Save your dashboard as JSON so you can load it into another Grafana instance lat
 ___
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/grafana/grafana.yml down
+docker compose -f labs/grafana/apps.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.

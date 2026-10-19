@@ -1,3 +1,14 @@
+---
+title: Security Scanning
+lang: en
+slug: scanning
+section: security
+order: 2
+duration: 45
+requires: [docker]
+status: needs-review
+upstream: labs/scanning
+---
 # Security Scanning
 
 Scanners inspect the binaries in a filesystem or a container image, looking for known vulnerabilities. They typically use multiple databases to determine what application the binary is from, what version of the app and whether there are any CVEs (Common Vulnerabilities and Exposures) for that version.
@@ -88,7 +99,7 @@ You'll see 40+ critical errors...
 
 ## Library Scanning
 
-Trivy can also scan source code folders, but it doesn't analyse your code (which is what SonarQube does in the [static analysis lab](/labs/static-analysis/README.md)). Trivy looks for library lists (e.g. `package-lock.json` for Node.js apps) and it scans each library for CVEs.
+Trivy can also scan source code folders, but it doesn't analyse your code (which is what SonarQube does in the [static analysis lab](../static-analysis/README.md)). Trivy looks for library lists (e.g. `package-lock.json` for Node.js apps) and it scans each library for CVEs.
 
 📋 Try scanning the Python depdencies in `/labs/scanning/python`
 
@@ -154,8 +165,11 @@ ___
 
 ## Cleanup
 
-Cleanup by removing all containers:
+Clean up by removing this lab's containers:
 
 ```
-docker rm -f $(docker ps -aq)
+docker compose -f labs/scanning/docker-compose.yml down
 ```
+
+> This removes only the containers this lab started. If you want
+> a clean slate, `docker ps` will show anything still running.
