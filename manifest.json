@@ -372,10 +372,16 @@
               "readme": "labs/kibana/README.md",
               "hints": "labs/kibana/hints.md",
               "solution": "labs/kibana/solution.md"
+            },
+            "tr": {
+              "readme": "labs/kibana/README.tr.md",
+              "hints": "labs/kibana/hints.tr.md",
+              "solution": "labs/kibana/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -396,10 +402,16 @@
               "readme": "labs/tracing/README.md",
               "hints": "labs/tracing/hints.md",
               "solution": "labs/tracing/solution.md"
+            },
+            "tr": {
+              "readme": "labs/tracing/README.tr.md",
+              "hints": "labs/tracing/hints.tr.md",
+              "solution": "labs/tracing/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         },
         {
@@ -420,10 +432,16 @@
               "readme": "labs/jaeger/README.md",
               "hints": "labs/jaeger/hints.md",
               "solution": "labs/jaeger/solution.md"
+            },
+            "tr": {
+              "readme": "labs/jaeger/README.tr.md",
+              "hints": "labs/jaeger/hints.tr.md",
+              "solution": "labs/jaeger/solution.tr.md"
             }
           },
           "langs": [
-            "en"
+            "en",
+            "tr"
           ]
         }
       ]
@@ -593,7 +611,7 @@
   "stats": {
     "total": 19,
     "en": 19,
-    "tr": 10,
+    "tr": 13,
     "by_status": {
       "needs-review": 19
     }

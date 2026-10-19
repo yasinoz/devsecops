@@ -67,9 +67,9 @@ Metrikler, loglar ve dağıtık izler — sisteminizin ne yaptığını bilmek.
 | [Metrik Yayınlamak](labs/prometheus/metrics/README.tr.md) | 40 dk | docker |
 | [Grafana ile Metrikleri Görselleştirmek](labs/grafana/README.tr.md) | 40 dk | docker |
 | [Logları Elasticsearch'te Saklamak](labs/elasticsearch/README.tr.md) | 45 dk | docker |
-| [Kibana ile Log Aramak](labs/kibana/README.md) _(EN)_ | 45 dk | docker |
-| [Dağıtık İzleme](labs/tracing/README.md) _(EN)_ | 45 dk | docker |
-| [Jaeger ile İzleri Görselleştirmek](labs/jaeger/README.md) _(EN)_ | 35 dk | docker |
+| [Kibana ile Log Aramak](labs/kibana/README.tr.md) | 45 dk | docker |
+| [Dağıtık İzleme](labs/tracing/README.tr.md) | 45 dk | docker |
+| [Jaeger ile İzleri Görselleştirmek](labs/jaeger/README.tr.md) | 35 dk | docker |
 
 ## Katmanlı Güvenlik
 

@@ -35,9 +35,9 @@ anlatıyordu, öğrenci ekranda başka bir şey görüyordu.
 
 | Bileşen | Önce | Sonra | Not |
 |---|---|---|---|
-| Grafana | 8.0.5 | 13.2.4 | Gezinme tamamen değişti (Explore, Dashboards, Connections). Lab adımları **yeniden yazılmalı**. |
+| Grafana | 8.0.5 | 13.2.4 | Gezinme tamamen değişti. Lab adımları **yeniden yazıldı** (Connections > Data sources, Dashboards > New, Transformations, Back to dashboard, Export as JSON). Ekran görüntüleri Grafana 8'den; lab başında açıkça uyarılıyor. |
 | Prometheus | 2.28.1 | 3.15.0 | Arayüz yenilendi. |
-| Elasticsearch / Kibana / Logstash | 7.10 | 9.5.5 | 8.x'ten itibaren güvenlik varsayılan **açık**; lab compose'larında `xpack.security.enabled=false` gerekiyor. |
+| Elasticsearch / Kibana / Logstash | 7.10 | 9.5.5 | Güvenlik 8.x'ten itibaren varsayılan açık; compose'lara `xpack.security.enabled=false` **eklendi**. Ayrıca: `_type` alanı 8'de kaldırıldı, sistem index'leri `_cat/indices`'te gizlendi (`expand_wildcards=all` gerekiyor), Kibana'da "index pattern" → "data view". Hepsi lab metinlerine işlendi. |
 | Jaeger | 1.24 | 2.22.0 | v2 yapılandırması çok farklı: OTLP varsayılan 4317/4318'de, eski Thrift ucu kapalı. Uygulama tarafı **gözden geçirilmeli**. |
 | Jenkins | 2.319.1 | 2.580.1-lts-jdk21 | Blue Ocean bakımsız kaldı; lab yerleşik Pipeline + Stage View'a taşındı. |
 | Git sunucusu | Gogs 0.12.3 | Gitea 28.2.0 | Gogs fiilen bakımsız. Gitea'da ilk kullanıcı CLI ile oluşturuluyor; lab adımı eklendi. |
@@ -99,17 +99,37 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
    Ekran görüntüsü (`img/jenkins-manual-gate.png`) Blue Ocean dönemine ait,
    yenilenmeli.
 
-3. **Elasticsearch / Kibana / Logstash lablarında** compose dosyalarına
-   `xpack.security.enabled=false` eklenmesi gerekiyor — imaj sürümü yükseltildi
-   ama bu ayar henüz eklenmedi. Bu haliyle `curl` çağrıları 401 dönecek.
-   **Bu, bilinen ve henüz kapatılmamış bir eksiklik.**
+3. **Elasticsearch / Kibana / Logstash** — kapatıldı. ✅ (çalıştırılmadı)
+   `xpack.security.enabled=false`, `discovery.type=single-node` ve sabit heap
+   eklendi; Kibana için sabit `encryptedSavedObjects` anahtarı verildi (yoksa
+   her restart'ta kaydedilen dashboard'lar açılmıyor).
 
-4. **Jaeger lab'ı** — v2'de izleri gönderme ucu değişti. Uygulama tarafının
-   OTLP'ye taşınması gerekiyor.
+4. **Jaeger lab'ı — araştırıldı, kod düzeltildi.** ✅ (çalıştırılmadı)
 
-5. **Grafana lab'ı** — adımlar Grafana 8 arayüzünü anlatıyor. Sürüm 13 ile
-   menüler uyuşmuyor; metin yeniden yazılmalı ve ekran görüntüleri
-   yenilenmeli.
+   Jaeger v2 tamamen yeniden yazıldı (OpenTelemetry Collector üzerine), bu
+   yüzden örnek uygulamaların kullandığı eski Jaeger protokolünün kapanmış
+   olmasından şüphelendim. Dağıtılan v2.22.0 yapılandırması kontrol edildi:
+
+   ```yaml
+   receivers: [otlp, jaeger, zipkin]
+   jaeger:
+     protocols: [grpc, thrift_binary, thrift_compact, thrift_http]
+   ```
+
+   Eski protokollerin tamamı varsayılan olarak açık — yani uygulamalar ek
+   yapılandırma olmadan rapor edebiliyor, compose'da değişiklik gerekmedi.
+
+   **Ama** aynı yapılandırmada Jaeger'ın kendi izlemesi için bir TODO var:
+   v2 kendini izlemiyor. Lab'ın ilk alıştırması `jaeger-query` servisinin
+   izlerine bakmayı söylüyordu ve o liste artık boş dönüyor — bölüm yeniden
+   kurgulandı, span/etiket anlatımı gerçek izlerin olduğu yere taşındı.
+   Kullanılmayan `jaeger-query-span.png` ekran görüntüsü artık referans
+   edilmiyor.
+
+5. **Grafana lab'ı** — metin yeniden yazıldı ✅, **ekran görüntüleri hâlâ
+   Grafana 8'den**. Lab başında bunun açık uyarısı var ama görsellerin
+   yenilenmesi gerekiyor. Aynı durum Kibana ve Jenkins lablarındaki görseller
+   için de geçerli.
 
 6. **Kubernetes gerektiren üç lab** (argo, admission, container-security) —
    manifestler yenilendi ama güncel bir kümede uygulanmadı.
@@ -118,9 +138,14 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
 
 | | Lab | Durum |
 |---|---|---|
-| ✅ | jenkins | EN yeniden yazıldı + TR çevrildi |
 | ✅ | index, setup | EN yeniden yazıldı + TR çevrildi |
-| ⬜ | diğer 18 lab | EN modernize, TR bekliyor |
+| ✅ | **CI/CD (6)** | jenkins, images, registries, multi-stage, compose-build, pipeline |
+| ✅ | **Gözlemlenebilirlik (7)** | prometheus, prometheus/metrics, grafana, elasticsearch, kibana, tracing, jaeger |
+| ⬜ | **Katmanlı Güvenlik (6)** | static-analysis, scanning, golden-images, argo, admission, container-security |
+
+Çeviri sırasında her lab'ın İngilizcesi de gözden geçirildi; bulunan içerik
+hataları (kırık komut, kaymış arayüz anlatımı, boş bağlantı, yazım hatası) EN
+tarafında da düzeltildi. Ayrıntı: `git log`.
 
 Çeviri bekleyen lablar sitede İngilizce gösteriliyor ve öğrenciye bunun çeviri
 olmadığı açıkça yazılıyor — "çevrildi" diye işaretlenip aslında çevrilmemiş bir

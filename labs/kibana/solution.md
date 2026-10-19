@@ -17,11 +17,11 @@ GET _cat/indices?v
 > When the log load has completed you'll see an index called `logstash-2021.07.07` with 86 documents.
 
 
-Create an index pattern - you can use the exact index name, or a wildcard like `logstash-*`; use `@timestamp` as the primary time field.
+Create a data view - you can use the exact index name, or a wildcard like `logstash-*`; use `@timestamp` as the timestamp field.
 
 ## Query the index pattern
 
-Switch to the _Discover_ tab and select your new index pattern. The search and filters from your last query are still there - remove them, ensure the timeframe is expanded to include 2021-07 and click _Update_.
+Switch to the _Discover_ tab and select your new data view. The search and filters from your last query are still there - remove them, ensure the timeframe is expanded to include 2021-07 and click _Update_.
 
 Click on the `level` field from the list and you'll see the top results for that field. Click `+` on ERROR to add that value as a filter.
 
@@ -31,7 +31,7 @@ Now you'll have 8 hits but you can't filter any more as there isn't a numeric fi
 message: "Request ID:" and message: 3*
 ```
 
-> You'l see 5 hits, but only 4 are what we want:
+> You'll see 5 hits, but only 4 are what we want:
 
 ![](../../img/kibana-lab-solution.png)
 
@@ -47,7 +47,7 @@ Now you can search with a regular expression which will only find numbers in the
 
 ![](../../img/kibana-lab-solution-lucene.png)
 
-> [Lucene syntax](https://www.elastic.co/guide/en/kibana/7.x/lucene-query.html) is a more featured query language than KQL, it can be a nice option between KQL and the full Query DSL
+> [Lucene syntax](https://www.elastic.co/guide/en/kibana/current/lucene-query.html) is a more featured query language than KQL, it can be a nice option between KQL and the full Query DSL
 
 ## More control with Query DSL
 

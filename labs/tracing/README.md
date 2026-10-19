@@ -17,7 +17,7 @@ For that you need your application components to emit and receive trace data, so
 
 ## Reference
 
-- [OpenTelemetry specification](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/overview.md) - the emerging-but-looking-likely-to-become-standard tracing spec
+- [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/overview/) - this was the emerging standard when these labs were written; it is now *the* standard, and a graduated CNCF project
 
 - [Trace Context](https://www.w3.org/TR/trace-context/) - the W3C standard for propagating trace details in HTTP headers
 
@@ -32,12 +32,12 @@ Start by running the app and checking the logs:
 ```
 docker compose -f labs/tracing/web.yml up -d
 
-docker logs -f courselabs-fulfilment-web-1
+docker compose -f labs/tracing/web.yml logs -f fulfilment-web
 ```
 
 > This command follows the logs, you can leave it running while we use the app
 
-Browse to the website at http://localhost:8070. It's not much to look at, but it's built with [OpenTelemetry instrumentation](https://opentelemetry.io/docs/concepts/instrumenting/) support, which emits all the tracing details we need.
+Browse to the website at http://localhost:8070. It's not much to look at, but it's built with [OpenTelemetry instrumentation](https://opentelemetry.io/docs/concepts/instrumentation/) support, which emits all the tracing details we need.
 
 You'll see an entry like this in the logs:
 
@@ -70,7 +70,7 @@ Resource associated with Activity:
 
 This activity represents a call to the web server.
 
-In each case there's ID to idenfity the span (activity), together with the kind of work, start time and duration.
+In each case there's an ID to identify the span (activity), together with the kind of work, start time and duration.
 
 Tags are used to store key details about the span - these are server calls so they record the HTTP method, URL path, response code etc.
 
@@ -120,12 +120,16 @@ Start the document fulfilment API server so we can see tracing between component
 
 - [api.yml](./api.yml) - specifies the API container with a flag to enable tracing, connecting to the same network as the web container and publishing port 8071.
 
+> The Java app uses the OpenTracing API, which has since been archived and
+> folded into OpenTelemetry. The env var name reflects that history; the
+> trace propagation it does is still the same W3C standard.
+
 Run the API container and check its logs:
 
 ```
 docker compose -f labs/tracing/api.yml up -d
 
-docker logs -f courselabs-fulfilment-api-1
+docker compose -f labs/tracing/api.yml logs -f fulfilment-api
 ```
 
 > This is a Java Spring Boot application. You'll see a lot of startup logs.
@@ -175,7 +179,7 @@ Check the trace logs in the web container to find the trace ID from your API log
 ```
 # Ctrl-C to exit the logs of the API
 
-docker logs courselabs-fulfilment-web-1
+docker compose -f labs/tracing/web.yml logs fulfilment-web
 ```
 
 Scroll up to the client trace where the web application calls the API, and you'll see an entry like this:
