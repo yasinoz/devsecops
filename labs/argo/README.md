@@ -44,7 +44,7 @@ argocd version
 
 There's a local copy of the Argo CD spec here:
 
-- [argocd/2.1.2.yaml](./specs/argocd/2.1.2.yaml) - it installs a lot of resources, including CustomResourceDefinitions - CRDs - which extend the functionality of Kubernetes. ArgoCD adds an `Application` resource to the cluster.
+- [argocd/v3.5.5.yaml](./specs/argocd/v3.5.5.yaml) - it installs a lot of resources, including CustomResourceDefinitions - CRDs - which extend the functionality of Kubernetes. ArgoCD adds an `Application` resource to the cluster.
 
 Deploy the server components:
 
