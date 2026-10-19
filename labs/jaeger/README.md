@@ -11,17 +11,17 @@ upstream: labs/jaeger
 ---
 # Running Jaeger
 
-[Jaeger](https://www.jaegertracing.io) is a distributed tracing system - it collects and stores traces, and gives you a web UI to find and visualize them. Jaeger originally used its own data format, but it also supports OpenTelemetry.
+[Jaeger](https://www.jaegertracing.io) is a distributed tracing system - it collects and stores traces, and gives you a web UI to find and visualize them. Jaeger originally used its own data format, but it also supports OpenTelemetry - and Jaeger 2 is built *on* the OpenTelemetry Collector.
 
 You can run Jaeger in a production configuration with different features running in different processes, swapping out the data store or adding a message queue to buffer collection. 
 
 ## Reference
 
-- [Jaeger architecture](https://www.jaegertracing.io/docs/1.24/architecture/) - mapping to OpenTelemetry terminology
+- [Jaeger architecture](https://www.jaegertracing.io/docs/latest/architecture/) - mapping to OpenTelemetry terminology
 
-- [Components of the all-in-one Jaeger package](https://www.jaegertracing.io/docs/1.24/getting-started/#all-in-one)
+- [Getting started with Jaeger](https://www.jaegertracing.io/docs/latest/getting-started/)
 
-- [Instrumenting apps with OpenTelemetry](https://opentelemetry.io/docs/concepts/instrumenting/) - which can be collected by Jaeger 
+- [Instrumenting apps with OpenTelemetry](https://opentelemetry.io/docs/concepts/instrumentation/) - which can be collected by Jaeger
 
 ## Run Jaeger
 
@@ -35,39 +35,22 @@ Run Jaeger:
 docker compose -f labs/jaeger/jaeger.yml up -d
 ```
 
-Browse to the Jaeger UI at http://localhost:16686; hit the _Search_ menu at the top and refresh your browser page. This shows all the services which have sent spans to Jaeger, and the names of the operations in the spans.
+Browse to the Jaeger UI at http://localhost:16686 and hit the _Search_ menu at
+the top. This is where you find traces: the _Service_ dropdown lists every
+service which has sent spans to Jaeger, and the _Operation_ dropdown lists the
+named operations within them.
 
-You'll see the _Service_ dropdown has a new entry - click it, select the service `jaeger-query` and hit the _Find Traces_ button.
+Right now the list is empty, because nothing has sent Jaeger any spans yet.
 
-Click on the first trace in the list and expand the details, it will look something like this:
+> Older versions of this lab started here by looking at Jaeger's own
+> `jaeger-query` traces - Jaeger 1 traced itself. Jaeger 2 does not wire up its
+> own tracing (its shipped config has a TODO for exactly that), so there is
+> nothing to look at until we send it some real spans. We'll do that next.
 
-![](../../img/jaeger-query-span.png)
-
-📋 What generated this trace, and what information does it give you?
-
-<details>
-  <summary>Need some help?</summary>
-
-Jaeger records traces **itself** - we're seeing the call to the API from the web UI, to list the operations that have been stored.
-
-There's a single span in the trace, so we can see that the API responds without making any further HTTP calls.
-
-The span records tags which are very similar to the ones we've seen from the [tracing lab](../tracing/README.md) exercises, things like:
-
-- http.method: GET
-- http.status_code: 200
-- span.kind: server
-
-</details><br/>
-
-Tags are a collection of key-value pairs which you can set in your spans to record additional information. There are some common tags which you'll see across components, but the collection is arbitrary and you can add whatever data is useful in your spans.
-
-The trace timeline is the most useful view in Jaeger, but you can also switch to other views of the same data. In the dropdown at the top-right of the screen, switch from _Trace Timeline_ to:
-
-- _Trace Statistics_ - to see low-level timing details about the spans
-- _Trace JSON_ - to see the full log data
-
-All the views are more useful when you have traces recording multiple spans across different components.
+Jaeger accepts spans in several formats. Its default configuration enables
+receivers for OTLP (the OpenTelemetry protocol), the legacy Jaeger protocols
+and Zipkin - so apps instrumented with any of those can report to it without
+extra configuration.
 
 ## Exporting traces to Jaeger
 
@@ -83,7 +66,7 @@ docker compose -f labs/jaeger/apps.yml up -d
 
 Browse to the home page for the web UI at http://localhost:8070, and then refresh your Jaeger search at http://localhost:16686/search.
 
-> You should see two services in the list now - `jaeger-query` and `Fulfilment.Web`.
+> You should see `Fulfilment.Web` in the service list now.
 
 📋 Open the trace for the homepage request to the web application. How many spans are in this trace?
 
@@ -107,7 +90,7 @@ Now browse back to the [document list page](http://localhost:8070/) and hit _Go_
 <details>
   <summary>Need some help?</summary>
 
-In Jaeger search you'll see a lot more services. We still want ` Fulfilment.Web` but it's not always clear which operation you want, so you can select _all_ for the operation and hit _Find Traces_.
+In Jaeger search you'll see a lot more services. We still want `Fulfilment.Web` but it's not always clear which operation you want, so you can select _all_ for the operation and hit _Find Traces_.
 
 The one you want is listed with multiple spans from multiple services.
 
@@ -119,7 +102,19 @@ Open the trace and expand the details, and you'll see the real value of adding t
 
 The graph at the top shows the total trace duration, and within that the duration for each span. In this example the whole request took 1.01 seconds, and you can clearly see the web app makes two consecutive HTTP calls.
 
-Below the graph you get the details of each span, which you can expand to see the tags and any additional information.
+Below the graph you get the details of each span, which you can expand to see
+the tags and any additional information.
+
+Tags are key-value pairs you set in your spans to record extra detail. Some are
+conventional and you'll see them across components (`http.method`,
+`http.status_code`, `span.kind`), but the collection is arbitrary - you can add
+whatever is useful.
+
+The trace timeline is the most useful view, but you can switch to others from
+the dropdown at the top right:
+
+- _Trace Statistics_ - low-level timing details about the spans
+- _Trace JSON_ - the full raw data
 
 📋 What is the call trace when you got the document list - and which part of the call takes the most time?
 
