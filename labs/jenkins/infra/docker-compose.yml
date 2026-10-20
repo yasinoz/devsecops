@@ -1,3 +1,8 @@
+# Proje adi acikca veriliyor: iki lab da 'infra' klasorunde durdugu icin
+# Compose ikisine de ayni varsayilan proje adini verir ve lablar
+# birbirinin container/volume'larini ele gecirir.
+name: devsecops-jenkins
+
 # Jenkins + yerel Git sunucusu (Gitea).
 #
 # 'image' VE 'build' birlikte tanimli:
@@ -17,13 +22,14 @@ services:
       GITEA__server__DOMAIN: localhost
       GITEA__service__DISABLE_REGISTRATION: "false"
       GITEA__service__REQUIRE_SIGNIN_VIEW: "false"
-      # Webhook'lar Jenkins'e container agi uzerinden gidecek
-      GITEA__webhook__ALLOWED_HOST_LIST: "*"
+      # Webhook hedefi Jenkins, konteyner aginda ozel IP'de: "private" bunu kapsar.
+      # NOT: eski [webhook] bolumu v28 ile kaldirildi, "*" artik gecersiz deger.
+      GITEA__security__ALLOWED_HOST_LIST: "private"
     ports:
       - "3000:3000"
 
   jenkins:
-    image: ghcr.io/yasinoz/labs-jenkins:1.0.1
+    image: ghcr.io/yasinoz/labs-jenkins:1.0.2
     build:
       context: ../../../images/jenkins
     ports:

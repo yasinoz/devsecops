@@ -170,7 +170,12 @@ docker image ls eclipse-temurin:25-jdk
 
 </details>
 
-> Uygulama imajınızın SDK imajının yarısı kadar olduğunu görmelisiniz.
+> Uygulama imajınız SDK imajından küçük - Java çalışma zamanını taşıyor ama
+> derleyiciyi ve derleme araçlarını taşımıyor. Bu Temurin imajlarında kazanç
+> 100MB civarında; `-jre` imajı `-jdk`'nın kabaca beşte dördü. Son aşamayı
+> daha ince bir imaja (örneğin Alpine tabanlı bir JRE) dayandırırsanız aradaki
+> fark çok açılır - [multi-stage lab'ındaki](../multi-stage/README.tr.md)
+> `whoami` derlemesi `scratch` ile tam olarak bunu yapıyor.
 
 ## Docker Compose ile Derlemek
 
@@ -348,8 +353,12 @@ ___
 Bu lab'ın container'larını kaldırın:
 
 ```
-docker compose -f labs/pipeline/infra/docker-compose.yml down
+docker compose -f labs/pipeline/infra/docker-compose.yml down -v
 ```
+
+> `-v` isimsiz volume'ları da siler. Olmadan Gitea'nın veritabanı hayatta
+> kalır ve lab'ın sonraki çalıştırmasında kullanıcı oluşturma adımı
+> `user already exists` hatası verir.
 
 > Bu komut yalnızca bu lab'in baslattigi container'lari kaldırır. Tamamen
 > temiz bir başlangıç istiyorsanız `docker ps` ile hâlâ çalışan varsa

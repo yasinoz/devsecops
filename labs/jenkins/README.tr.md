@@ -6,7 +6,7 @@ section: cicd
 order: 1
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/jenkins
 ---
 # Jenkins ile Otomasyon
@@ -327,8 +327,13 @@ ___
 Lab container'larını kaldırın:
 
 ```
-docker compose -f labs/jenkins/infra/docker-compose.yml down
+docker compose -f labs/jenkins/infra/docker-compose.yml down -v
 ```
+
+> `-v` önemli. Her iki imaj da `VOLUME` tanımlıyor, bu yüzden yalnızca `down`
+> çalıştırırsanız Compose arkada isimsiz bir volume bırakır. Gitea'nın
+> veritabanı orada hayatta kalır ve lab'ı tekrar çalıştırdığınızda kullanıcı
+> oluşturma adımı `user already exists` hatası verir.
 
 Sonraki lablarda kafa karıştırmaması için Gitea remote'unu kaldırın:
 

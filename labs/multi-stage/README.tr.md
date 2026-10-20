@@ -6,7 +6,7 @@ section: cicd
 order: 4
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/multi-stage
 ---
 # Çok Aşamalı Build
@@ -196,8 +196,8 @@ nasıl çalıştığını gösteriyor:
 
 - builder aşaması Go SDK imajından başlıyor
 - uygulamayı derlemek için gereken işletim sistemi paketlerini kuruyor
-- sonra kütüphane listesini kopyalayıp uygulamanın bağımlılıklarını kurmak
-  için `go mod download` çalıştırıyor
+- sonra kütüphane listesini (`go.mod`) ve kilit dosyasını (`go.sum`) kopyalayıp
+  uygulamanın bağımlılıklarını kurmak için `go mod download` çalıştırıyor
 - ardından kaynak kodu kopyalayıp uygulamayı derliyor
 - son uygulama imajı container ortamını kuruyor
 - sonra builder'dan derlenmiş çıktıyı kopyalıyor
@@ -232,7 +232,11 @@ docker image ls -f reference=whoami -f reference=golang
 
 </details><br/>
 
-> Vay! SDK imajı 300MB'ın üzerinde; uygulama imajı 10MB'ın altında.
+> Vay! SDK imajı yüzlerce megabayt; uygulama imajı birkaç megabayt.
+>
+> Docker 29, eski `SIZE` sütununu `DISK USAGE` ve `CONTENT SIZE` olarak ikiye
+> ayırıyor, yani iki sayı göreceksiniz - aradaki fark her iki ölçüde de aynı
+> derecede büyük.
 
 
 Uygulama basit bir web sunucusu. Rastgele bir port yayınlayarak bir container

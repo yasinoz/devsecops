@@ -6,7 +6,7 @@ section: cicd
 order: 5
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/compose-build
 ---
 # Compose ile Uygulama Derlemek
