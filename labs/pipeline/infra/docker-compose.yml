@@ -23,7 +23,7 @@ services:
       - "3000:3000"
 
   jenkins:
-    image: ghcr.io/yasinoz/labs-jenkins:1.0.0
+    image: ghcr.io/yasinoz/labs-jenkins:1.0.1
     build:
       context: ../../../images/jenkins
     ports:
@@ -31,7 +31,9 @@ services:
     environment:
       # Kurulum sihirbazini atla; kullanici ve isler casc.yaml'dan gelir
       JAVA_OPTS: -Djenkins.install.runSetupWizard=false
-      CASC_JENKINS_CONFIG: /var/jenkins_home/casc.yaml
+      # /var/jenkins_home VOLUME oldugu icin yapilandirma onun disinda
+      # tutulur - yoksa imaj guncellense de eski kopya okunurdu
+      CASC_JENKINS_CONFIG: /var/jenkins_config/casc.yaml
     # BILINCLI LAB TAVIZI: Jenkins root olarak calisiyor.
     #
     # Pipeline'lar host Docker motorunda imaj derliyor ve docker.sock'un

@@ -15,8 +15,8 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Imaj etiketi'
-        default: '1.0.0'
+        description: 'Imaj etiketi (bos: matristeki surum)'
+        default: ''
 
 permissions:
   contents: read
@@ -29,8 +29,10 @@ jobs:
       fail-fast: false
       matrix:
         image:
+          # Surum burada tutuluyor - _platform/VERSIONS.yaml ile ayni olmali
           - name: labs-jenkins
             context: images/jenkins
+            tag: '1.0.1'
     steps:
       - uses: actions/checkout@v5
 
@@ -55,7 +57,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}:${{ inputs.tag || '1.0.0' }}
+            ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}:${{ inputs.tag != '' && inputs.tag || matrix.image.tag }}
             ghcr.io/${{ github.repository_owner }}/${{ matrix.image.name }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max

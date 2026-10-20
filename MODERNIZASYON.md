@@ -74,7 +74,7 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
 
 ### İlk dersten önce mutlaka çalıştırılmalı
 
-1. **`ghcr.io/yasinoz/labs-jenkins:1.0.0` yayınlandı ve erişilebilir.** ✅
+1. **`ghcr.io/yasinoz/labs-jenkins:1.0.1` — çalıştırılarak doğrulandı.** ✅
 
    CI iş akışı (`build-images.yml`) çalıştı, imaj `linux/amd64` ve
    `linux/arm64` olarak GHCR'a gitti (Apple Silicon öğrenciler kapsandı) ve
@@ -90,9 +90,39 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
    docker compose -f labs/jenkins/infra/docker-compose.yml build
    ```
 
-   **Yine de doğrulanmadı:** imajın İÇİ. Jenkins'in gerçekten eklentilerle
-   açıldığı, `casc.yaml`'ın okunduğu ve student/student ile giriş yapıldığı
-   çalıştırılarak teyit edilmedi.
+   **İmajın içi 20.10.2026'da çalıştırılarak doğrulandı:**
+
+   - Jenkins `Jenkins is fully up and running` noktasına ulaşıyor
+   - `casc.yaml` uygulanıyor (sistem mesajı, `numExecutors: 2`, `mode: NORMAL`
+     API'den teyit edildi)
+   - `student` / `student` girişi çalışıyor (HTTP 200, `authenticated: true`),
+     anonim erişim reddediliyor (HTTP 403), yanlış parola 401
+   - Jenkins içinde `docker` 29.9.1 ve `kubectl` v1.37.1 var,
+     `docker.sock` üzerinden host konteynerleri listelenebiliyor
+   - `plugins.txt`'teki eklentilerin tamamı yüklü
+   - Gitea HTTP 200
+
+   **1.0.0 bozuktu — kullanılmamalı.** İlk yayınlanan imajda Jenkins hiç
+   açılmıyordu (exit 5) ve bu ancak çalıştırılınca ortaya çıktı. Üç ayrı hata
+   vardı:
+
+   | Hata | Yazdığım | Doğrusu |
+   | --- | --- | --- |
+   | `authorizationStrategy` sembolü | `loggedInAuthenticationStrategy` | `loggedInUsersCanDoAnything` |
+   | `crumbIssuer` alt alanı | `standard: { excludeClientIPFromCrumb: true }` | `crumbIssuer: "standard"` (alt alan kabul etmiyor) |
+   | `casc.yaml` konumu | `/var/jenkins_home/casc.yaml` | `/var/jenkins_config/casc.yaml` |
+
+   Sondaki en sinsisiydi: `/var/jenkins_home` temel imajda `VOLUME`. Oraya
+   kopyalanan dosya yalnızca volume ilk oluşurken yazılır; sonra imaj
+   güncellense bile compose aynı anonim volume'ü koruyup eski kopyayı okur.
+   Yani yapılandırma düzeltmeleri kullanıcıya hiç ulaşmıyordu. Dosya artık
+   volume'ün dışında.
+
+   Geçerli JCasC sembollerini tahmin etmek yerine, imaj CasC olmadan açılıp
+   `/configuration-as-code/schema` ucundan şema çekilerek bulundu; düzeltilmiş
+   dosya da yeniden derlemeden önce `/configuration-as-code/checkNewSource`
+   ile doğrulandı (`The configuration can be applied`). Aynı yöntem
+   ilerideki casc değişiklikleri için de kullanılabilir.
 
 2. **Jenkins lab'ı** — Gitea'da kullanıcı oluşturma, kimlik bilgisi ekleme ve
    `input` bloğunun duraklattığı aşamanın yerleşik arayüzde nasıl göründüğü.
