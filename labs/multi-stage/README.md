@@ -6,7 +6,7 @@ section: cicd
 order: 4
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/multi-stage
 ---
 # Multi-Stage Builds
@@ -161,7 +161,8 @@ We won't cover different languages in detail. The [whoami Dockerfile](./whoami/D
 
 - the builder stages starts from the Go SDK image
 - it installs the OS packages needed to build the app
-- then it copies the library list and runs `go mod download` to install the app's dependencies
+- then it copies the library list (`go.mod`) and the lock file (`go.sum`) and
+  runs `go mod download` to install the app's dependencies
 - next it copies the source code and compiles the app
 - the final app image sets up the container environment
 - then it copies in the compiled output from the builder
@@ -194,7 +195,10 @@ docker image ls -f reference=whoami -f reference=golang
 
 </details><br/>
 
-> Woah! The SDK image is over 300MB; the app image is under 10MB.
+> Woah! The SDK image is hundreds of megabytes; the app image is a few.
+>
+> Docker 29 splits the old `SIZE` column into `DISK USAGE` and `CONTENT SIZE`,
+> so you'll see two numbers - the gap is just as big either way.
 
 
 The app is a simple web server. Run a container publishing a random port and find the port:

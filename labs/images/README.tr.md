@@ -6,7 +6,7 @@ section: cicd
 order: 2
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/images
 ---
 # Container İmajları Derlemek
@@ -121,11 +121,23 @@ Tüm Ubuntu imajlarınızı ve kendi temel imajınızı listeleyin:
 docker image ls --filter reference=ubuntu --filter reference=courselabs/base
 ```
 
-> ID'lere bakın. `courselabs/base` ve `ubuntu` aynı ID'yi paylaşıyor — ikisi
-> aynı imajın takma adı, çünkü temel Dockerfile `latest` etiketinin şu an
-> gösterdiği sürümü kullanıyor. `ubuntu:24.04` ise farklı bir ID'ye sahip:
-> o farklı bir imaj. Sürüm pinlemenin bütün anlamı bu — `latest` kayar,
-> sürüm etiketi kaymaz.
+> ID'lere bakın — üçü de farklı. `ubuntu:24.04` gerçekten farklı bir imaj:
+> başka bir Ubuntu sürümü. İnce olan `courselabs/base`. Dockerfile'ı
+> `ubuntu:26.04` üzerine hiçbir şey eklemiyor (`latest` şu an onu gösteriyor),
+> ama BuildKit her derlemede yeni bir imaj dışa aktardığı için sonuç kendi
+> ID'sini alıyor.
+>
+> Yine de *içerik* birebir aynı — katmanları karşılaştırın:
+>
+> ```
+> docker image inspect courselabs/base --format '{{.RootFS.Layers}}'
+>
+> docker image inspect ubuntu --format '{{.RootFS.Layers}}'
+> ```
+>
+> Katman ID'leri aynı, imaj ID'si farklı. Ders iki katmanlı: imajlar katman
+> paylaşır ve sürüm pinlemek önemlidir, çünkü `latest` kayar, sürüm etiketi
+> kaymaz.
 
 ## Komutlar ve entrypoint'ler
 

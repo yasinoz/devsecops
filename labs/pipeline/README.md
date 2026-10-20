@@ -140,7 +140,12 @@ docker image ls eclipse-temurin:25-jdk
 
 </details>
 
-> You should see your application image is about half the size of the SDK image.
+> Your application image is smaller than the SDK image - it carries the Java
+> runtime but not the compiler and build tools. With these Temurin images the
+> saving is around 100MB; the `-jre` image is roughly four fifths of the
+> `-jdk`. Base the final stage on a slimmer image (an Alpine JRE, say) and
+> the gap gets much wider - that's what the `whoami` build in the
+> [multi-stage lab](../multi-stage/README.md) does with `scratch`.
 
 ## Building with Docker Compose
 
@@ -270,8 +275,12 @@ ___
 Clean up by removing this lab's containers:
 
 ```
-docker compose -f labs/pipeline/infra/docker-compose.yml down
+docker compose -f labs/pipeline/infra/docker-compose.yml down -v
 ```
+
+> `-v` removes the anonymous volumes too. Without it Gitea's database
+> survives, and the next run of this lab fails at the user-creation step
+> with `user already exists`.
 
 > This removes only the containers this lab started. If you want
 > a clean slate, `docker ps` will show anything still running.

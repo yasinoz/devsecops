@@ -8,7 +8,7 @@ RUN apk --no-cache --no-progress add \
     && update-ca-certificates 
 
 WORKDIR /go/whoami
-COPY go.mod .
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY app.go .

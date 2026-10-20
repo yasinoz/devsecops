@@ -6,7 +6,7 @@ section: cicd
 order: 1
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/jenkins
 ---
 # Automation with Jenkins
@@ -319,8 +319,13 @@ ___
 Remove the lab containers:
 
 ```
-docker compose -f labs/jenkins/infra/docker-compose.yml down
+docker compose -f labs/jenkins/infra/docker-compose.yml down -v
 ```
+
+> `-v` matters. Both images declare a `VOLUME`, so Compose keeps an anonymous
+> volume behind when you only run `down`. Gitea's database survives in it, and
+> running the lab again fails at the user-creation step with
+> `user already exists`.
 
 And remove the Gitea remote so it doesn't confuse later labs:
 

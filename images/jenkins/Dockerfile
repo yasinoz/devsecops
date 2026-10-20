@@ -8,7 +8,7 @@
 # gomulu geldigi icin konteyner saniyeler icinde hazir.
 #
 # Derleme:
-#   docker build -t ghcr.io/yasinoz/labs-jenkins:1.0.1 images/jenkins
+#   docker build -t ghcr.io/yasinoz/labs-jenkins:1.0.2 images/jenkins
 # Ya da lab dizininden: docker compose -f labs/jenkins/infra/docker-compose.yml build
 
 # Docker komut satirini resmi imajdan aliyoruz - apt deposu eklemekten
@@ -26,6 +26,12 @@ USER root
 
 # Docker komut satiri: pipeline'lar host Docker motorunda imaj derliyor
 COPY --from=dockercli /usr/local/bin/docker /usr/local/bin/docker
+
+# CLI eklentileri: 'docker compose' ve 'docker buildx' ayri ikili dosyalar.
+# Bunlar olmadan pipeline labindaki 'docker compose build' adimi
+# "docker: 'compose' is not a docker command" ile patlar ve 'docker build'
+# BuildKit yerine kullanimdan kaldirilmis eski derleyiciye duser.
+COPY --from=dockercli /usr/local/libexec/docker/cli-plugins/ /usr/local/libexec/docker/cli-plugins/
 
 # kubectl: GitOps / admission lablari icin
 ARG KUBECTL_VERSION=v1.37.1

@@ -6,7 +6,7 @@ section: cicd
 order: 2
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/images
 ---
 # Building Container Images
@@ -111,11 +111,23 @@ List all your Ubuntu images and your own base image:
 docker image ls --filter reference=ubuntu --filter reference=courselabs/base
 ```
 
-> Look at the IDs. `courselabs/base` and `ubuntu` share one - they're aliases
-> for the same image, because the base Dockerfile uses the same version that
-> the `latest` tag currently points to. `ubuntu:24.04` has a different ID: it
-> is a different image. That's the whole point of pinning a version - `latest`
-> moves, a version tag doesn't.
+> Look at the IDs - all three are different. `ubuntu:24.04` is a genuinely
+> different image: a different Ubuntu release. `courselabs/base` is the subtle
+> one. Its Dockerfile adds nothing at all to `ubuntu:26.04` (which is what
+> `latest` currently points to), but BuildKit exports a new image for every
+> build, so the result gets an ID of its own.
+>
+> The *contents* are identical though - compare the layers:
+>
+> ```
+> docker image inspect courselabs/base --format '{{.RootFS.Layers}}'
+>
+> docker image inspect ubuntu --format '{{.RootFS.Layers}}'
+> ```
+>
+> Same layer IDs, different image ID. That's the lesson twice over: images
+> share layers, and pinning a version matters because `latest` moves while a
+> version tag doesn't.
 
 ## Commands and entrypoints
 
