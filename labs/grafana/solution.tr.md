@@ -19,7 +19,7 @@ PromQL'e bir etiket ekleyin:
 sum without(job, tier) (up{tier="infrastructure"})
 ```
 
-_Back to dashboard_ tıklayın — aynısını zaman çizelgesi paneli için de yapın
+_Back_ tıklayın — aynısını zaman çizelgesi paneli için de yapın
 (ikisi de aynı sorguyu kullanabilir).
 
 ### Backend satırı

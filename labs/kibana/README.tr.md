@@ -6,7 +6,7 @@ section: observability
 order: 5
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/kibana
 ---
 # Kibana
@@ -201,13 +201,12 @@ seçenekleri sunabiliyor.
 Ana menüden _Management > Stack Management_, sonra _Kibana > Data Views_
 bölümünü açıp _Create data view_ tıklayın.
 
-> Bunlara Kibana 7'ye kadar **index pattern** deniyordu — aşağıdaki ekran
-> görüntüsü ve Elastic dökümantasyonunun bir kısmı hâlâ eski adı kullanıyor.
-> Kavram birebir aynı.
+> Bunlara Kibana 7'ye kadar **index pattern** deniyordu ve Elastic
+> dökümantasyonunun bir kısmı hâlâ eski adı kullanıyor. Kavram birebir aynı.
 
 Şuna benzer bir ekran göreceksiniz:
 
-![Kibana'da data view (eski adıyla index pattern) oluşturma ekranı](../../img/kibana-create-index-pattern.png)
+![Kibana'da data view oluşturma ekranı](../../img/kibana-create-index-pattern.png)
 
 > Index adı için bir *desen* belirtiyorsunuz; böylece tek bir sorguda bir veya
 > daha fazla index üzerinde arama yapabiliyorsunuz.

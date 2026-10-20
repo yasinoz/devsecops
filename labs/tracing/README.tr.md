@@ -6,7 +6,7 @@ section: observability
 order: 6
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/tracing
 ---
 # Uygulama İzleri

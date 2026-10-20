@@ -6,7 +6,7 @@ section: observability
 order: 1
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/prometheus
 ---
 # Prometheus
@@ -94,7 +94,7 @@ sizde farklı olacak, bu imajlar zaman içinde yeniden derleniyor):
 |Element|Value|
 |-|-|
 |`app_info{app_version="1.3.1",assembly_name="Fulfilment.Processor",dotnet_version="3.1.16",instance="fulfilment-processor:9110",job="fulfilment-processor"}`|`1`|
-|`app_info{instance="fulfilment-api:80",java_version="11-jre",job="fulfilment-api",version="0.3.0"}`|`1`|
+|`app_info{instance="fulfilment-api",java_version="11-jre",job="fulfilment-api",version="0.3.0"}`|`1`|
 
 Bunlar bilgilendirme amaçlı metrikler; döküman işleyici ve REST API için
 uygulama ve çalışma ortamı sürüm numaralarını gösteriyorlar.
@@ -255,7 +255,7 @@ toplama hedefi için bir tane:
       {
         "metric": {
           "__name__": "up",
-          "instance": "fulfilment-api:80",
+          "instance": "fulfilment-api",
           "job": "fulfilment-api"
         },
         "value": [

@@ -6,7 +6,7 @@ section: observability
 order: 7
 duration: 35
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/jaeger
 ---
 # Jaeger Çalıştırmak
@@ -53,10 +53,10 @@ adlandırılmış işlemleri listeliyor.
 Şu anda liste boş, çünkü Jaeger'a henüz hiçbir şey span göndermedi.
 
 > Bu lab'ın eski sürümü buraya Jaeger'ın kendi `jaeger-query` izlerine bakarak
-> başlıyordu — Jaeger 1 kendini izliyordu. Jaeger 2 kendi izlemesini
-> bağlamıyor (dağıttığı yapılandırmada tam olarak bunun için bir TODO var),
-> dolayısıyla ona gerçek span göndermeden bakacak bir şey yok. Sırada bunu
-> yapacağız.
+> başlıyordu. Jaeger 2 kendisi hakkında çok daha az şey raporluyor: yeni
+> açılmış bir container'da servis listesi gerçekten boş ve `jaeger` servisi
+> ancak gerçek span'ler akmaya başlayınca beliriyor. Yani ona span
+> göndermeden bakacak bir şey yok — sırada bunu yapacağız.
 
 Jaeger span'leri birkaç farklı biçimde kabul ediyor. Varsayılan
 yapılandırması OTLP (OpenTelemetry protokolü), eski Jaeger protokolleri ve
@@ -167,8 +167,12 @@ Tüm span'leri genişletin ve bol ayrıntı göreceksiniz:
     - burada da iki span var, iki bileşen de iz span'i kaydediyor: web
       sunucusundan client çağrısı ve API sunucusundan server çağrısı
 
-Zincirdeki en uzun çağrı, https://blog.sixeyed.com adresine yapılan harici
-istek.
+Hangi span'in baskın olduğu güne göre değişir. **Kontrol etmediğiniz** çağrı,
+https://blog.sixeyed.com adresine yapılan harici istek - bu lablar yazıldığında
+açık ara en yavaş olan oydu, yaklaşık bir saniye. Artık bir CDN arkasında
+önbellekleniyor ve çoğu zaman milisaniyeler içinde dönüyor; o durumda en uzun
+çağrı doküman API'sine yapılan oluyor. Bu değişkenlik, harici bağımlılığın
+neden izlenmeye değer olduğunu tam olarak gösteriyor.
 
 </details><br/>
 

@@ -6,7 +6,7 @@ section: observability
 order: 7
 duration: 35
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/jaeger
 ---
 # Running Jaeger
@@ -43,9 +43,10 @@ named operations within them.
 Right now the list is empty, because nothing has sent Jaeger any spans yet.
 
 > Older versions of this lab started here by looking at Jaeger's own
-> `jaeger-query` traces - Jaeger 1 traced itself. Jaeger 2 does not wire up its
-> own tracing (its shipped config has a TODO for exactly that), so there is
-> nothing to look at until we send it some real spans. We'll do that next.
+> `jaeger-query` traces. Jaeger 2 reports far less about itself: on a fresh
+> container the service list is genuinely empty, and a `jaeger` service only
+> appears once real spans are flowing. So there is nothing to look at until
+> we send it some - we'll do that next.
 
 Jaeger accepts spans in several formats. Its default configuration enables
 receivers for OTLP (the OpenTelemetry protocol), the legacy Jaeger protocols
@@ -135,7 +136,12 @@ Expand all the spans and you'll see a lot of detail:
 - the web app calls the document service
     - two spans again here as both components record trace spans, the client call from the web server and the server call from the API server
 
-The longest call in the chain is the external request to https://blog.sixeyed.com.
+Which span dominates depends on the day. The call you do **not** control is
+the external request to https://blog.sixeyed.com - when these labs were
+written it was by far the slowest, at about a second. It is cached behind a
+CDN now and often comes back in milliseconds, in which case the call to the
+document API is the longest. That variability is exactly why the external
+dependency is the one worth watching.
 
 </details><br/>
 

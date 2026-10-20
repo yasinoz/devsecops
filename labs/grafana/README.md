@@ -6,18 +6,16 @@ section: observability
 order: 3
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/grafana
 ---
 # Grafana
 
 [Grafana](https://grafana.com/oss/grafana/) is a web-based UI for visualizing data. It can consume data from many different sources, and it's particularly well matched with Prometheus. You might use the Prometheus UI to fine-tune your queries, and then you'd take the PromQL and use it in Grafana.
 
-> ⚠️ **Screenshots in this lab were taken on Grafana 8.** The containers now
-> run Grafana 13, where the navigation is substantially different. The written
-> steps below have been updated for the current UI; the images are kept because
-> they still show *what you are aiming for*, not *where to click*. Menu labels
-> move between Grafana releases - if a label has moved again, the
+> The screenshots and the written steps in this lab were both taken on
+> Grafana 13.2.4, the version the containers run. Menu labels do move between
+> Grafana releases - if something has shifted again, the
 > [Grafana docs](https://grafana.com/docs/grafana/latest/) are authoritative.
 
 ## Reference
@@ -52,7 +50,7 @@ Sign in with the default credentials - you'll be asked to create a new password,
 
 In current Grafana you add a data source from **Connections > Data sources**:
 
-![Grafana home screen (Grafana 8)](../../img/grafana-first-run.png)
+![Grafana home screen](../../img/grafana-first-run.png)
 
 📋 Add a Prometheus data source, with the URL `http://prometheus:9090` and test it.
 
@@ -77,7 +75,7 @@ That's all the setup you need - now you can create a dashboard with panels to qu
 
 Open **Dashboards** from the left nav, then **New > New dashboard**. You'll see an empty dashboard like this:
 
-![Empty dashboard (Grafana 8)](../../img/grafana-empty-dashboard.png)
+![Empty dashboard](../../img/grafana-empty-dashboard.png)
 
 Every visualization is a panel within a dashboard.
 
@@ -86,9 +84,13 @@ Every visualization is a panel within a dashboard.
 <details>
   <summary>Need some help?</summary>
 
-Click _+ Add visualization_, pick your Prometheus data source, and enter `up` in the query editor. You'll see a preview of the visualization, which is not quite what we want:
+The empty dashboard asks you to _Select layout_ - pick either _Auto grid_ or
+_Custom grid_, then click _Add_ and choose _Panel_. (Grafana 13 replaced the
+old _+ Add visualization_ button with this layout picker.) The panel editor
+opens on your default data source; enter `up` in the query editor. You'll see
+a preview of the visualization, which is not quite what we want:
 
-![Default time series preview of the up metric (Grafana 8)](../../img/grafana-up-preview.png)
+![Default time series preview of the up metric](../../img/grafana-up-preview.png)
 
 </details><br/>
 
@@ -113,8 +115,11 @@ Here's what you're aiming for:
 
 In the _Query_ panel:
 
-- set the format to Table
-- check _Instant_
+- set _Format_ to Table
+- set _Type_ to Instant
+
+> In Grafana 13 these live under _Options_ in the query row. _Instant_ used to
+> be a checkbox; it is now one of the two _Type_ choices (Range or Instant).
 
 In the display options:
 
@@ -130,12 +135,15 @@ Back in display options:
 
 - Add a title
 
-- scroll to  _Value mappings_ and click _Edit value mappings_
+- scroll to _Value mappings_ and click _Add value mappings_ (the button reads
+  _Edit value mappings_ once you have some)
     - add a mapping for value=0 to display `OFFLINE` 
     - add a mapping for value=1 to display `ok`
     - click _Apply_
 
-Click _Back to dashboard_ at the top-right to return to the dashboard (then _Save dashboard_ to keep it).
+Click _Back_ at the top-right to return to the dashboard, then _Save_ to keep
+it. (Both buttons were named _Back to dashboard_ and _Save dashboard_ in
+older Grafana.)
 
 </details><br/>
 
@@ -157,7 +165,7 @@ docker compose -f labs/grafana/apps.yml up -d
 
 If you watch long enough you'll see processor instance 1 flicks between `ok` and `OFFLINE`. The table we have shows the current status, and it would also be useful to see the history of each component's uptime.
 
-Click _Add_ in the top menu and choose _Visualization_ to add a second panel.
+Click _Add_ in the top menu and choose _Panel_ to add a second panel.
 
 Last time we used a transform to hide labels, but we can do that in the query too:
 
@@ -192,7 +200,7 @@ In the query panel:
 
 - set the legend format to `{{instance}}`
 
-Click _Back to dashboard_.
+Click _Back_.
 
 </details><br/>
 

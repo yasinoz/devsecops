@@ -1,3 +1,8 @@
+# NOT: courselabs/fulfilment-* imajlari digest ile pinlendi.
+# Docker Hub'da '25.03' diye bir etiket YOK - yalnizca
+# '25.03-linux-amd64' var, yani Apple Silicon ogrencilerde cekilemezdi.
+# Cok mimarili olan tek surum 'latest'; tekrar edilebilirlik icin onun
+# digest'ine sabitlendi (digest hem amd64 hem arm64'u kapsar).
 services:
 
   node-exporter:
@@ -6,7 +11,7 @@ services:
       - metrics
 
   fulfilment-api:
-    image: courselabs/fulfilment-api:25.03
+    image: courselabs/fulfilment-api@sha256:ee65224fb578b2ff909358edb1e488e25dd8fafdac668bba97d26825a9b8278c
     ports:
       - 8080:80
     networks: 
@@ -14,7 +19,7 @@ services:
       - metrics
 
   fulfilment-processor:
-    image: courselabs/fulfilment-processor:25.03
+    image: courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
     environment:
       - Observability__Metrics__IncludeRuntime=true
     networks: 

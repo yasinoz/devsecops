@@ -7,7 +7,7 @@ parametrelerini içermesi gerekiyor.
 metriğiniz olmayacak:
 
 ```
-curl 'localhost:9090/api/v1/query_range?query=fulfilment_in_flight_total&start=2021-07-11T00:01:30Z&end=2021-07-11T01:00Z&step=15s'
+curl 'localhost:9090/api/v1/query_range?query=fulfilment_in_flight_total&start=2021-07-11T00:01:30Z&end=2021-07-11T01:00:00Z&step=15s'
 ```
 
 Şunu göreceksiniz:

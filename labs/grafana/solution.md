@@ -16,7 +16,7 @@ Add a label to the PromQL:
 sum without(job, tier) (up{tier="infrastructure"})
 ```
 
-Click _Back to dashboard_ - and do the same for the timeline panel (both can use the same query).
+Click _Back_ - and do the same for the timeline panel (both can use the same query).
 
 ### Backend row
 

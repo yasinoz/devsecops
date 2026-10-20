@@ -6,7 +6,7 @@ section: observability
 order: 1
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/prometheus
 ---
 # Prometheus
@@ -77,7 +77,7 @@ Query `app_info` and you'll see output like this (your version numbers will diff
 |Element|Value|
 |-|-|
 |`app_info{app_version="1.3.1",assembly_name="Fulfilment.Processor",dotnet_version="3.1.16",instance="fulfilment-processor:9110",job="fulfilment-processor"}`|`1`|
-|`app_info{instance="fulfilment-api:80",java_version="11-jre",job="fulfilment-api",version="0.3.0"}`|`1`|
+|`app_info{instance="fulfilment-api",java_version="11-jre",job="fulfilment-api",version="0.3.0"}`|`1`|
 
 These are informational metrics, showing the application and runtime version numbers for the document processor and REST API.
 
@@ -212,7 +212,7 @@ You'll get a response like this, with multiple metrics in the result - one for e
       {
         "metric": {
           "__name__": "up",
-          "instance": "fulfilment-api:80",
+          "instance": "fulfilment-api",
           "job": "fulfilment-api"
         },
         "value": [
