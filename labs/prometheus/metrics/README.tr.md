@@ -6,7 +6,7 @@ section: observability
 order: 2
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/prometheus/metrics
 ---
 # Metrik Yayınlamak
@@ -28,7 +28,7 @@ Basit bir sunucu uygulaması çalıştırarak başlayın. Taklit bir döküman
 işleyici ve yaptığı iş hakkında metrikler kaydediyor:
 
 ```
-docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor:25.03
+docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
 ```
 
 > Metrik uç noktasını http://localhost:9110/metrics adresinde açın
@@ -115,7 +115,7 @@ kullanan bir .NET uygulaması):
 ```
 docker rm -f processor
 
-docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor:25.03
+docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
 ```
 
 > Metrik uç noktasını yine http://localhost:9110/metrics adresinde açın
@@ -208,7 +208,7 @@ Tomcat ve [micrometer istemci kütüphanesini](https://micrometer.io) kullanan
 bir Java REST API'si çalıştırın:
 
 ```
-docker run -d -p 8080:80 courselabs/fulfilment-api:25.03
+docker run -d -p 8080:80 courselabs/fulfilment-api@sha256:ee65224fb578b2ff909358edb1e488e25dd8fafdac668bba97d26825a9b8278c
 ```
 
 > Metrikleri http://localhost:8080/actuator/prometheus adresinde açın

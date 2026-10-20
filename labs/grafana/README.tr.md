@@ -6,7 +6,7 @@ section: observability
 order: 3
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/grafana
 ---
 # Grafana
@@ -16,12 +16,9 @@ tabanlı bir arayüz. Çok farklı kaynaktan veri tüketebiliyor ve özellikle
 Prometheus ile iyi eşleşiyor. Sorgularınızı ince ayar yapmak için Prometheus
 arayüzünü kullanıp, sonra PromQL'i alıp Grafana'da kullanabilirsiniz.
 
-> ⚠️ **Bu lab'daki ekran görüntüleri Grafana 8 üzerinde alındı.**
-> Container'lar artık Grafana 13 çalıştırıyor ve gezinme belirgin biçimde
-> farklı. Aşağıdaki yazılı adımlar güncel arayüze göre güncellendi; görseller
-> ise *nereye tıklayacağınızı* değil *neyi hedeflediğinizi* gösterdikleri
-> için korundu. Menü etiketleri Grafana sürümleri arasında yer değiştiriyor —
-> bir etiket yine taşınmışsa
+> Bu lab'daki ekran görüntüleri de yazılı adımlar da container'ların
+> çalıştırdığı sürümde, Grafana 13.2.4'te alındı. Menü etiketleri Grafana
+> sürümleri arasında yer değiştirebiliyor — bir şey yine kaymışsa
 > [Grafana dökümanları](https://grafana.com/docs/grafana/latest/) bağlayıcıdır.
 
 ## Kaynaklar
@@ -68,7 +65,7 @@ istenecek ama bu adımı atlayabilirsiniz:
 Güncel Grafana'da veri kaynağını **Connections > Data sources** üzerinden
 eklersiniz:
 
-![Grafana ana ekranı (Grafana 8)](../../img/grafana-first-run.png)
+![Grafana ana ekranı](../../img/grafana-first-run.png)
 
 📋 `http://prometheus:9090` URL'siyle bir Prometheus veri kaynağı ekleyip test
 edin.
@@ -96,7 +93,7 @@ dashboard oluşturabilirsiniz.
 Sol menüden **Dashboards**, sonra **New > New dashboard** yolunu açın. Şuna
 benzer boş bir dashboard göreceksiniz:
 
-![Boş dashboard (Grafana 8)](../../img/grafana-empty-dashboard.png)
+![Boş dashboard](../../img/grafana-empty-dashboard.png)
 
 Her görselleştirme, bir dashboard içindeki bir paneldir.
 
@@ -106,11 +103,14 @@ gösteren yeni bir panel ekleyin.
 <details>
   <summary>Biraz yardım lazım mı?</summary>
 
-_+ Add visualization_ tıklayın, Prometheus veri kaynağınızı seçin ve sorgu
-düzenleyicisine `up` yazın. Görselleştirmenin bir ön izlemesini göreceksiniz;
-tam istediğimiz gibi değil:
+Boş dashboard sizden _Select layout_ seçmenizi ister - _Auto grid_ ya da
+_Custom grid_ seçin, sonra _Add_ tıklayıp _Panel_ deyin. (Grafana 13, eski
+_+ Add visualization_ düğmesini bu düzen seçiciyle değiştirdi.) Panel
+düzenleyici varsayılan veri kaynağınızla açılır; sorgu düzenleyicisine `up`
+yazın. Görselleştirmenin bir ön izlemesini göreceksiniz; tam istediğimiz
+gibi değil:
 
-![up metriğinin varsayılan zaman serisi ön izlemesi (Grafana 8)](../../img/grafana-up-preview.png)
+![up metriğinin varsayılan zaman serisi ön izlemesi](../../img/grafana-up-preview.png)
 
 </details><br/>
 
@@ -139,8 +139,12 @@ Hedeflediğiniz şey bu:
 
 _Query_ bölümünde:
 
-- biçimi Table yapın
-- _Instant_ seçeneğini işaretleyin
+- _Format_ değerini Table yapın
+- _Type_ değerini Instant yapın
+
+> Grafana 13'te bunlar sorgu satırındaki _Options_ altında. _Instant_ eskiden
+> bir onay kutusuydu; artık iki _Type_ seçeneğinden biri (Range ya da
+> Instant).
 
 Görüntüleme seçeneklerinde:
 
@@ -156,13 +160,15 @@ Görüntüleme seçeneklerine dönün:
 
 - Bir başlık ekleyin
 
-- _Value mappings_ bölümüne inip _Edit value mappings_ tıklayın
+- _Value mappings_ bölümüne inip _Add value mappings_ tıklayın (eşleme
+  eklediğinizde düğme _Edit value mappings_ olur)
     - value=0 için `OFFLINE` gösteren bir eşleme ekleyin
     - value=1 için `ok` gösteren bir eşleme ekleyin
     - _Apply_ tıklayın
 
-Panelinizi güncelleyip dashboard'a dönmek için sağ üstteki _Back to dashboard_
-tıklayın (sonra saklamak için _Save dashboard_).
+Panelinizi güncelleyip dashboard'a dönmek için sağ üstteki _Back_ tıklayın,
+sonra saklamak için _Save_. (Eski Grafana'da bu düğmeler _Back to dashboard_
+ve _Save dashboard_ adını taşıyordu.)
 
 </details><br/>
 
@@ -191,8 +197,7 @@ Yeterince uzun izlerseniz 1 numaralı işleyici instance'ının `ok` ve `OFFLINE
 arasında gidip geldiğini göreceksiniz. Elimizdeki tablo güncel durumu
 gösteriyor; her bileşenin uptime geçmişini görmek de faydalı olurdu.
 
-Üst menüden _Add_ tıklayıp ikinci bir panel eklemek için _Visualization_
-seçin.
+Üst menüden _Add_ tıklayıp ikinci bir panel eklemek için _Panel_ seçin.
 
 Geçen sefer etiketleri gizlemek için bir dönüşüm kullandık, ama bunu sorguda
 da yapabiliriz:
@@ -230,7 +235,7 @@ Sorgu bölümünde:
 
 - legend biçimini `{{instance}}` yapın
 
-_Back to dashboard_ tıklayın.
+_Back_ tıklayın.
 
 </details><br/>
 

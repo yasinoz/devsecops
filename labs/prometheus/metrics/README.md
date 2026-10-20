@@ -6,7 +6,7 @@ section: observability
 order: 2
 duration: 40
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/prometheus/metrics
 ---
 # Exporting Metrics
@@ -25,7 +25,7 @@ In a distributed architecture, each of your components exposes an HTTP endpoint,
 Start by running a simple server application. It's a mock document processor, and it records metrics about the work it's doing:
 
 ```
-docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor:25.03
+docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
 ```
 
 > Browse to the metrics endpoint at http://localhost:9110/metrics
@@ -100,7 +100,7 @@ Remove the processor container and start a new one, configured to expose platfor
 ```
 docker rm -f processor
 
-docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor:25.03
+docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
 ```
 
 > Browse to the metrics endpoint again at http://localhost:9110/metrics
@@ -174,7 +174,7 @@ Application servers like Tomcat and ASP.NET should publish usage metrics, like t
 Run a Java REST API which uses Tomcat and the [micrometer client library](https://micrometer.io):
 
 ```
-docker run -d -p 8080:80 courselabs/fulfilment-api:25.03
+docker run -d -p 8080:80 courselabs/fulfilment-api@sha256:ee65224fb578b2ff909358edb1e488e25dd8fafdac668bba97d26825a9b8278c
 ```
 
 > Browse to the metrics at http://localhost:8080/actuator/prometheus

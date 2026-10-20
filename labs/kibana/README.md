@@ -6,7 +6,7 @@ section: observability
 order: 5
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/kibana
 ---
 # Kibana
@@ -177,9 +177,8 @@ matching indices, so it can present search and filter options.
 From the main menu select _Management > Stack Management_, then _Kibana > Data
 Views_ and click _Create data view_.
 
-> These were called **index patterns** up to Kibana 7 - the screenshot below
-> and some of the Elastic documentation still use the old name. The concept is
-> identical.
+> These were called **index patterns** up to Kibana 7, and some of the Elastic
+> documentation still uses the old name. The concept is identical.
 
 You'll see a screen like this:
 
