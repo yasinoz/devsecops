@@ -24,20 +24,15 @@ jenkins:
           name: Lab Student
 
   authorizationStrategy:
-    loggedInAuthenticationStrategy:
+    loggedInUsersCanDoAnything:
       allowAnonymousRead: false
 
   # Lab ortami: CSRF korumasini acik birakiyoruz, kapatmak gerekmiyor.
-  crumbIssuer:
-    standard:
-      excludeClientIPFromCrumb: true
+  # 'standard' skaler yazilir: DefaultCrumbIssuer CasC'a hic alan aciklamiyor,
+  # alt alan vermek (ornek: excludeClientIPFromCrumb) boot'u dusurur.
+  crumbIssuer: "standard"
 
 unclassified:
   location:
     url: http://localhost:8080/
     adminAddress: labs@example.local
-
-security:
-  # Lab pipeline'lari script onay bekleyip takilmasin
-  scriptApproval:
-    approvedSignatures: []

@@ -8,7 +8,7 @@
 # gomulu geldigi icin konteyner saniyeler icinde hazir.
 #
 # Derleme:
-#   docker build -t ghcr.io/yasinoz/labs-jenkins:1.0.0 images/jenkins
+#   docker build -t ghcr.io/yasinoz/labs-jenkins:1.0.1 images/jenkins
 # Ya da lab dizininden: docker compose -f labs/jenkins/infra/docker-compose.yml build
 
 # Docker komut satirini resmi imajdan aliyoruz - apt deposu eklemekten
@@ -56,11 +56,20 @@ USER jenkins
 
 # Eklentiler. Surumler bilincli olarak pinlenmedi: jenkins-plugin-cli
 # eklentileri bu Jenkins surumuyle UYUMLU en guncel haliyle cozumler.
-# Tekrarlanabilirlik imaj etiketiyle saglanir (1.0.0 her zaman ayni katmanlar).
+# Tekrarlanabilirlik yayinlanmis imaj etiketiyle saglanir: bir etiket bir kez
+# yayinlandiktan sonra ayni katmanlari verir, yeniden derleme ise daha yeni
+# eklenti surumleri cekebilir - bu yuzden duzeltmeler yeni etiketle cikar.
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt --latest true
 
-# Configuration as Code: yonetici kullanicisi, guvenlik ve ornek ayarlar
-COPY --chown=jenkins:jenkins casc.yaml /var/jenkins_home/casc.yaml
-ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc.yaml \
+# Configuration as Code: yonetici kullanicisi, guvenlik ve ornek ayarlar.
+#
+# ONEMLI - dosya /var/jenkins_home ALTINDA DEGIL:
+# /var/jenkins_home temel imajda VOLUME olarak tanimli. Oraya kopyalanan bir
+# dosya yalnizca volume ilk kez olusurken yazilir; sonra imaj guncellense bile
+# compose ayni anonim volume'u koruyup eski kopyayi kullanmaya devam eder.
+# Yani yapilandirma duzeltmeleri kullaniciya hic ulasmaz. Volume disinda
+# tutuldugunda her acilista imajdan gelen surum okunur.
+COPY --chown=jenkins:jenkins casc.yaml /var/jenkins_config/casc.yaml
+ENV CASC_JENKINS_CONFIG=/var/jenkins_config/casc.yaml \
     JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
