@@ -1,0 +1,52 @@
+name: Siteyi yeniden derle
+
+# Lab icerigi degistiginde yasinoz.me'yi yeniden derletir.
+#
+# Site (yasinoz/yasinoz-web) lab icerigini BUILD ZAMANINDA bu repodan
+# cekiyor. Yani buraya push etmek tek basina siteyi guncellemez; sitenin
+# yeniden derlenmesi gerekiyor. Bu is akisi Cloudflare Pages'in deploy
+# hook'unu cagirip onu tetikliyor.
+#
+# KURULUM (bir kez):
+#   1. Cloudflare panel > Workers & Pages > yasinoz-web > Settings >
+#      Builds & deployments > Deploy hooks > "Create deploy hook"
+#   2. Uretilen URL'yi bu reponun Settings > Secrets and variables >
+#      Actions bolumune CF_PAGES_DEPLOY_HOOK adiyla ekle
+#
+# Secret tanimli degilse is akisi hata vermeden atlar - boylece Pages
+# projesi kurulmadan once de push'lar kirmizi gorunmez.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'labs/**'
+      - 'setup/**'
+      - 'manifest.json'
+  workflow_dispatch:
+
+# Ust uste gelen push'larda yalnizca son derleme anlamli.
+concurrency:
+  group: rebuild-site
+  cancel-in-progress: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy hook'u tetikle
+        env:
+          HOOK: ${{ secrets.CF_PAGES_DEPLOY_HOOK }}
+        run: |
+          set -euo pipefail
+          if [ -z "${HOOK:-}" ]; then
+            echo "CF_PAGES_DEPLOY_HOOK tanimli degil - atlaniyor."
+            echo "Kurulum adimlari bu dosyanin basinda yazili."
+            exit 0
+          fi
+          code="$(curl -sS -o /dev/null -w '%{http_code}' -X POST "$HOOK")"
+          echo "deploy hook -> HTTP $code"
+          case "$code" in
+            200|201) echo "site yeniden derlenmeye alindi" ;;
+            *) echo "beklenmeyen yanit: $code" >&2; exit 1 ;;
+          esac
