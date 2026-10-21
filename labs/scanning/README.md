@@ -69,7 +69,7 @@ This Trivy container is set up to talk to your local Docker Engine, so you can s
 **Open another terminal** and build a website image from [this Dockerfile](./web/Dockerfile) which uses a very old version of Nginx:
 
 ```
-docker build -t courselabs/web:nginx-1.7 ./labs/scanning/web
+docker build -t courselabs/web:nginx-1.14 ./labs/scanning/web
 ```
 
 📋 Scan your newly built image in Trivy. Is it good to go live?
@@ -80,7 +80,7 @@ docker build -t courselabs/web:nginx-1.7 ./labs/scanning/web
 Trivy can use your local Docker Engine so it has access to your image cache:
 
 ```
-trivy image courselabs/web:nginx-1.7
+trivy image courselabs/web:nginx-1.14
 ```
 
 You'll see lots of errors - so many on my run that it scrolls past the terminal buffer.
@@ -88,7 +88,7 @@ You'll see lots of errors - so many on my run that it scrolls past the terminal 
 Try this to just print critical issues:
 
 ```
-trivy image -s CRITICAL courselabs/web:nginx-1.7
+trivy image -s CRITICAL courselabs/web:nginx-1.14
 ```
 
 You'll see 40+ critical errors...

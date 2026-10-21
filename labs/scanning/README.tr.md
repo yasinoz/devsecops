@@ -93,7 +93,7 @@ Docker Hub'daki imajların yanında kendi imajlarınızı da tarayabilirsiniz.
 [bu Dockerfile'dan](./web/Dockerfile) bir web sitesi imajı derleyin:
 
 ```
-docker build -t courselabs/web:nginx-1.7 ./labs/scanning/web
+docker build -t courselabs/web:nginx-1.14 ./labs/scanning/web
 ```
 
 📋 Yeni derlediğiniz imajı Trivy ile tarayın. Yayına çıkmaya uygun mu?
@@ -105,7 +105,7 @@ Trivy yerel Docker motorunuzu kullanabiliyor, dolayısıyla imaj
 önbelleğinize erişebiliyor:
 
 ```
-trivy image courselabs/web:nginx-1.7
+trivy image courselabs/web:nginx-1.14
 ```
 
 Bol miktarda hata göreceksiniz — bendeki çalıştırmada o kadar çoktu ki
@@ -114,7 +114,7 @@ terminal tamponunu aştı.
 Yalnızca kritik sorunları yazdırmak için şunu deneyin:
 
 ```
-trivy image -s CRITICAL courselabs/web:nginx-1.7
+trivy image -s CRITICAL courselabs/web:nginx-1.14
 ```
 
 40'ın üzerinde kritik hata göreceksiniz...

@@ -75,8 +75,14 @@ Argo CD belirtiminin yerel bir kopyası burada:
 Sunucu bileşenlerini dağıtın:
 
 ```
-kubectl apply -n argocd -f labs/argo/specs/argocd
+kubectl apply --server-side -n argocd -f labs/argo/specs/argocd
 ```
+> Burada `--server-side` gerekiyor. Duz `kubectl apply`, manifestin tamamini
+> bir annotation'a yaziyor; ArgoCD'nin `applicationsets` CRD'si ise
+> Kubernetes'in annotation icin izin verdigi 262KB sinirindan buyuk ve kurulum
+> *"metadata.annotations: Too long"* diyerek basarisiz oluyor. Sunucu tarafli
+> apply o annotation'i yazmiyor.
+
 
 Argo, _Application_ adında yeni bir özel nesne tipi kuruyor.
 
