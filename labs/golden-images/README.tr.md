@@ -33,9 +33,9 @@ listenizi derleyip ihtiyacınıza göre şekillendirebiliyorsunuz.
 Önce problemi anlayalım. Şu iki Java uygulaması farklı temel imajlar ve farklı
 build kalıpları kullanıyor:
 
-- [app-1/Dockerfile](./apps/app-1/Dockerfile) — kullanımdan kaldırılmış `java`
-  imajını kullanıyor ve uygulamayı derlemek için de çalıştırmak için de JDK
-  sürümünü kullanıyor
+- [app-1/Dockerfile](./apps/app-1/Dockerfile) — Amazon Linux tabanında on
+  yıllık bir Java olan Amazon Corretto 8 kullanıyor; uygulamayı derlemek için
+  de çalıştırmak için de aynı JDK'yı kullanıyor
 
 - [app-2/Dockerfile](./apps/app-2/Dockerfile) — Eclipse Temurin kullanıyor;
   derleme için JDK, çalışma zamanı için JRE ile çok aşamalı bir build; bunlar
@@ -60,28 +60,29 @@ kullanıyor, dolayısıyla filtrede bunu kullanabilirsiniz:
 docker image ls "courselabs/app*:v1"
 ```
 
-app-2'nin yaklaşık 200MB'lık bir imaj, app-1'in ise 600MB'ın üzerinde
-olduğunu göreceksiniz.
+app-2'nin yaklaşık 450MB, app-1'in ise 550MB'ın üzerinde olduğunu
+göreceksiniz. Daha basit kurulum olmasına rağmen büyük olan app-1: çalışma
+imajında JDK'nin tamamını taşıyor, app-2 ise yalnızca JRE gönderiyor.
 
-Katman ID'lerini kontrol etmek için imajları inceleyin:
-
-```
-docker inspect courselabs/app-1:v1
-```
-
-app-1'de yaklaşık 12 katman bulacaksınız.
+Burada katman sayısı değil, katmanların *paylaşılıp paylaşılmadığı* önemli.
+Her imajın yalnızca katman özetlerini yazdırın:
 
 ```
-docker inspect courselabs/app-2:v1
+docker inspect -f '{{range .RootFS.Layers}}{{println .}}{{end}}' courselabs/app-1:v1
+
+docker inspect -f '{{range .RootFS.Layers}}{{println .}}{{end}}' courselabs/app-2:v1
 ```
 
-app-2'de yarısı kadar katman var — ama app-1 ile hiç ortak katman yok.
+İki listeyi yan yana koyunca hiçbir ortak özet olmadığını görürsünüz.
+İkisinde de geçen tek özet `sha256:5f70bf18...` — Docker'ın boş yer tutucu
+katmanı; içinde dosya yok, dolayısıyla hiçbir önbellek kazancı değil.
 
 </details>
 
 İkisi de Java uygulaması ve aynı çalışma ortamına ihtiyaç duyuyorlar, ama imaj
-hiyerarşileri tamamen ayrışmış. Paylaşılan katman yok, dolayısıyla Docker
-katman önbelleği hiç yeniden kullanılmıyor — imajların güvenliğini hiç
+hiyerarşileri tamamen ayrışmış — on yıllık bir Amazon Linux JDK'sine karşı
+güncel bir Debian Temurin JRE'si. Gerçek hiçbir katmanı paylaşmıyorlar,
+dolayısıyla Docker katman önbelleği hiç yeniden kullanılmıyor — imajların güvenliğini hiç
 düşünmesek bile disk alanı ve ağ bant genişliği için kötü haber.
 
 ## Altın İmaj Kütüphanesi
