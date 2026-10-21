@@ -288,3 +288,19 @@ kubectl delete crd -l gatekeeper.sh/system
 
 kubectl delete crd -l gatekeeper.sh/constraint
 ```
+
+And - **this one matters** - the webhook configurations:
+
+```
+kubectl delete validatingwebhookconfiguration servicetokenpolicy gatekeeper-validating-webhook-configuration cert-manager-webhook --ignore-not-found
+
+kubectl delete mutatingwebhookconfiguration nonrootpolicy gatekeeper-mutating-webhook-configuration cert-manager-webhook --ignore-not-found
+```
+
+> Webhook configurations are **cluster-scoped** - deleting the namespaces does
+> not remove them. If you leave them behind, the API server keeps calling a
+> webhook service that no longer exists, and **every later lab fails** with
+> errors like *"failed calling webhook ... service not found"* - you will not
+> even be able to create a namespace. If you hit that, run the two commands
+> above to recover.
+

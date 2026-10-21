@@ -354,3 +354,18 @@ kubectl delete crd -l gatekeeper.sh/system
 
 kubectl delete crd -l gatekeeper.sh/constraint
 ```
+
+Bir de - **bu onemli** - webhook yapilandirmalari:
+
+```
+kubectl delete validatingwebhookconfiguration servicetokenpolicy gatekeeper-validating-webhook-configuration cert-manager-webhook --ignore-not-found
+
+kubectl delete mutatingwebhookconfiguration nonrootpolicy gatekeeper-mutating-webhook-configuration cert-manager-webhook --ignore-not-found
+```
+
+> Webhook yapilandirmalari **kume kapsamli**; namespace'leri silmek onlari
+> kaldirmiyor. Geride birakirsaniz API sunucusu artik var olmayan bir webhook
+> servisini cagirmaya devam eder ve **sonraki butun lablar** *"failed calling
+> webhook ... service not found"* hatasiyla coker - namespace bile
+> olusturamazsiniz. Bu duruma dusersiniz, yukaridaki iki komut kurtarir.
+
