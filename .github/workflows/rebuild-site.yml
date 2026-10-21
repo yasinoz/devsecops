@@ -48,5 +48,10 @@ jobs:
           echo "deploy hook -> HTTP $code"
           case "$code" in
             200|201) echo "site yeniden derlenmeye alindi" ;;
+            # 304 = "bu hook icin zaten bir derleme kuyrukta". Dort lab
+            # reposu ayni anda push alinca ilki derlemeyi kuyruga koyuyor,
+            # digerleri 304 aliyor - istenen davranis tam olarak bu, cunku
+            # site bir kez derlenip hepsinin son halini cekiyor. Hata degil.
+            304) echo "derleme zaten kuyrukta - ikinci bir derleme gerekmiyor" ;;
             *) echo "beklenmeyen yanit: $code" >&2; exit 1 ;;
           esac
