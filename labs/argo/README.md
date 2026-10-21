@@ -216,6 +216,34 @@ This ArgoCD application is set to self-heal, which means if an administrator rem
 
 ___
 
+<!-- troubleshooting:auto -->
+## If something goes wrong
+
+**`The connection to the server ... was refused`** - the cluster is not
+running. Enable Kubernetes in Docker Desktop and wait for it to start.
+
+**`provided port is already allocated`** - a Service from an earlier lab still
+holds that NodePort. Find it with `kubectl get svc -A` and delete the namespace
+that lab created.
+
+**`failed calling webhook ... service not found`** - leftovers from the
+**admission** lab are blocking the API server, and you will not be able to
+create anything, not even a namespace. That lab's Cleanup section has the two
+commands that remove the webhook configurations.
+
+**Pod stuck in `ContainerCreating` or `Pending`** - usually the image is still
+downloading, which can take a few minutes the first time. Check with
+`kubectl describe pod <name>` and read the **Events** at the bottom: they say
+exactly what the Pod is waiting for.
+
+**Pod in `CrashLoopBackOff`** - the container starts and exits. The reason is
+in its logs: `kubectl logs <name>`. Add `--previous` to see the run before the
+last restart.
+
+Still stuck? The **Cleanup** section below resets everything, so you can start
+the lab again from a clean cluster.
+
+
 ## Cleanup
 
 Deleting apps in ArgoCD doesn't remove the running application - unless you use the cascade flag:
