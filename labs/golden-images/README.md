@@ -21,9 +21,11 @@ Building your own set of base images - _golden images_ - and mandating that all 
 
 Let's understand the problem first. These two Java apps use different base images and different build patterns:
 
-- [app-1/Dockerfile](./apps/app-1/Dockerfile) - uses the deprecated `java` image, and it's the JDK version used for compiling and running the app
+- [app-1/Dockerfile](./apps/app-1/Dockerfile) - uses Amazon Corretto 8, a decade-old Java on an Amazon Linux base, and that same JDK is used for compiling *and* running the app
 
 - [app-2/Dockerfile](./apps/app-2/Dockerfile) - uses Eclipse Temurin, with a multi-stage build using the JDK for compilation and the JRE at runtime; these are Debian-based images
+
+> This lab originally used Docker Hub's `java` image for app-1. Both `java` and the `openjdk` image that replaced it have since been **deleted** from Docker Hub, so the original Dockerfile does not build at all any more. That is the argument for golden images in one line: pin your apps to somebody else's base image and they break when that image goes away.
 
 Build both apps with Compose:
 
@@ -42,25 +44,26 @@ The image references both start with `courselabs/app` and use the `v1` tag so yo
 docker image ls "courselabs/app*:v1"
 ```
 
-You'll see that app-2 is about a 200MB image and app-1 is over 600MB.
+You'll see that app-2 is around 450MB and app-1 is over 550MB. app-1 is the
+bigger image even though it is the simpler build - it keeps a whole JDK in the
+runtime image, where app-2 ships only a JRE.
 
-Inspect the images to check the layer IDs:
-
-```
-docker inspect courselabs/app-1:v1
-```
-
-You'll find around 12 layers in app-1.
+Layer count is not the interesting part here; whether the layers are *shared*
+is. Print just the layer digests for each image:
 
 ```
-docker inspect courselabs/app-2:v1
+docker inspect -f '{{range .RootFS.Layers}}{{println .}}{{end}}' courselabs/app-1:v1
+
+docker inspect -f '{{range .RootFS.Layers}}{{println .}}{{end}}' courselabs/app-2:v1
 ```
 
-About half as many layers in app-2 - but there are no common layers with app-1.
+Line the two lists up and you'll find they have nothing in common. The only
+digest that appears in both is `sha256:5f70bf18...`, which is Docker's empty
+placeholder layer - it carries no files, so it is no cache re-use at all.
 
 </details>
 
-These are both Java apps and need the same runtime, but their image hierarchies are completely divergent. There are no shared layers, so there's no re-use of the Docker layer cache - bad news for disk space and network bandwidth, even without considering the security of the images.
+These are both Java apps and need the same runtime, but their image hierarchies are completely divergent - a decade-old Amazon Linux JDK against a current Debian Temurin JRE. They share no real layers, so there's no re-use of the Docker layer cache - bad news for disk space and network bandwidth, even without considering the security of the images.
 
 ## A Golden Image Library
 
