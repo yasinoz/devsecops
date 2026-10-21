@@ -16,6 +16,22 @@ upstream: labs/registries
 
 Organizations run their own registries so they can have a long-term store of release versions from the build pipeline, or to make images available in the same network region as the production environment.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 30 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Pulling images](https://docs.docker.com/engine/reference/commandline/image_pull/)

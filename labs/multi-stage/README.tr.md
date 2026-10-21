@@ -20,6 +20,23 @@ toplamanın harika bir yolu: geliştiricilerin ve build sunucularının yalnızc
 Docker'a ve kaynak koda ihtiyacı olur, tüm araçlar Docker imajlarında paketli
 gelir, böylece herkes aynı sürümleri kullanır.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 40 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Çok aşamalı build dökümantasyonu](https://docs.docker.com/develop/develop-images/multistage-build/)

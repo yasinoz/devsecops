@@ -26,6 +26,23 @@ Kimlik bilgilerini de Jenkins'te saklayabilirsiniz; böylece diğer servislerle
 kimlik doğrulaması yapıp pipeline'dan Docker Hub'a imaj gönderebilir ya da
 üretim ortamınıza dağıtım yapabilirsiniz.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 60 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Container içinden Docker motoruna erişmek](https://docs.docker.com/engine/security/#docker-daemon-attack-surface)

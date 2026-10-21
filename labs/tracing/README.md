@@ -15,6 +15,22 @@ Tracing is the third pillar of observability - metrics show you overall health, 
 
 For that you need your application components to emit and receive trace data, so a collector can store all the traces and identify the calls which belong to the same client transaction.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/overview/) - this was the emerging standard when these labs were written; it is now *the* standard, and a graduated CNCF project

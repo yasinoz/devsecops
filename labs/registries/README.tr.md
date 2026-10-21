@@ -20,6 +20,23 @@ Kurumlar kendi registry'lerini çalıştırıyor: build pipeline'ından çıkan 
 uzun vadeli saklamak için, ya da imajları üretim ortamıyla aynı ağ bölgesinde
 erişilebilir kılmak için.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 30 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [İmaj çekmek (pull)](https://docs.docker.com/engine/reference/commandline/image_pull/)

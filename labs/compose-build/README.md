@@ -13,6 +13,22 @@ upstream: labs/compose-build
 
 Docker Compose models can include build-time details, so you can build multiple container images using one Docker Compose command. Using override files lets you customize the image references and set labels to track the image back to the source code.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Compose build spec](https://docs.docker.com/reference/compose-file/build/)

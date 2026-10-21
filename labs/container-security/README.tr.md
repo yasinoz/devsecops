@@ -25,6 +25,34 @@ anlamanız gerekiyor, çünkü kontrol uygulamak onları bozabilir — Go
 uygulamaları salt okunur bir dosya sisteminde sorunsuz çalışabilirken Java
 uygulamaları hata verecektir.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 50 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+Bir **Kubernetes kümesi** çalışıyor olmalı. Docker Desktop
+bunu içeriyor: *Settings -> Kubernetes -> Enable Kubernetes*. Kontrol edin:
+
+```
+kubectl get nodes
+```
+
+En az bir düğüm görmelisiniz ve `STATUS` sütunu `Ready` olmalı. Komut
+takılır ya da hata verirse küme henüz başlamamıştır; bir dakika bekleyip
+tekrar deneyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Kubernetes güvenlik rehberi](https://kubernetes.io/docs/concepts/security/)

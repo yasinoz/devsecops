@@ -18,6 +18,23 @@ halde, çalışmaya hazır gelir.
 İmajı, container'ın dosya sistemi artı container başlarken Docker'ın hangi
 komutu çalıştıracağını söyleyen bir miktar metadata olarak düşünebilirsiniz.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 40 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Dockerfile sözdizimi](https://docs.docker.com/engine/reference/builder/)

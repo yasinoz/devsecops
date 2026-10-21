@@ -17,6 +17,22 @@ Letting developers use any base image for their apps is not a good idea. They co
 
 Building your own set of base images - _golden images_ - and mandating that all apps need to use those is the best approach. It lets you curate your own approved list of images and tailor them as you need.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 50 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Developer Free-For-All
 
 Let's understand the problem first. These two Java apps use different base images and different build patterns:

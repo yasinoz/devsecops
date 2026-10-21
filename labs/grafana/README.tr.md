@@ -21,6 +21,23 @@ arayüzünü kullanıp, sonra PromQL'i alıp Grafana'da kullanabilirsiniz.
 > sürümleri arasında yer değiştirebiliyor — bir şey yine kaymışsa
 > [Grafana dökümanları](https://grafana.com/docs/grafana/latest/) bağlayıcıdır.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 40 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Prometheus'u veri kaynağı olarak kullanmak](https://grafana.com/docs/grafana/latest/datasources/prometheus/)

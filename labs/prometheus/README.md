@@ -13,6 +13,22 @@ upstream: labs/prometheus
 
 [Prometheus](https://prometheus.io) is an open-source monitoring solution. It's a [CNCF](https://www.cncf.io) project (under the same foundation as Kubernetes), and it runs a whole suite of monitoring components.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Prometheus documentation](https://prometheus.io/docs/introduction/overview/)

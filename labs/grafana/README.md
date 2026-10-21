@@ -18,6 +18,22 @@ upstream: labs/grafana
 > Grafana releases - if something has shifted again, the
 > [Grafana docs](https://grafana.com/docs/grafana/latest/) are authoritative.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 40 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Using Prometheus as a data source](https://grafana.com/docs/grafana/latest/datasources/prometheus/)
