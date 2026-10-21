@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-19",
+  "generated": "2026-10-21",
   "track": {
     "slug": "devsecops",
     "titles": {
@@ -51,7 +51,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/jenkins",
           "docs": {
             "en": {
@@ -81,7 +81,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/images",
           "docs": {
             "en": {
@@ -141,7 +141,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/multi-stage",
           "docs": {
             "en": {
@@ -171,7 +171,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/compose-build",
           "docs": {
             "en": {
@@ -245,7 +245,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/prometheus",
           "docs": {
             "en": {
@@ -275,7 +275,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/prometheus/metrics",
           "docs": {
             "en": {
@@ -305,7 +305,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/grafana",
           "docs": {
             "en": {
@@ -335,7 +335,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/elasticsearch",
           "docs": {
             "en": {
@@ -365,7 +365,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/kibana",
           "docs": {
             "en": {
@@ -395,7 +395,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/tracing",
           "docs": {
             "en": {
@@ -425,7 +425,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/jaeger",
           "docs": {
             "en": {
@@ -649,7 +649,8 @@
     "en": 19,
     "tr": 19,
     "by_status": {
-      "needs-review": 19
+      "updated": 11,
+      "needs-review": 8
     }
   }
 }
