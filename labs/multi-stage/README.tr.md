@@ -310,6 +310,30 @@ Docker yeni portu doğru eşliyor mu?
 > [çözümü](solution.tr.md) inceleyin.
 
 ___
+<!-- troubleshooting:auto -->
+## Takılırsanız
+
+**`Cannot connect to the Docker daemon`** - Docker Desktop çalışmıyor.
+Başlatın ve balina simgesi hareket etmeyi bırakana kadar bekleyin.
+
+**`port is already allocated`** - önceki bir labdan kalan konteyner o portu
+hâlâ tutuyor. `docker ps` ile neyin çalıştığına bakın, eskisini
+`docker rm -f <ad>` ile kaldırın.
+
+**`The container name "/..." is already in use`** - aynı sebep, aynı çözüm:
+`docker rm -f <ad>` deyip komutu tekrar çalıştırın.
+
+**Build sırasında `unable to prepare context: path ... not found`** - yanlış
+dizindesiniz. Bu labdaki her komut deponun kök dizininde olduğunuzu varsayıyor.
+
+**Çalışmak yerine kullanım metni basan `docker run`** - bu labdaki bazı
+komutlar, yanlış argümanın nasıl göründüğünü göstermek için kasıtlı olarak
+başarısız oluyor. Bozuk sanmadan önce komutun çevresindeki açıklamayı okuyun.
+
+Hâlâ takılıysanız: aşağıdaki **Cleanup** bölümü her şeyi sıfırlıyor, labı
+temiz bir makineyle baştan yapabilirsiniz.
+
+
 ## Temizlik
 
 Bu lab'ın container'larını kaldırın:

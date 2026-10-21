@@ -296,6 +296,34 @@ kontrolü etkinleştirene kadar güvenlik kontrollerini ekleyin.
 > [çözümü](solution.tr.md) inceleyin.
 
 ___
+<!-- troubleshooting:auto -->
+## Takılırsanız
+
+**`The connection to the server ... was refused`** - küme çalışmıyor. Docker
+Desktop'ta Kubernetes'i açın ve başlamasını bekleyin.
+
+**`provided port is already allocated`** - önceki bir labdan kalan Service o
+NodePort'u hâlâ tutuyor. `kubectl get svc -A` ile bulun ve o labın oluşturduğu
+namespace'i silin.
+
+**`failed calling webhook ... service not found`** - **admission** labından
+kalanlar API sunucusunu engelliyor; hiçbir şey oluşturamazsınız, namespace
+bile. O labın Cleanup bölümünde webhook yapılandırmalarını kaldıran iki komut
+var.
+
+**Pod `ContainerCreating` ya da `Pending`de takılı** - genellikle imaj hâlâ
+iniyor; ilk seferde birkaç dakika sürebilir. `kubectl describe pod <ad>` ile
+bakın ve en alttaki **Events** bölümünü okuyun: pod'un neyi beklediğini tam
+olarak söylüyor.
+
+**Pod `CrashLoopBackOff`de** - konteyner başlayıp çıkıyor. Sebep günlüklerinde:
+`kubectl logs <ad>`. Son yeniden başlatmadan önceki çalıştırmayı görmek için
+`--previous` ekleyin.
+
+Hâlâ takılıysanız: aşağıdaki **Cleanup** bölümü her şeyi sıfırlıyor, labı
+temiz bir kümeyle baştan yapabilirsiniz.
+
+
 ## Temizlik
 
 ```

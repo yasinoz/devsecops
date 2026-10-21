@@ -255,6 +255,31 @@ Save your dashboard as JSON so you can load it into another Grafana instance lat
 > Stuck? Try [hints](hints.md) or check the [solution](solution.md).
 
 ___
+<!-- troubleshooting:auto -->
+## If something goes wrong
+
+**`Cannot connect to the Docker daemon`** - Docker Desktop is not running.
+Start it and wait until the whale icon stops animating.
+
+**`port is already allocated`** - a container from an earlier lab is still
+holding that port. See what is running with `docker ps`, then remove the old
+container with `docker rm -f <name>`.
+
+**`The container name "/..." is already in use`** - same cause, same fix:
+`docker rm -f <name>`, then run the command again.
+
+**`unable to prepare context: path ... not found`** on a build - you are in the
+wrong folder. Every command in this lab assumes you are at the root of this
+repository.
+
+**A `docker run` that prints usage text instead of working** - some commands in
+this lab are meant to fail, to show you what a wrong argument looks like. Read
+the text around the command before assuming it is broken.
+
+Still stuck? The **Cleanup** section below resets everything, so you can start
+the lab again from a clean machine.
+
+
 ## Cleanup
 
 Clean up by removing this lab's containers:
