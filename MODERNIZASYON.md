@@ -50,7 +50,7 @@ CVE'leri bulmak üzere kurgulandı; güncellenirse lab anlamsız hale gelir.
 
 | İmaj | Kullanan lab | Sebep |
 |---|---|---|
-| `nginx:1.7` | scanning | Trivy taramasında yüzlerce CVE göstermek |
+| `nginx:1.14` | scanning | Trivy taramasında yüzlerce CVE göstermek (216 CVE, 31 kritik) |
 | `ghcr.io/yasinoz/library/alpine:3.8` | scanning, golden-images | Temel katman açıklarını göstermek |
 | `python:3.4-alpine` | scanning | CVE-2019-15903 dahil kritik bulgular |
 | `ghcr.io/yasinoz/library/amazoncorretto:8` | golden-images | Altın imaj karşılaştırma tabanı (Java 8, runtime'da JDK) |

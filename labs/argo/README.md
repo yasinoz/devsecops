@@ -60,8 +60,14 @@ There's a local copy of the Argo CD spec here:
 Deploy the server components:
 
 ```
-kubectl apply -n argocd -f labs/argo/specs/argocd
+kubectl apply --server-side -n argocd -f labs/argo/specs/argocd
 ```
+> `--server-side` is needed here. A plain `kubectl apply` records the whole
+> manifest in an annotation, and ArgoCD's `applicationsets` CRD is larger than
+> the 262KB limit Kubernetes allows for annotations - the install fails with
+> *"metadata.annotations: Too long"*. Server-side apply does not write that
+> annotation.
+
 
 Argo installs a new custom object type called _Application_.
 
