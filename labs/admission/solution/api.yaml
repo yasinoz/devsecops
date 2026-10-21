@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: kiamol/ch14-image-of-the-day
+          image: ghcr.io/yasinoz/kiamol/ch14-image-of-the-day:latest
           ports:
             - containerPort: 80
               name: api

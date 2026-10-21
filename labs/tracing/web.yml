@@ -6,7 +6,7 @@
 services:
 
   fulfilment-web:
-    image: courselabs/fulfilment-web@sha256:a5118de1f92688719c37ca6119010f904e38520791e58af447f958da9168700e
+    image: ghcr.io/yasinoz/courselabs/fulfilment-web:sha-a5118de1f926
     ports:
       - "8070:80"
     networks:

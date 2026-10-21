@@ -100,7 +100,7 @@ The new base image doesn't add anything to the [official Ubuntu image](https://h
 docker pull ubuntu
 
 # image versions are set in the tag name:
-docker pull ubuntu:24.04
+docker pull ghcr.io/yasinoz/library/ubuntu:24.04
 ```
 
 </details><br/>
@@ -111,9 +111,9 @@ List all your Ubuntu images and your own base image:
 docker image ls --filter reference=ubuntu --filter reference=courselabs/base
 ```
 
-> Look at the IDs - all three are different. `ubuntu:24.04` is a genuinely
+> Look at the IDs - all three are different. `ghcr.io/yasinoz/library/ubuntu:24.04` is a genuinely
 > different image: a different Ubuntu release. `courselabs/base` is the subtle
-> one. Its Dockerfile adds nothing at all to `ubuntu:26.04` (which is what
+> one. Its Dockerfile adds nothing at all to `ghcr.io/yasinoz/library/ubuntu:26.04` (which is what
 > `latest` currently points to), but BuildKit exports a new image for every
 > build, so the result gets an ID of its own.
 >
@@ -254,17 +254,17 @@ docker inspect courselabs/web
 The base image is Nginx running on Alpine:
 
 ```
-docker pull nginx:1.31.7-alpine
+docker pull ghcr.io/yasinoz/library/nginx:1.31.7-alpine
 
-docker inspect nginx:1.31.7-alpine
+docker inspect ghcr.io/yasinoz/library/nginx:1.31.7-alpine
 ```
 
 And you can check Alpine too:
 
 ```
-docker pull alpine:3.24
+docker pull ghcr.io/yasinoz/library/alpine:3.24
 
-docker inspect alpine:3.24
+docker inspect ghcr.io/yasinoz/library/alpine:3.24
 ```
 
 </details><br/>
@@ -274,8 +274,8 @@ docker inspect alpine:3.24
 Here's the full image hierarchy:
 
 ```
-alpine:3.24
-└─ nginx:1.31.7-alpine
+ghcr.io/yasinoz/library/alpine:3.24
+└─ ghcr.io/yasinoz/library/nginx:1.31.7-alpine
     └─ courselabs/web 
 ```
 

@@ -193,9 +193,9 @@ göreceksiniz. O imajı çekip etiketlerini inceleyin.
 
 ```
 # build surumu imaj etiketine ekleniyor, ornegin 39 numarali build icin:
-docker pull courselabs/rng-api:21.05-39
+docker pull ghcr.io/yasinoz/courselabs/rng-api:21.05-39
 
-docker image inspect courselabs/rng-api:21.05-39
+docker image inspect ghcr.io/yasinoz/courselabs/rng-api:21.05-39
 ```
 
 </details><br/>

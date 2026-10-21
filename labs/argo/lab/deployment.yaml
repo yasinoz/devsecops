@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: app
-          image: courselabs/whoami-lab:21.09-4
+          image: ghcr.io/yasinoz/courselabs/whoami-lab:21.09-4

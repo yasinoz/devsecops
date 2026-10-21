@@ -6,7 +6,7 @@
 services:
 
   fulfilment-api:
-    image: courselabs/fulfilment-api@sha256:ee65224fb578b2ff909358edb1e488e25dd8fafdac668bba97d26825a9b8278c
+    image: ghcr.io/yasinoz/courselabs/fulfilment-api:sha-ee65224fb578
     ports:
       - "8071:80"
     environment:

@@ -1,7 +1,7 @@
 services:
 
   prometheus:
-    image: prom/prometheus:v3.15.0
+    image: ghcr.io/yasinoz/prom/prometheus:v3.15.0
     ports: 
       - 9090:9090
     volumes:
@@ -10,7 +10,7 @@ services:
       - metrics
 
   grafana:
-    image: grafana/grafana:13.2.4
+    image: ghcr.io/yasinoz/grafana/grafana:13.2.4
     ports: 
       - 3000:3000
     networks:

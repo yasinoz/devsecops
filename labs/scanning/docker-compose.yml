@@ -1,7 +1,7 @@
 services:
 
   trivy:
-    image: aquasec/trivy:0.76.0
+    image: ghcr.io/yasinoz/aquasec/trivy:0.76.0
     entrypoint: /bin/sh
     stdin_open: true 
     tty: true  

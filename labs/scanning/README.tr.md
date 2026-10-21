@@ -55,7 +55,7 @@ Docker Hub'daki bir imajı tarayın:
 ```
 trivy
 
-trivy image sixeyed/whoami:24.07
+trivy image ghcr.io/yasinoz/sixeyed/whoami:24.07
 ```
 
 > İlk çalıştırmada Trivy güvenlik açığı veritabanını indirecek; bu bir iki

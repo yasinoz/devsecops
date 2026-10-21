@@ -157,9 +157,9 @@ https://github.com/courselabs/docker/actions/workflows/rng-build.yml
 
 ```
 # the build version is appended to the image tag, e.g for build 39:
-docker pull courselabs/rng-api:21.05-39
+docker pull ghcr.io/yasinoz/courselabs/rng-api:21.05-39
 
-docker image inspect courselabs/rng-api:21.05-39
+docker image inspect ghcr.io/yasinoz/courselabs/rng-api:21.05-39
 ```
 
 </details><br/>

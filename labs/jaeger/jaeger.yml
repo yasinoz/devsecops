@@ -1,6 +1,6 @@
 services:
   jaeger:
-    image: jaegertracing/jaeger:2.22.0
+    image: ghcr.io/yasinoz/jaegertracing/jaeger:2.22.0
     ports:
       - "16686:16686"
     networks:

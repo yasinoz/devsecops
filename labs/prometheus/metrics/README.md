@@ -25,7 +25,7 @@ In a distributed architecture, each of your components exposes an HTTP endpoint,
 Start by running a simple server application. It's a mock document processor, and it records metrics about the work it's doing:
 
 ```
-docker run -d -p 9110:9110 --name processor courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
+docker run -d -p 9110:9110 --name processor ghcr.io/yasinoz/courselabs/fulfilment-processor:sha-578bc38424a1
 ```
 
 > Browse to the metrics endpoint at http://localhost:9110/metrics
@@ -100,7 +100,7 @@ Remove the processor container and start a new one, configured to expose platfor
 ```
 docker rm -f processor
 
-docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
+docker run -d -p 9110:9110 --name processor -e Observability__Metrics__IncludeRuntime=true ghcr.io/yasinoz/courselabs/fulfilment-processor:sha-578bc38424a1
 ```
 
 > Browse to the metrics endpoint again at http://localhost:9110/metrics
@@ -137,7 +137,7 @@ The [node exporter](https://github.com/prometheus/node_exporter) publishes stand
 We can see the metrics it publishes by running it in a container. 
 
 ```
-docker run -d -p 9100:9100 --name node prom/node-exporter:v1.9.1
+docker run -d -p 9100:9100 --name node ghcr.io/yasinoz/prom/node-exporter:v1.9.1
 ```
 
 > Browse these metrics at http://localhost:9100/metrics
@@ -174,7 +174,7 @@ Application servers like Tomcat and ASP.NET should publish usage metrics, like t
 Run a Java REST API which uses Tomcat and the [micrometer client library](https://micrometer.io):
 
 ```
-docker run -d -p 8080:80 courselabs/fulfilment-api@sha256:ee65224fb578b2ff909358edb1e488e25dd8fafdac668bba97d26825a9b8278c
+docker run -d -p 8080:80 ghcr.io/yasinoz/courselabs/fulfilment-api:sha-ee65224fb578
 ```
 
 > Browse to the metrics at http://localhost:8080/actuator/prometheus

@@ -6,12 +6,12 @@
 services:
 
   node-exporter:
-    image: prom/node-exporter:v1.9.1
+    image: ghcr.io/yasinoz/prom/node-exporter:v1.9.1
     networks: 
       - metrics
 
   fulfilment-api:
-    image: courselabs/fulfilment-api@sha256:ee65224fb578b2ff909358edb1e488e25dd8fafdac668bba97d26825a9b8278c
+    image: ghcr.io/yasinoz/courselabs/fulfilment-api:sha-ee65224fb578
     ports:
       - 8080:80
     networks: 
@@ -19,7 +19,7 @@ services:
       - metrics
 
   fulfilment-processor:
-    image: courselabs/fulfilment-processor@sha256:578bc38424a1891bbe613925a04e27461fd6cad36de31a2efdbab0acb5d19b26
+    image: ghcr.io/yasinoz/courselabs/fulfilment-processor:sha-578bc38424a1
     environment:
       - Observability__Metrics__IncludeRuntime=true
     networks: 

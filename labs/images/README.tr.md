@@ -110,7 +110,7 @@ yayınlanıyor.
 docker pull ubuntu
 
 # imaj surumleri etiket adinda belirtilir:
-docker pull ubuntu:24.04
+docker pull ghcr.io/yasinoz/library/ubuntu:24.04
 ```
 
 </details><br/>
@@ -121,9 +121,9 @@ Tüm Ubuntu imajlarınızı ve kendi temel imajınızı listeleyin:
 docker image ls --filter reference=ubuntu --filter reference=courselabs/base
 ```
 
-> ID'lere bakın — üçü de farklı. `ubuntu:24.04` gerçekten farklı bir imaj:
+> ID'lere bakın — üçü de farklı. `ghcr.io/yasinoz/library/ubuntu:24.04` gerçekten farklı bir imaj:
 > başka bir Ubuntu sürümü. İnce olan `courselabs/base`. Dockerfile'ı
-> `ubuntu:26.04` üzerine hiçbir şey eklemiyor (`latest` şu an onu gösteriyor),
+> `ghcr.io/yasinoz/library/ubuntu:26.04` üzerine hiçbir şey eklemiyor (`latest` şu an onu gösteriyor),
 > ama BuildKit her derlemede yeni bir imaj dışa aktardığı için sonuç kendi
 > ID'sini alıyor.
 >
@@ -283,17 +283,17 @@ docker inspect courselabs/web
 Temel imaj, Alpine üzerinde çalışan Nginx:
 
 ```
-docker pull nginx:1.31.7-alpine
+docker pull ghcr.io/yasinoz/library/nginx:1.31.7-alpine
 
-docker inspect nginx:1.31.7-alpine
+docker inspect ghcr.io/yasinoz/library/nginx:1.31.7-alpine
 ```
 
 Alpine'ı da kontrol edebilirsiniz:
 
 ```
-docker pull alpine:3.24
+docker pull ghcr.io/yasinoz/library/alpine:3.24
 
-docker inspect alpine:3.24
+docker inspect ghcr.io/yasinoz/library/alpine:3.24
 ```
 
 </details><br/>
@@ -305,8 +305,8 @@ docker inspect alpine:3.24
 İmaj hiyerarşisinin tamamı şöyle:
 
 ```
-alpine:3.24
-└─ nginx:1.31.7-alpine
+ghcr.io/yasinoz/library/alpine:3.24
+└─ ghcr.io/yasinoz/library/nginx:1.31.7-alpine
     └─ courselabs/web 
 ```
 

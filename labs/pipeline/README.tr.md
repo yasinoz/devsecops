@@ -164,8 +164,8 @@ Ayrıntıları görmek için makinenizdeki imajları listeleyebilirsiniz:
 docker image ls courselabs/multi-stage:1
 
 # Docker Hub'daki java sdk imaji:
-docker pull eclipse-temurin:25-jdk
-docker image ls eclipse-temurin:25-jdk 
+docker pull ghcr.io/yasinoz/library/eclipse-temurin:25-jdk
+docker image ls ghcr.io/yasinoz/library/eclipse-temurin:25-jdk 
 ```
 
 </details>
@@ -319,7 +319,7 @@ taşıyor. İmajın daha az belirgin sürümlerini de sunmak istiyoruz, örneği
 
 - `courselabs/rng-api:21.12-3` — 21.12 sürümünün 3 numaralı build'i
 - `courselabs/rng-api:21.12` — 21.12 sürümünün en son build'i
-- `courselabs/rng-api:latest` — en son sürümün en son build'i
+- `ghcr.io/yasinoz/courselabs/rng-api:latest` — en son sürümün en son build'i
 
 `latest` varsayılan etiket olduğu için kullanıcılar en güncel sürümü almak
 için `courselabs/rng-api`, sürümün en son build'ini almak için

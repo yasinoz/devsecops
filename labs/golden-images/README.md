@@ -132,7 +132,7 @@ These images start with `courselabs/app` and use the `v2` tag so you can use tha
 docker image ls "courselabs/app*:v2"
 ```
 
-They're both under 200MB - almost the same size as the golden JRE image. The application binaries are so small they don't add much to the base image.
+They're both around 340MB - the same size as the golden JRE image, to the megabyte. The application binaries are so small they don't add much to the base image.
 
 Inspect the base image and application images to check the layer IDs:
 

@@ -40,7 +40,7 @@ You're connected to the Trivy container. Check the commands you can run, and the
 ```
 trivy
 
-trivy image sixeyed/whoami:24.07
+trivy image ghcr.io/yasinoz/sixeyed/whoami:24.07
 ```
 
 > On the first run Trivy will download the vulnerabilities database, which can take a minute or two

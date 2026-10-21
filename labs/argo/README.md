@@ -171,7 +171,7 @@ Now let's see GitOps in action, making a change to the Docker image tag for the 
 
 Edit the Kubernetes [deployment.yaml](./project/whoami/deployment.yaml) file and make two changes:
 
-- set the image tag to `courselabs/whoami-lab:21.09-4`
+- set the image tag to `ghcr.io/yasinoz/courselabs/whoami-lab:21.09-4`
 - set the replica count to 3
 
 Trigger the update by pushing your changes to the local Git server.

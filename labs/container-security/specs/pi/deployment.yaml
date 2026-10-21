@@ -14,7 +14,7 @@ spec:
         app: pi-web
     spec:
       containers:
-        - image: kiamol/ch05-pi
+        - image: ghcr.io/yasinoz/kiamol/ch05-pi:latest
           command: ["dotnet", "Pi.Web.dll", "-m", "web"]
           name: web
           ports:
