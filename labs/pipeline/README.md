@@ -134,8 +134,8 @@ You can list images on your machine to see the details:
 docker image ls courselabs/multi-stage:1
 
 # java sdk image from Docker Hub:
-docker pull eclipse-temurin:25-jdk
-docker image ls eclipse-temurin:25-jdk 
+docker pull ghcr.io/yasinoz/library/eclipse-temurin:25-jdk
+docker image ls ghcr.io/yasinoz/library/eclipse-temurin:25-jdk 
 ```
 
 </details>
@@ -252,7 +252,7 @@ Docker image tags are typically used for versioning. Our images contain a releas
 
 - `courselabs/rng-api:21.12-3` - is build 3 of the 21.12 release
 - `courselabs/rng-api:21.12` - is the latest build of the 21.12 release
-- `courselabs/rng-api:latest` - is the latest build of the latest release
+- `ghcr.io/yasinoz/courselabs/rng-api:latest` - is the latest build of the latest release
 
 `latest` is the default tag, so users can run a container from `courselabs/rng-api` to get the latest version, or `courselabs/rng-api:21.12` to get the latest build for the release, or `courselabs/rng-api:21.12-3` to run a specific build.
 

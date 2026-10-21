@@ -177,7 +177,7 @@ dolayısıyla filtrede bunu kullanabilirsiniz:
 docker image ls "courselabs/app*:v2"
 ```
 
-İkisi de 200MB'ın altında — altın JRE imajıyla neredeyse aynı boyutta.
+İkisi de 340MB civarında — altın JRE imajıyla megabaytına kadar aynı boyutta.
 Uygulama ikili dosyaları o kadar küçük ki temel imaja pek bir şey eklemiyorlar.
 
 Katman ID'lerini kontrol etmek için temel imajı ve uygulama imajlarını

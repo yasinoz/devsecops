@@ -212,7 +212,7 @@ değiştirip yeni Pod'larla bir rollout tetikleyeceğiz.
 Kubernetes [deployment.yaml](./project/whoami/deployment.yaml) dosyasını
 düzenleyip iki değişiklik yapın:
 
-- imaj etiketini `courselabs/whoami-lab:21.09-4` yapın
+- imaj etiketini `ghcr.io/yasinoz/courselabs/whoami-lab:21.09-4` yapın
 - replica sayısını 3 yapın
 
 Değişikliklerinizi yerel Git sunucusuna göndererek güncellemeyi tetikleyin.

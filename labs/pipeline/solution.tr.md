@@ -22,13 +22,13 @@ Buradaki yaklaşım, Compose dosyalarınıza yeni imajlar eklediğinizde de
 Bir `latest` imajı çekmeyi deneyin:
 
 ```
-docker pull courselabs/rng-api:latest
+docker pull ghcr.io/yasinoz/courselabs/rng-api:latest
 ```
 
 Sonra inceleyebilirsiniz:
 
 ```
-docker inspect courselabs/rng-api:latest
+docker inspect ghcr.io/yasinoz/courselabs/rng-api:latest
 ```
 
 Etiketlerin içinde build etiketini ve commit hash'ini göreceksiniz:

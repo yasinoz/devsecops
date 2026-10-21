@@ -19,7 +19,7 @@ spec:
        runAsGroup: 3000
       containers:
         - name: app
-          image: sixeyed/whoami:24.07
+          image: ghcr.io/yasinoz/sixeyed/whoami:24.07
           command: ["/app/whoami", "-port", "5000"]
           env:
             - name: WHOAMI_MODE

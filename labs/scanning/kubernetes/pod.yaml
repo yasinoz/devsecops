@@ -5,4 +5,4 @@ metadata:
 spec:
   containers:
     - name: sleep
-      image: kiamol/ch03-sleep
+      image: ghcr.io/yasinoz/kiamol/ch03-sleep:latest

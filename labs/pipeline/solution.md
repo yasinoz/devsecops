@@ -15,13 +15,13 @@ This approach continues to work even if you add new images to your Compose files
 Try pulling a `latest` image:
 
 ```
-docker pull courselabs/rng-api:latest
+docker pull ghcr.io/yasinoz/courselabs/rng-api:latest
 ```
 
 Then you can inspect it:
 
 ```
-docker inspect courselabs/rng-api:latest
+docker inspect ghcr.io/yasinoz/courselabs/rng-api:latest
 ```
 
 In the labels you'll see the build tag and commit hash:

@@ -13,7 +13,7 @@ name: devsecops-jenkins
 services:
 
   gitea:
-    image: gitea/gitea:28.2.0
+    image: ghcr.io/yasinoz/gitea/gitea:28.2.0
     environment:
       # Kurulum sihirbazini atla - lab ortaminda elle kurulum adimi istemiyoruz
       GITEA__security__INSTALL_LOCK: "true"

@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: kiamol/ch14-access-log
+          image: ghcr.io/yasinoz/kiamol/ch14-access-log:latest
           ports:
             - containerPort: 80
               name: api

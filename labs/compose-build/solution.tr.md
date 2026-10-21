@@ -14,7 +14,7 @@ Kullanıcılar bu sürümün güncel build'ini almak için `21.05`, belirli bir
 build'i almak için ise örneğin `21.05-39` kullanabilir:
 
 ```
-docker pull courselabs/rng-api:21.05
+docker pull ghcr.io/yasinoz/courselabs/rng-api:21.05
 
 docker image ls courselabs/rng-api
 ```
@@ -24,9 +24,9 @@ Buradaki *takma ad* kelimesine dikkat. İş akışı iki etiketi iki ayrı
 aynı olsa bile ayrı imajlar çıkıyor - karşılaştırın, digest'ler farklı:
 
 ```
-docker manifest inspect courselabs/rng-api:21.05
+docker manifest inspect ghcr.io/yasinoz/courselabs/rng-api:21.05
 
-docker manifest inspect courselabs/rng-api:21.05-39
+docker manifest inspect ghcr.io/yasinoz/courselabs/rng-api:21.05-39
 ```
 
 Tüketici için önemli olan her etiketin verdiği söz: `21.05` size her zaman

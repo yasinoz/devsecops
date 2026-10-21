@@ -9,7 +9,7 @@ When you merge in the latest file it will build images with the tag `21.05`, whi
 Consumers can use `21.05` to get the current build for this release, or e.g. `21.05-39` to get a specific build:
 
 ```
-docker pull courselabs/rng-api:21.05
+docker pull ghcr.io/yasinoz/courselabs/rng-api:21.05
 
 docker image ls courselabs/rng-api
 ```
@@ -19,9 +19,9 @@ two separate `docker compose build` runs, so they end up as separate images
 even when the source is identical - compare them and the digests differ:
 
 ```
-docker manifest inspect courselabs/rng-api:21.05
+docker manifest inspect ghcr.io/yasinoz/courselabs/rng-api:21.05
 
-docker manifest inspect courselabs/rng-api:21.05-39
+docker manifest inspect ghcr.io/yasinoz/courselabs/rng-api:21.05-39
 ```
 
 What matters to a consumer is the promise each tag makes: `21.05` always

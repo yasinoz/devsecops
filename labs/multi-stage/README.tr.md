@@ -225,7 +225,7 @@ imajınızda kalır.
   <summary>Nasıl yapılacağını bilmiyor musunuz?</summary>
 
 ```
-docker pull golang:1.27.2-alpine
+docker pull ghcr.io/yasinoz/library/golang:1.27.2-alpine
 
 docker image ls -f reference=whoami -f reference=golang
 ```

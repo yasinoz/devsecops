@@ -51,9 +51,9 @@ CVE'leri bulmak üzere kurgulandı; güncellenirse lab anlamsız hale gelir.
 | İmaj | Kullanan lab | Sebep |
 |---|---|---|
 | `nginx:1.7` | scanning | Trivy taramasında yüzlerce CVE göstermek |
-| `alpine:3.8` | scanning, golden-images | Temel katman açıklarını göstermek |
+| `ghcr.io/yasinoz/library/alpine:3.8` | scanning, golden-images | Temel katman açıklarını göstermek |
 | `python:3.4-alpine` | scanning | CVE-2019-15903 dahil kritik bulgular |
-| `amazoncorretto:8` | golden-images | Altın imaj karşılaştırma tabanı (Java 8, runtime'da JDK) |
+| `ghcr.io/yasinoz/library/amazoncorretto:8` | golden-images | Altın imaj karşılaştırma tabanı (Java 8, runtime'da JDK) |
 
 Bu liste `_platform/VERSIONS.yaml` içindeki `intentionally_vulnerable`
 bölümünde tutuluyor; lint aracı bu imajları uyarı üretmeden geçiyor.
