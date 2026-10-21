@@ -15,6 +15,22 @@ Kibana is the web front-end for Elasticsearch. It lets you search and filter acr
 
 You can save searches and build the results into visualizations. Kibana is fairly straightforward to use, and power users can build their own dashboards.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Kibana Query Language (KQL)](https://www.elastic.co/guide/en/kibana/current/kuery-query.html) - for simple searches

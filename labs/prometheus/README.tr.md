@@ -15,6 +15,23 @@ upstream: labs/prometheus
 [CNCF](https://www.cncf.io) projesi (Kubernetes ile aynı vakıf altında) ve
 eksiksiz bir izleme bileşenleri takımı barındırıyor.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 45 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Prometheus dökümantasyonu](https://prometheus.io/docs/introduction/overview/)

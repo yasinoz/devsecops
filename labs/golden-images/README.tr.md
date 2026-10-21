@@ -28,6 +28,23 @@ Kendi temel imaj kümenizi — _altın imajlar_ — oluşturup tüm uygulamalar�
 bunları kullanmasını zorunlu kılmak en iyi yaklaşım. Böylece kendi onaylı imaj
 listenizi derleyip ihtiyacınıza göre şekillendirebiliyorsunuz.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 50 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Geliştiricinin Serbest Bölgesi
 
 Önce problemi anlayalım. Şu iki Java uygulaması farklı temel imajlar ve farklı

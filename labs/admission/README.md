@@ -15,6 +15,33 @@ Admission control is the process of allowing - or blocking - workloads from runn
 
 You can do this with admission controller webhooks - HTTP servers which run inside the cluster and get invoked by the API to apply rules when objects are created. Admission controllers can use your own logic, or can use a standard tool like [Open Policy Agent](https://www.openpolicyagent.org).
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 60 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+A **Kubernetes cluster** must be running. Docker Desktop ships one:
+*Settings -> Kubernetes -> Enable Kubernetes*. Check it:
+
+```
+kubectl get nodes
+```
+
+You should see at least one node with `STATUS` of `Ready`. If the command
+hangs or errors, the cluster is still starting - give it a minute and try
+again.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Using admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)

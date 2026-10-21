@@ -18,6 +18,23 @@ Aramaları kaydedip sonuçları görselleştirmelere dönüştürebilirsiniz. Ki
 kullanmak oldukça kolay ve ileri kullanıcılar kendi dashboard'larını
 kurabiliyor.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 45 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Kibana Sorgu Dili (KQL)](https://www.elastic.co/guide/en/kibana/current/kuery-query.html) — basit aramalar için

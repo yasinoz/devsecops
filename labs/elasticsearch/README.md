@@ -15,6 +15,22 @@ Elasticsearch is a document database - it uses JSON as the data format. Document
 
 You can use Elasticsearch as a generic data store, but it's particularly well suited to storing logs because it gives you lots of advanced querying features.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [Index API](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html) and [Document API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html) documentation - for storing data

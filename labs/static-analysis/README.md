@@ -15,6 +15,22 @@ Static analysis tools inspect the source code of your applications, looking for 
 
 There are commercial versions of SonarQube but we'll run the free community edition. It runs as a server, and you can trigger the analysis when you build your code. A SonarQube client on your desktop or build server sends the code for analysis and prints the results. Any issues are stored in the SonarQube server, and you can configure critical issues to fail the build.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## Reference
 
 - [SonarQube on Docker Hub](https://hub.docker.com/_/sonarqube)

@@ -21,6 +21,34 @@ kalmıyor. Ayrıca uygulama tanımlarınız — hatta bulut servislerinin altyap
 kurulumu — kesin olarak Git repolarında saklanabiliyor. Tüm dağıtımınızı
 sıfırdan yeniden oluşturabilirsiniz.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 60 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+Bir **Kubernetes kümesi** çalışıyor olmalı. Docker Desktop
+bunu içeriyor: *Settings -> Kubernetes -> Enable Kubernetes*. Kontrol edin:
+
+```
+kubectl get nodes
+```
+
+En az bir düğüm görmelisiniz ve `STATUS` sütunu `Ready` olmalı. Komut
+takılır ya da hata verirse küme henüz başlamamıştır; bir dakika bekleyip
+tekrar deneyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [GitOps](https://www.gitops.tech) — yaklaşımı ve benimsenmesini anlatıyor

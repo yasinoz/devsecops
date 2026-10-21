@@ -19,6 +19,23 @@ Bunun için uygulama bileşenlerinizin iz verisi yayması ve alması gerekiyor;
 böylece bir toplayıcı tüm izleri saklayıp aynı istemci işlemine ait çağrıları
 birbiriyle ilişkilendirebiliyor.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 45 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [OpenTelemetry belirtimi](https://opentelemetry.io/docs/specs/otel/overview/) —

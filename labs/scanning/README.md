@@ -15,6 +15,22 @@ Scanners inspect the binaries in a filesystem or a container image, looking for 
 
 There are several tools for scanning container images - [Clair](https://quay.github.io/clair/) and [Snyk](https://snyk.io) are popular options. We'll be using [Trivy](https://trivy.dev/latest/docs/) which is free, open source and runs in containers, so it can be integrated nicely into a pipeline. Trivy can scan the binaries in container images, and also run static analysis on Dockerfiles and Kubernetes manifests. 
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 45 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## References
 
 - [Trivy documentation](https://trivy.dev/latest/docs/)

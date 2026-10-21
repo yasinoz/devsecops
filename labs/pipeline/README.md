@@ -15,6 +15,22 @@ You can run containers which have access to the Docker engine - so the app insid
 
 With this approach your whole build infrastructure is portable. You can run a Jenkins server on any Docker engine, load in your pipelines and build any type of software without installing any other tools. You can also save credentials in Jenkins so you can authenticate with other services - then you can push images to Docker Hub or deploy to your production environment from your pipeline.
 
+<!-- prereqs:auto -->
+## Before you start
+
+Takes about 60 minutes.
+
+**Docker Desktop** must be running. Check it:
+
+```
+docker version
+```
+
+A `Server:` section in the output means you are ready. If you get an error
+instead, start Docker Desktop and wait until the whale icon stops animating.
+
+> Run every command from the **root of this repository** - the paths in this lab are written relative to it.
+
 ## References
 
 - [Accessing the Docker Engine from inside a container](https://docs.docker.com/engine/security/#docker-daemon-attack-surface)

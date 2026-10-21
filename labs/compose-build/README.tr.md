@@ -16,6 +16,23 @@ bir Docker Compose komutuyla birden fazla container imajı derleyebilirsiniz.
 Override dosyaları kullanmak, imaj referanslarını özelleştirmenize ve imajı
 kaynak koda kadar izlemenizi sağlayan etiketler koymanıza imkân verir.
 
+<!-- prereqs:auto -->
+## Başlamadan önce
+
+Süre: yaklaşık 45 dakika.
+
+**Docker Desktop** çalışıyor olmalı. Kontrol edin:
+
+```
+docker version
+```
+
+Çıktıda bir `Server:` bölümü görüyorsanız hazırsınız. Onun yerine hata
+alıyorsanız Docker Desktop'ı başlatın ve balina simgesi hareket etmeyi
+bırakana kadar bekleyin.
+
+> Bütün komutları **deponun kök dizininden** çalıştırın; bu labdaki yollar ona göre yazıldı.
+
 ## Kaynaklar
 
 - [Compose build belirtimi](https://docs.docker.com/reference/compose-file/build/)
