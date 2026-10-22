@@ -6,7 +6,7 @@ section: security
 order: 5
 duration: 60
 requires: [docker, kubernetes]
-status: needs-review
+status: updated
 upstream: labs/admission
 ---
 # Controlling Admission
