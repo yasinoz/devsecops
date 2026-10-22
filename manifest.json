@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-21",
+  "generated": "2026-10-22",
   "track": {
     "slug": "devsecops",
     "titles": {
@@ -201,7 +201,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/pipeline",
           "docs": {
             "en": {
@@ -469,7 +469,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/static-analysis",
           "docs": {
             "en": {
@@ -499,7 +499,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/scanning",
           "docs": {
             "en": {
@@ -529,7 +529,7 @@
           "requires": [
             "docker"
           ],
-          "status": "needs-review",
+          "status": "updated",
           "path": "labs/golden-images",
           "docs": {
             "en": {
@@ -649,8 +649,8 @@
     "en": 19,
     "tr": 19,
     "by_status": {
-      "updated": 11,
-      "needs-review": 8
+      "updated": 15,
+      "needs-review": 4
     }
   }
 }
