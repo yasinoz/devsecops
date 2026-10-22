@@ -6,7 +6,7 @@ section: cicd
 order: 6
 duration: 60
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/pipeline
 ---
 # Building Docker Images with Jenkins

@@ -6,7 +6,7 @@ section: security
 order: 1
 duration: 45
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/static-analysis
 ---
 # Statik Kod Analizi

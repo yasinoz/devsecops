@@ -6,7 +6,7 @@ section: security
 order: 3
 duration: 50
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/golden-images
 ---
 # Altın İmaj Kütüphaneleri
