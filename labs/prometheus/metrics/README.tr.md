@@ -15,6 +15,40 @@ Dağıtık bir mimaride her bileşeniniz bir HTTP uç noktası açar ve o bileş
 ilgili tüm metrikleri yayınlar. Metrik biçimi standarttır ve metrikleri farklı
 ayrıntı seviyelerinde toplamak isteyeceksiniz.
 
+<!-- orientation:auto -->
+## Bu lab nasıl işliyor
+
+Bunu bir kez okuyun - bu eğitimdeki her lab aynı kurallarla yazıldı.
+
+**Komutları nereye yazacaksınız.** Bir terminal açın ve bu depoyu kopyaladığınız
+klasöre gidin. Windows'ta **PowerShell** kullanın (Başlat menüsünde aratın),
+macOS veya Linux'ta **Terminal**. Labdaki bütün yollar depo kökünden yazıldı,
+yani bir adım aksini söylemedikçe orada kalın.
+
+**`>` ile başlayan satırlar açıklamadır, komut değildir.** Onları yapıştırmayın.
+Yalnızca gri kod kutularının içindeki metin yazılır.
+
+**📋 işareti "sıra sizde" demektir.** Onu gördüğünüzde adımı önce kendiniz
+deneyin. Hemen altında cevabı saklayan kapalı bir **"Nasıl yapılır?"** oku var;
+onu denedikten *sonra* açın, önce değil. Lablar bilerek böyle yazıldı: kendi
+çözdüğünüz şeyi hatırlarsınız, yapıştırdığınızı değil.
+
+**Bir komut hata verirse bu normal olabilir.** Bazı adımlar hatanın nasıl
+göründüğünü göstermek için bilerek başarısız olur. Bir şeyin bozuk olduğuna
+karar vermeden önce komutun üstündeki cümleyi okuyun.
+
+**Takılırsanız** şu sırayla:
+
+1. Komutun üstündeki paragrafı tekrar okuyun - cevap genelde oradadır.
+2. **"Nasıl yapılır?"** okunu açın.
+3. `hints.md` dosyasını açın, küçük bir yönlendirme verir.
+4. `solution.md` dosyasını açın, tam cevap orada. Kullanmak serbest; okumadan
+   kopyalamak değil.
+
+**Bitirdiğinizde** en alttaki **Temizlik** bölümünü çalıştırın. Lablar aynı
+portları ve container adlarını paylaşıyor; birinden kalan artık diğerini bozar.
+<!-- /orientation:auto -->
+
 ## Kaynaklar
 
 - [Prometheus yayın (exposition) biçimi](https://prometheus.io/docs/instrumenting/exposition_formats/) — en yaygın metrik biçimi
