@@ -6,7 +6,7 @@ section: security
 order: 4
 duration: 60
 requires: [docker, kubernetes]
-status: needs-review
+status: updated
 upstream: labs/argo
 ---
 # GitOps with ArgoCD
@@ -298,4 +298,13 @@ And remove the Git remote:
 
 ```
 git remote rm labs-argo
+```
+
+Deleting the namespaces does **not** remove ArgoCD's custom resource
+definitions - they are cluster-wide objects that live outside any namespace.
+They are harmless on their own, but they make `kubectl get crd` confusing in
+later labs, so clear them too:
+
+```
+kubectl delete crd applications.argoproj.io applicationsets.argoproj.io appprojects.argoproj.io --ignore-not-found
 ```

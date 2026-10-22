@@ -6,7 +6,7 @@ section: security
 order: 6
 duration: 50
 requires: [docker, kubernetes]
-status: needs-review
+status: updated
 upstream: labs/container-security
 ---
 # Container Güvenliği

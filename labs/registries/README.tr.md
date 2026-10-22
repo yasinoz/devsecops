@@ -6,7 +6,7 @@ section: cicd
 order: 3
 duration: 30
 requires: [docker]
-status: needs-review
+status: updated
 upstream: labs/registries
 ---
 

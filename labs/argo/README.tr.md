@@ -6,7 +6,7 @@ section: security
 order: 4
 duration: 60
 requires: [docker, kubernetes]
-status: needs-review
+status: updated
 upstream: labs/argo
 ---
 # ArgoCD ile GitOps
@@ -344,4 +344,13 @@ Ve Git remote'unu kaldırın:
 
 ```
 git remote rm labs-argo
+```
+
+Namespace'leri silmek ArgoCD'nin özel kaynak tanımlarını (CRD) **kaldırmaz** -
+onlar küme geneli nesneler, hiçbir namespace'in içinde durmuyorlar. Tek
+başlarına zararsızlar ama sonraki lablarda `kubectl get crd` çıktısını
+karıştırıyorlar; onları da silin:
+
+```
+kubectl delete crd applications.argoproj.io applicationsets.argoproj.io appprojects.argoproj.io --ignore-not-found
 ```
