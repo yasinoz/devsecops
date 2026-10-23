@@ -354,7 +354,17 @@ Remove all the lab's namespaces, which removes all the other objects:
 
 ```
 kubectl delete ns -l kubernetes.courselabs.co=admission
+
+# and by name, in case a namespace was created before the policies were
+# active - then it has no label and the command above does not see it:
+kubectl delete ns pi apod --ignore-not-found
 ```
+
+> The label-based delete only finds namespaces that carry the label - which
+> is exactly what this lab makes you add. If you applied `specs/apod` before
+> the constraints were in place, the namespace was created *without* it and
+> stays behind. Deleting by name as well costs nothing and leaves the cluster
+> clean either way.
 
 Except the CRDs:
 
