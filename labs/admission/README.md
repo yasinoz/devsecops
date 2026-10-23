@@ -358,6 +358,10 @@ kubectl delete ns -l kubernetes.courselabs.co=admission
 # and by name, in case a namespace was created before the policies were
 # active - then it has no label and the command above does not see it:
 kubectl delete ns pi apod --ignore-not-found
+
+# OPA Gatekeeper's own namespace - deleting the CRDs and webhooks below
+# does not remove it, and its four pods keep running:
+kubectl delete ns gatekeeper-system --ignore-not-found
 ```
 
 > The label-based delete only finds namespaces that carry the label - which
