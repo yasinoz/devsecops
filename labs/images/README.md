@@ -158,7 +158,7 @@ docker pull ghcr.io/yasinoz/library/ubuntu:24.04
 List all your Ubuntu images and your own base image:
 
 ```
-docker image ls --filter reference=ubuntu --filter reference=courselabs/base
+docker image ls --filter reference=ubuntu --filter reference='ghcr.io/yasinoz/library/ubuntu' --filter reference=courselabs/base
 ```
 
 > Look at the IDs - all three are different. `ghcr.io/yasinoz/library/ubuntu:24.04` is a genuinely

@@ -128,6 +128,12 @@ Token Pi uygulamasında da duruyor:
 kubectl exec deploy/pi-web -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 ```
 
+> **Windows'ta bunu PowerShell'de çalıştırın.** Git Bash'te yol, Kubectl'e
+> ulaşmadan yeniden yazılıyor ve `can't open 'C:/Program
+> Files/Git/var/run/...'` alıyorsunuz. Bu, token yokmuş gibi görünüyor —
+> oysa tam tersi, burada anlatılan şey token'ın orada OLMASI. Git Bash
+> kullanmak zorundaysanız komutun başına `MSYS_NO_PATHCONV=1` ekleyin.
+
 Kubernetes kümesiyle kimlik doğrulaması yapmak için gereken tek şey bu (bu tür
 token'ları Kubectl ile kullanabilirsiniz) ve ardından Pod ile tamamen aynı
 izinlere sahip olurdunuz.

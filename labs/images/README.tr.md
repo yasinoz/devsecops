@@ -169,7 +169,7 @@ docker pull ghcr.io/yasinoz/library/ubuntu:24.04
 Tüm Ubuntu imajlarınızı ve kendi temel imajınızı listeleyin:
 
 ```
-docker image ls --filter reference=ubuntu --filter reference=courselabs/base
+docker image ls --filter reference=ubuntu --filter reference='ghcr.io/yasinoz/library/ubuntu' --filter reference=courselabs/base
 ```
 
 > ID'lere bakın — üçü de farklı. `ghcr.io/yasinoz/library/ubuntu:24.04` gerçekten farklı bir imaj:
