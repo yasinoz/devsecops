@@ -420,7 +420,17 @@ Lab'ın tüm namespace'lerini kaldırın; bu diğer tüm nesneleri de kaldırıy
 
 ```
 kubectl delete ns -l kubernetes.courselabs.co=admission
+
+# ve ada göre — politikalar devreye girmeden önce oluşturulmuş bir
+# namespace etiketsiz kalır ve yukarıdaki komut onu görmez:
+kubectl delete ns pi apod --ignore-not-found
 ```
+
+> Etikete göre silme yalnızca etiketi taşıyan namespace'leri buluyor — ki bu
+> lab zaten o etiketi eklemenizi istiyor. `specs/apod`'u kısıtlar devreye
+> girmeden uyguladıysanız namespace etiketsiz oluşmuştur ve geride kalır.
+> Ada göre de silmek hiçbir şeye mal olmuyor ve kümeyi her hâlükârda temiz
+> bırakıyor.
 
 CRD'ler hariç:
 
