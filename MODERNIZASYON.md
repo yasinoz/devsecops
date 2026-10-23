@@ -58,10 +58,17 @@ CVE'leri bulmak üzere kurgulandı; güncellenirse lab anlamsız hale gelir.
 Bu liste `_platform/VERSIONS.yaml` içindeki `intentionally_vulnerable`
 bölümünde tutuluyor; lint aracı bu imajları uyarı üretmeden geçiyor.
 
-## 4. DOĞRULANMAYANLAR
+## 4. Modernizasyon sırasında doğrulanamayanlar (tarihsel kayıt)
 
-Bu bölüm dürüstlük içindir. Aşağıdakiler **kod olarak düzeltildi ama uçtan uca
-çalıştırılmadı** — modernizasyon sırasında bu makinede Docker motoru kapalıydı.
+> **Bu bölüm artık geçmişi anlatıyor.** Buradaki maddelerin tamamı o günden
+> sonra çalıştırılarak doğrulandı; sonuçlar **bölüm 5**'te. Bölüm, hangi
+> riskin nerede görüldüğünü ve nasıl araştırıldığını kayıt altında tutmak
+> için duruyor — özellikle Jenkins imajındaki üç JCasC hatasının bulunma
+> yöntemi ilerideki değişikliklerde yine işe yarar.
+
+Aşağıdakiler, yazıldıkları sırada **kod olarak düzeltilmiş ama uçtan uca
+çalıştırılmamıştı** — modernizasyon sırasında bu makinede Docker motoru
+kapalıydı.
 
 Her lab'ın frontmatter'ında `status` alanı bunu taşır:
 
@@ -69,8 +76,7 @@ Her lab'ın frontmatter'ında `status` alanı bunu taşır:
 - `needs-review` — modernize edildi, canlı test **edilmedi**
 - `upstream` — henüz dokunulmadı
 
-Şu an **19 lab'ın tamamı `needs-review`**. Sitede bu lablar `beta` etiketiyle
-görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
+O gün 19 lab'ın tamamı `needs-review` idi; bugün tamamı `updated`.
 
 ### İlk dersten önce mutlaka çalıştırılmalı
 
@@ -164,7 +170,62 @@ görünüyor ve öğrenciye uçtan uca doğrulanmadığı yazılıyor.
 6. **Kubernetes gerektiren üç lab** (argo, admission, container-security) —
    manifestler yenilendi ama güncel bir kümede uygulanmadı.
 
-## 5. Çeviri durumu
+## 5. Doğrulama koşusu — 23 Ekim 2026
+
+**19 lab'ın tamamı bu makinede öğrenci gibi çalıştırıldı.** Ortam: Docker
+29.9.1 (containerd snapshotter), kubectl v1.36.1, Docker Desktop Kubernetes
+kümesi, Windows 11.
+
+### Bulunan ve düzeltilen hatalar
+
+| # | Lab | Hata | Etki |
+|---|---|---|---|
+| 1 | registries | `docker tag alpine ...` deniyor ama `alpine` hiç çekilmiyor | **Öğrenci duruyordu:** `No such image: alpine:latest` |
+| 2 | multi-stage | `-f reference=golang` ayna referansını görmüyor | **Lab'ın dersi kayboluyordu:** metin "SDK imajı yüzlerce megabayt" diyor, öğrenci yalnızca 19 MB'lık imajı görüyordu |
+| 3 | container-security | Git Bash konteyner içi yolu yeniden yazıyor | **Ders tersine dönüyordu:** "token orada duruyor" denen yerde öğrenci "dosya yok" görüyordu |
+| 4 | images | `--filter reference=ubuntu` aynadakini görmüyor | "üçünün de ID'si farklı" denirken iki imaj çıkıyordu |
+| 5 | admission | `apod` namespace'i temizlikte kalıyor | Etiket tabanlı silme, etiketi eklemek zaten alıştırmanın kendisi |
+| 6 | admission | `gatekeeper-system` namespace'i temizlikte kalıyor | Lab bittikten 161 dk sonra dört pod hâlâ ayaktaydı |
+| 7 | *(repo)* | lint 15 "pinlenmemiş imaj" hatası veriyordu | **CI kırmızıydı.** Aynalama `kiamol/` önekini `ghcr.io/yasinoz/kiamol/` yapınca istisna eşleşmeyi bıraktı |
+
+1–4 iki dilde de düzeltildi. 7 için lab içeriğine dokunulmadı.
+
+### Doğrulanan
+
+- **10 compose yığını** ayağa kalkıyor: compose-build, prometheus, grafana,
+  elasticsearch, kibana, tracing, jaeger, static-analysis, scanning, jenkins,
+  pipeline. Servis durumları ve yayınlanan portlar tek tek ölçüldü
+  (`scripts/verify-stacks.sh`).
+- **Üç Kubernetes lab'ı** canlı kümede: `argo` (ArgoCD 7/7 pod ayakta, Gitea
+  çalışıyor), `admission` (etiketsiz namespace `[requiredlabels-ns]` ile
+  reddediliyor, fix-1 kabul ediliyor, fix-2 ile pod kalkıyor),
+  `container-security` (fix-4 sonrası `nobody`/uid 65534, salt okunur dosya
+  sistemi).
+- **golden-images zinciri**: kütüphane derleniyor, app-1 585 MB → 353 MB,
+  app-2 475 MB → 353 MB; ikisi de aynı altın imaj tabanında buluşuyor.
+- **51 imaj referansı**: 43'ü registry'de mevcut, 8'i golden-images lab'ında
+  yerelde derleniyor. Şüpheli görünen etiketlerin hepsi gerçek
+  (nginx:1.31.7-alpine, maven:3.10-eclipse-temurin-25-noble, alpine:3.24,
+  golang:1.27.2-alpine, ubuntu:26.04).
+- **Lint tümüyle temiz**: 0 bulgu, 0 hata.
+
+### Hata OLMAYAN bulgu
+
+`tracing` ve `jaeger` yığınları ilk denemede kalkmadı. Sebep lab değil,
+makinedeki geçici DNS hatasıydı (`lookup ghcr.io: getaddrinfow ... temporary
+error`). Aynı imajların var olduğu manifest sorgusuyla zaten doğrulanmıştı;
+tekrar koşulduğunda ikisi de çalıştı. Lab hatası diye raporlanmadı.
+
+### Hâlâ yapılmamış
+
+- `argocd` CLI adımları (CLI bu makinede kurulu değil; lab kurulumunu
+  anlatıyor, öğrencinin yapacağı adım).
+- Grafana, Kibana ve Jenkins lablarındaki **ekran görüntüleri** hâlâ eski
+  sürümlerden. Metinler güncel, lab başında uyarı var.
+- Docker Hub push adımı (registries lab'ı) — öğrencinin kendi hesabını
+  gerektiriyor.
+
+## 6. Çeviri durumu
 
 | | Lab | Durum |
 |---|---|---|
@@ -192,7 +253,7 @@ lab yayına çıkamaz, çünkü dil durumu dosya varlığından okunuyor.
 Çeviri yaparken `_platform/docs/CEVIRI-SOZLUGU.md` bağlayıcıdır: terim
 tablosu, üslup ve çevrilmeyecek bölümler orada.
 
-## 6. Araçlar
+## 7. Araçlar
 
 Tümü `yasinoz/labs-platform` reposunda, sıfır bağımlılık (PyYAML bile yok).
 
