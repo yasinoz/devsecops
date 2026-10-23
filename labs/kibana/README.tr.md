@@ -18,6 +18,19 @@ Aramaları kaydedip sonuçları görselleştirmelere dönüştürebilirsiniz. Ki
 kullanmak oldukça kolay ve ileri kullanıcılar kendi dashboard'larını
 kurabiliyor.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+`curl` ile log aramak bir olay anında işe yaramıyor. Kibana, Elasticsearch'ün ön kapısı: milyonlarca satırı, kesintiyi açıklayan yirmi satıra indirdiğiniz yer.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Logstash besleyen bir kurulumda Kibana'yı Elasticsearch'e karşı çalıştırmak
+- konsolu kullanarak doğrudan sorgu çalıştırmak
+- indeksler arasında arayıp filtreleyerek tek bir isteği yalıtmak
+- bir aramayı kaydedip ekibin geri kalanının yeniden kullanabileceği hale getirmek
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

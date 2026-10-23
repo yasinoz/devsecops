@@ -15,6 +15,19 @@ Kibana is the web front-end for Elasticsearch. It lets you search and filter acr
 
 You can save searches and build the results into visualizations. Kibana is fairly straightforward to use, and power users can build their own dashboards.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Searching logs with `curl` does not scale to an incident. Kibana is the front door to Elasticsearch: it is where you narrow millions of lines down to the twenty that explain the outage.
+
+**After this lab you will be able to:**
+
+- run Kibana against Elasticsearch with Logstash feeding it
+- use the console to run queries directly
+- search and filter across indices to isolate one request
+- save a search and turn it into something the rest of the team can reuse
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

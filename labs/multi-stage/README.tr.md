@@ -20,6 +20,19 @@ toplamanın harika bir yolu: geliştiricilerin ve build sunucularının yalnızc
 Docker'a ve kaynak koda ihtiyacı olur, tüm araçlar Docker imajlarında paketli
 gelir, böylece herkes aynı sürümleri kullanır.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Derleme araçları ve derleyiciler üretimde işi olmayan şeyler. Çok aşamalı derleme, tek bir Dockerfile'ın uygulamayı derleyip araç zincirini çöpe atmasını sağlıyor; sevk edilen şey yalnızca çalışma ortamı oluyor. Boyut farkı süs değil — sevk ettiğiniz her araç, saldırganın kullanabileceği bir araç.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- derleme, test ve çalışma aşamalarını ayıran bir Dockerfile yazmak
+- `--target` ile tek bir aşamayı kendi başına derlemek
+- SDK imajı ile son imaj arasındaki boyut farkını gösterip nereden geldiğini açıklamak
+- `scratch` tabanlı bir imajda neden kabuk olmadığını ve bunun neden bir güvenlik özelliği olduğunu söylemek
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

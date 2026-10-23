@@ -17,6 +17,19 @@ Application security in Kubernetes is mostly concerned with securing containers,
 
 You'll need to understand the OS features your apps need because applying controls can break them - Go applications might run fine on a read-only filesystem whereas Java apps will fail.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+A container is not a security boundary by default. Out of the box your app runs as root, can write anywhere, and holds a token for the Kubernetes API it never needed. Each of those is a step an attacker skips if you leave it alone.
+
+**After this lab you will be able to:**
+
+- remove the service account token from Pods that do not call the API
+- set CPU and memory limits and explain what happens without them
+- run a container as a non-root user on a read-only filesystem
+- recognise which of these controls will break a given application, and why Go and Java behave differently
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

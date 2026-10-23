@@ -15,6 +15,19 @@ Dağıtık bir mimaride her bileşeniniz bir HTTP uç noktası açar ve o bileş
 ilgili tüm metrikleri yayınlar. Metrik biçimi standarttır ve metrikleri farklı
 ayrıntı seviyelerinde toplamak isteyeceksiniz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Prometheus yalnızca uygulamanızın yayınladığını saklayabilir. Bir metrik ucu eklemek küçük bir kod değişikliği ama getirisi büyük: "kullanıcılar yavaş diyor" cümlesini grafiğe dökebileceğiniz ve alarm kurabileceğiniz bir sayıya çeviriyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- uygulama metriklerini bir HTTP ucunda yayınlamak
+- çalışma ortamı metrikleriyle kendi eklediğiniz iş metriklerini ayırt etmek
+- sorduğunuz soruya uyan metrik tipini (counter, gauge, histogram) seçmek
+- Prometheus'un yeni metriği topladığını doğrulamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

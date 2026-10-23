@@ -25,6 +25,19 @@ entegre edilebiliyor. Trivy container imajlarındaki ikili dosyaları
 tarayabildiği gibi Dockerfile ve Kubernetes manifestleri üzerinde statik analiz
 de yapabiliyor.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+İmajınızdaki kodun çoğunu siz yazmadınız. Taban katman ve kütüphaneler kendi bilinen açıklarıyla geliyor ve yenisi yayımlandığında kimse size haber vermiyor. Tarama, bunu bir başkasından önce öğrenme yolunuz.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- bir container imajını tarayıp CVE raporunu okumak
+- işletim sistemi katmanının yanı sıra uygulama bağımlılıklarını da taramak
+- Dockerfile ve Kubernetes manifestlerini yanlış yapılandırmaya karşı taramak
+- hangi bulgulara göre hareket edeceğinize karar vermek — uzun bir liste plan değildir
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

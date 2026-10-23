@@ -13,6 +13,19 @@ upstream: labs/prometheus
 
 [Prometheus](https://prometheus.io) is an open-source monitoring solution. It's a [CNCF](https://www.cncf.io) project (under the same foundation as Kubernetes), and it runs a whole suite of monitoring components.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+When something is slow at 3am you need numbers, not guesses. Prometheus is the de-facto metrics store in container platforms: it scrapes your apps on a schedule and keeps the history, so you can ask what the system looked like before it broke.
+
+**After this lab you will be able to:**
+
+- run Prometheus and point it at targets with a config file
+- read the targets page and tell a scrape failure from an app failure
+- query time-series data with PromQL
+- explain the pull model and why it changes how you deploy apps
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

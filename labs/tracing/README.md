@@ -15,6 +15,19 @@ Tracing is the third pillar of observability - metrics show you overall health, 
 
 For that you need your application components to emit and receive trace data, so a collector can store all the traces and identify the calls which belong to the same client transaction.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+In a distributed system the hard question is not 'is the API up' but 'which of the eight calls behind this one request was slow'. Traces answer that, and they are the only pillar of observability that shows you the path through the system.
+
+**After this lab you will be able to:**
+
+- add trace exporting to an application
+- follow a single transaction across more than one component
+- explain context propagation and what breaks when a service drops the headers
+- say when a trace is more useful than a log or a metric
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

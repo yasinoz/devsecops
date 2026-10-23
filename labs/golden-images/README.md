@@ -17,6 +17,19 @@ Letting developers use any base image for their apps is not a good idea. They co
 
 Building your own set of base images - _golden images_ - and mandating that all apps need to use those is the best approach. It lets you curate your own approved list of images and tailor them as you need.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+If every team picks its own base image, your organisation has no answer to 'which of our apps are affected by this CVE'. A curated set of approved base images turns that question into one you can answer, and one patch into a fix for everything built on it.
+
+**After this lab you will be able to:**
+
+- see the problem a free-for-all base image policy creates
+- build a small library of golden images for one runtime
+- rebuild applications on top of the golden images
+- explain how the image cache and layer sharing make this cheap rather than wasteful
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

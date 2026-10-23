@@ -26,6 +26,19 @@ Kimlik bilgilerini de Jenkins'te saklayabilirsiniz; böylece diğer servislerle
 kimlik doğrulaması yapıp pipeline'dan Docker Hub'a imaj gönderebilir ya da
 üretim ortamınıza dağıtım yapabilirsiniz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Container tabanlı CI'ın bütün amacı, derleme sunucusunda hiçbir şeyin kurulu olmaması — ne JDK, ne .NET SDK, ne Node. Derleme araçları container içinde geliyor. Bu da pipeline'ınızı taşınabilir ve tekrarlanabilir yapıyor; modern CI sistemlerinin çoğunun arkasındaki desen bu.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Jenkins pipeline'ından container içinde derleme çalıştırmak
+- çok aşamalı derlemeyle pipeline'ın tek adımda derleyip paketlemesini sağlamak
+- CI'dan Compose ile çok imajlı bir uygulama derlemek
+- derlenen imajları pipeline'ın parçası olarak registry'ye göndermek
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

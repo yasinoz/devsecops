@@ -23,6 +23,19 @@ HTTP sunucuları. Admission controller'lar sizin kendi mantığınızı
 kullanabileceği gibi [Open Policy Agent](https://www.openpolicyagent.org) gibi
 standart bir aracı da kullanabilir.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Wiki'de yazan politikalar görmezden geliniyor. Giriş denetimi (admission control) onları API sunucusunda, iş yükü var olmadan önce uyguluyor — böylece "güvenilmeyen registry'den container çalışmaz" insanların hatırlaması gereken bir kural olmaktan çıkıp kümenin uyguladığı bir kurala dönüşüyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- doğrulayan (validating) ve değiştiren (mutating) webhook farkını açıklamak
+- bir kümeye OPA Gatekeeper kurmak
+- politika yazıp kümenin onu çiğneyen bir iş yükünü reddetmesini izlemek
+- bozuk bir giriş webhook'unun her dağıtımı durdurabileceği riskini tartmak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

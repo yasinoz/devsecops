@@ -16,6 +16,19 @@ upstream: labs/registries
 
 Organizations run their own registries so they can have a long-term store of release versions from the build pipeline, or to make images available in the same network region as the production environment.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Images only help you if other machines can get them. A registry is that distribution point - and in a real pipeline it is also the place where release history lives and where access control is enforced. Teams that skip this end up copying tar files around.
+
+**After this lab you will be able to:**
+
+- push and pull images using a registry account
+- read an image reference and name every part of it
+- run a private registry in a container and use it
+- explain why an organisation would host its own registry instead of using Docker Hub
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

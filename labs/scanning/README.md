@@ -15,6 +15,19 @@ Scanners inspect the binaries in a filesystem or a container image, looking for 
 
 There are several tools for scanning container images - [Clair](https://quay.github.io/clair/) and [Snyk](https://snyk.io) are popular options. We'll be using [Trivy](https://trivy.dev/latest/docs/) which is free, open source and runs in containers, so it can be integrated nicely into a pipeline. Trivy can scan the binaries in container images, and also run static analysis on Dockerfiles and Kubernetes manifests. 
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+You did not write most of the code in your image. The base layer and the libraries come with their own known vulnerabilities, and nobody tells you when a new one is published. Scanning is how you find out before somebody else does.
+
+**After this lab you will be able to:**
+
+- scan a container image and read the CVE report
+- scan application dependencies as well as the OS layer
+- scan Dockerfiles and Kubernetes manifests for misconfiguration
+- judge which findings to act on, since a long list is not a plan
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

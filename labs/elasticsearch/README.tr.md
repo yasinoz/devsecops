@@ -19,6 +19,19 @@ Elasticsearch'ü genel amaçlı bir veri deposu olarak kullanabilirsiniz, ama
 özellikle log saklamaya çok uygun; çünkü size bol miktarda ileri düzey sorgu
 özelliği sunuyor.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Metrikler bir şeyin ters gittiğini söyler; loglar ne olduğunu anlatır. Birkaç container'ı geçtiğinizde `docker logs` bir strateji olmaktan çıkıyor — logların, container'dan daha uzun yaşayan tek bir aranabilir yerde toplanması gerekiyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Elasticsearch'ü çalıştırıp sağlıklı olduğunu kontrol etmek
+- belge indekslemek ve geri okumak
+- sorgu API'siyle arama yapmak ve indekslerin nasıl düzenlendiğini anlamak
+- merkezî loglamanın container'larda neden sunuculardakinden daha önemli olduğunu açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

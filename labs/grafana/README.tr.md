@@ -21,6 +21,19 @@ arayüzünü kullanıp, sonra PromQL'i alıp Grafana'da kullanabilirsiniz.
 > sürümleri arasında yer değiştirebiliyor — bir şey yine kaymışsa
 > [Grafana dökümanları](https://grafana.com/docs/grafana/latest/) bağlayıcıdır.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Kimsenin bakmadığı metrik, kimsenin harekete geçmediği metriktir. Dashboard, bir ekibin sisteme dair tek bir resmi paylaşma yolu — ve birini kurmak, hangi sayıların gerçekten önemli olduğuna karar vermenizi zorunlu kılıyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Grafana'yı veri kaynağı olarak Prometheus'a bağlamak
+- PromQL sorgularından panel kurmak ve veriye uyan bir görselleştirme seçmek
+- panelleri belirli bir soruyu yanıtlayan bir dashboard'da toplamak
+- dashboard'u JSON olarak dışa aktarıp sürüm kontrolünde saklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

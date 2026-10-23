@@ -25,6 +25,19 @@ anlamanız gerekiyor, çünkü kontrol uygulamak onları bozabilir — Go
 uygulamaları salt okunur bir dosya sisteminde sorunsuz çalışabilirken Java
 uygulamaları hata verecektir.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Container varsayılan olarak bir güvenlik sınırı değil. Kutudan çıktığı haliyle uygulamanız root olarak çalışıyor, her yere yazabiliyor ve hiç ihtiyacı olmayan bir Kubernetes API token'ı taşıyor. Bunların her biri, siz dokunmazsanız saldırganın atlamak zorunda kalmadığı bir adım.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- API'ye çağrı yapmayan Pod'lardan servis hesabı token'ını kaldırmak
+- CPU ve bellek sınırı koymak ve bunlar olmadan ne olduğunu açıklamak
+- bir container'ı salt okunur dosya sisteminde root olmayan kullanıcıyla çalıştırmak
+- bu denetimlerden hangisinin hangi uygulamayı bozacağını ve Go ile Java'nın neden farklı davrandığını fark etmek
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

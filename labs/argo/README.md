@@ -15,6 +15,19 @@ GitOps turns the CI/CD approach on its head - instead of an external automation 
 
 It means your cluster can be secured more cleanly, because you don't need a cluster admin user for the automation server. It also means your app definitions - and even the infrastructure setup for cloud services - can be definitively stored in Git repos. You can recreate your whole deployment from scratch.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Giving a build server cluster-admin credentials is how CI pipelines become the softest target in your infrastructure. GitOps inverts it: an agent inside the cluster pulls from Git, so nothing outside needs write access - and the repository becomes the record of what is actually deployed.
+
+**After this lab you will be able to:**
+
+- install ArgoCD into a cluster
+- point an application at a Git repository and let ArgoCD deploy it
+- watch a change in Git reach the cluster without anyone running `kubectl apply`
+- explain why pull-based delivery is easier to secure than push-based
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

@@ -15,6 +15,19 @@ Multi-stage builds use the standard Dockerfile syntax, with multiple stages sepa
 
 You won't see multi-stage builds used everywhere, but they're a great way to centralize your toolset - developers and build servers just need Docker and the source code, all the tools come packaged in Docker images, so everyone's using the same versions.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Build tools and compilers do not belong in production. A multi-stage build lets one Dockerfile compile the app and then throw the toolchain away, so what ships is only the runtime. The size difference is not cosmetic - every tool you ship is something an attacker can use.
+
+**After this lab you will be able to:**
+
+- write a Dockerfile with separate build, test and runtime stages
+- build a single stage on its own with `--target`
+- show the size gap between an SDK image and the final image, and explain where it comes from
+- say why a `scratch`-based image has no shell, and why that is a security feature
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

@@ -15,6 +15,19 @@ upstream: labs/jaeger
 
 You can run Jaeger in a production configuration with different features running in different processes, swapping out the data store or adding a message queue to buffer collection. 
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Raw trace data is unreadable. Jaeger is where it becomes a picture: a waterfall that shows which span took the time. This is usually the fastest route from 'the system is slow' to a specific line of code.
+
+**After this lab you will be able to:**
+
+- run Jaeger and send application traces to it
+- read a trace waterfall and find the slow span
+- use tags to filter traces down to the ones you care about
+- explain what a span is and how spans relate to each other
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

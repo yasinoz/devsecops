@@ -15,6 +15,19 @@ upstream: labs/images
 
 You can think of images as the filesystem for the container, plus some metadata which tells Docker which command to run when the container starts.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Every container starts from an image, so the image is where your app's dependencies, configuration and attack surface are decided. Getting this wrong is expensive later: a bloated base image means slow deployments and hundreds of CVEs you inherited without asking.
+
+**After this lab you will be able to:**
+
+- write a Dockerfile and build an image from it
+- explain the difference between `CMD` and `ENTRYPOINT`, and when each one gets in your way
+- read an image's layers and say why two images with identical contents can have different IDs
+- argue for pinning a version tag instead of `latest`
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

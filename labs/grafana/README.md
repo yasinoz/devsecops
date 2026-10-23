@@ -18,6 +18,19 @@ upstream: labs/grafana
 > Grafana releases - if something has shifted again, the
 > [Grafana docs](https://grafana.com/docs/grafana/latest/) are authoritative.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Metrics nobody looks at are metrics nobody acts on. A dashboard is how a team shares one picture of the system - and building one forces you to decide which numbers actually matter.
+
+**After this lab you will be able to:**
+
+- connect Grafana to Prometheus as a data source
+- build panels from PromQL queries and choose a visualization that fits the data
+- assemble panels into a dashboard that answers a specific question
+- export a dashboard as JSON so it can live in source control
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

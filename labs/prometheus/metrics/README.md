@@ -13,6 +13,19 @@ upstream: labs/prometheus/metrics
 
 In a distributed architecture, each of your components exposes an HTTP endpoint, publishing all the metrics relevant to that component. The metrics format is standard, and you'll want to capture metrics at different levels of detail.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Prometheus can only store what your application publishes. Adding a metrics endpoint is a small code change with a large payoff: it turns 'users say it is slow' into a number you can chart and alert on.
+
+**After this lab you will be able to:**
+
+- expose application metrics on an HTTP endpoint
+- tell runtime metrics apart from the business metrics you add yourself
+- pick a metric type (counter, gauge, histogram) that fits the question you are asking
+- confirm Prometheus is collecting the new metric
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

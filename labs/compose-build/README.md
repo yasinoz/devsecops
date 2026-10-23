@@ -13,6 +13,19 @@ upstream: labs/compose-build
 
 Docker Compose models can include build-time details, so you can build multiple container images using one Docker Compose command. Using override files lets you customize the image references and set labels to track the image back to the source code.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+A real application is several images, and they have to be built the same way every time - on your laptop and on the build server. Compose lets one file describe all of them, and override files let the same definition produce a dev build and a release build without copy-pasting.
+
+**After this lab you will be able to:**
+
+- build every image in an application with one command
+- pass build arguments and attach labels that trace an image back to its source commit
+- layer override files to get different image tags from one build definition
+- explain why CI builds and local builds should share the same Compose files
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 
