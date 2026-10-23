@@ -22,8 +22,16 @@ Git ücretsiz ve açık kaynak:
 
 - [Git'i kurun](https://git-scm.com/downloads) (Windows, macOS, Linux)
 
-Windows'ta bu kurulum size **Git Bash**'i de verir. PowerShell kullanmak
-istemiyorsanız kullanışlı bir alternatiftir.
+Windows'ta bu kurulum size **Git Bash**'i de verir. Yine de bu lablarda
+**PowerShell** kullanın.
+
+> **Git Bash neden olmaz?** Linux yoluna benzeyen her argümanı yeniden
+> yazıyor. Örneğin `kubectl exec deploy/pi-web -- cat /var/run/secrets/...`
+> komutu `C:/Program Files/Git/var/run/secrets/...` hâline geliyor ve dosya
+> container'ın içinde dururken `No such file or directory` hatası
+> alıyorsunuz. Lab yerine kendi kabuğunuzu ayıklamak zorunda kalırsınız.
+> Git Bash'te kalmakta ısrarlıysanız bu komutların başına
+> `MSYS_NO_PATHCONV=1` ekleyin.
 
 ## 2. Docker
 

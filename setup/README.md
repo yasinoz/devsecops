@@ -21,8 +21,16 @@ Git is free and open source:
 
 - [Install Git](https://git-scm.com/downloads) (Windows, macOS, Linux)
 
-On Windows this also gives you **Git Bash**, which is a usable shell if you'd
-rather not use PowerShell.
+On Windows this also gives you **Git Bash**. Use **PowerShell** for these
+labs anyway.
+
+> **Why not Git Bash?** It rewrites any argument that looks like a Linux path.
+> A command like `kubectl exec deploy/pi-web -- cat /var/run/secrets/...`
+> becomes `C:/Program Files/Git/var/run/secrets/...` and fails with
+> `No such file or directory` - while the file is sitting there inside the
+> container. You would be debugging your shell instead of the lab. If you
+> really prefer Git Bash, put `MSYS_NO_PATHCONV=1` in front of those
+> commands.
 
 ## 2. Docker
 

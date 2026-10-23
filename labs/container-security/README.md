@@ -112,6 +112,12 @@ The token is there in the Pi app:
 kubectl exec deploy/pi-web -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 ```
 
+> **On Windows, run this in PowerShell.** In Git Bash the path is rewritten
+> before Kubectl sees it and you get `can't open 'C:/Program
+> Files/Git/var/run/...'`. That looks like the token is missing when it is
+> actually there - the opposite of the point being made here. Prefix the
+> command with `MSYS_NO_PATHCONV=1` if you must use Git Bash.
+
 That's all you need to authenticate with the Kubernetes cluster (you can use tokens like this with Kubectl), and then you'd have all the same permissions as the Pod.
 
 > Since Kubernetes 1.21 these are *bound* tokens - short-lived and tied to > this Pod and audience, so a stolen one expires. That reduces the blast > radius; it does not remove it, which is why we still take the mount away.

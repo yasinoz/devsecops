@@ -223,6 +223,25 @@ Tam imaj referans biçimi şöyle:
 
 - `[registry-alan-adi]/[repository-adi]:[etiket]`
 
+Bunun için küçük bir imaj kullanacağız. Alpine Linux'u ders aynasından çekin ve
+ona kısa bir yerel ad verin:
+
+```
+docker pull ghcr.io/yasinoz/library/alpine:3.24
+
+docker tag ghcr.io/yasinoz/library/alpine:3.24 alpine
+```
+
+> **Ayna neden?** Docker Hub anonim çekmeyi IP adresi başına altı saatte 100
+> istekle sınırlıyor ve bir sınıf tek bir adresi paylaşıyor — ilk birkaç
+> öğrenci herkesin hakkını tüketirdi. GHCR'daki ders aynasında böyle bir
+> sınır yok.
+>
+> **İkinci komut ne yaptı?** O sizin ilk etiketinizdi. Aynı imaja ikinci ve
+> daha kısa bir ad veriyor. Hiçbir şey kopyalanmadı, disk alanı da
+> harcanmadı: iki ad da tek bir imaj ID'sini gösteriyor. Etiket zaten
+> bundan ibaret — bir yafta.
+
 📋 Alpine imajını etiketleyip yerel registry'nize gönderin.
 
 <details>

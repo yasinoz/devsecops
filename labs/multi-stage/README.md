@@ -240,7 +240,7 @@ SDK images are typically very large, having the whole build toolset. You don't w
 ```
 docker pull ghcr.io/yasinoz/library/golang:1.27.2-alpine
 
-docker image ls -f reference=whoami -f reference=golang
+docker image ls -f reference=whoami -f reference='ghcr.io/yasinoz/library/golang'
 ```
 
 </details><br/>

@@ -197,6 +197,24 @@ The full image reference format is:
 
 - `[registry-domain]/[repository-name]:[tag]`
 
+We'll use a small image for this. Pull Alpine Linux from the course mirror and
+give it a short local name:
+
+```
+docker pull ghcr.io/yasinoz/library/alpine:3.24
+
+docker tag ghcr.io/yasinoz/library/alpine:3.24 alpine
+```
+
+> **Why the mirror?** Docker Hub limits anonymous pulls to 100 per IP address
+> every six hours, and a classroom shares one address - the first few students
+> would use up the allowance for everyone. The course mirror on GHCR has no
+> such limit.
+>
+> **What did the second command do?** That was your first tag. It gives the
+> same image a second, shorter name. Nothing was copied and no disk space was
+> used: both names point to one image ID. That is all a tag is - a label.
+
 📋 Tag the Alpine image and push it to your local registry.
 
 <details>
