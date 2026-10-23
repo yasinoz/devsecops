@@ -424,6 +424,10 @@ kubectl delete ns -l kubernetes.courselabs.co=admission
 # ve ada göre — politikalar devreye girmeden önce oluşturulmuş bir
 # namespace etiketsiz kalır ve yukarıdaki komut onu görmez:
 kubectl delete ns pi apod --ignore-not-found
+
+# OPA Gatekeeper'ın kendi namespace'i — aşağıdaki CRD ve webhook
+# silmeleri onu kaldırmıyor, dört pod'u çalışmaya devam ediyor:
+kubectl delete ns gatekeeper-system --ignore-not-found
 ```
 
 > Etikete göre silme yalnızca etiketi taşıyan namespace'leri buluyor — ki bu
