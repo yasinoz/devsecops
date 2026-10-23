@@ -16,6 +16,19 @@ bir Docker Compose komutuyla birden fazla container imajı derleyebilirsiniz.
 Override dosyaları kullanmak, imaj referanslarını özelleştirmenize ve imajı
 kaynak koda kadar izlemenizi sağlayan etiketler koymanıza imkân verir.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Gerçek bir uygulama birden çok imaj demek ve bunların her seferinde aynı şekilde derlenmesi gerekiyor — hem sizin dizüstünüzde hem derleme sunucusunda. Compose hepsini tek dosyada tarif etmenizi, override dosyaları da aynı tanımdan kopyala-yapıştır yapmadan hem geliştirme hem sürüm derlemesi üretmenizi sağlıyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- bir uygulamadaki bütün imajları tek komutla derlemek
+- derleme argümanı geçmek ve imajı kaynak commit'ine bağlayan etiketler eklemek
+- override dosyalarını üst üste bindirip tek tanımdan farklı imaj etiketleri almak
+- CI derlemeleriyle yerel derlemelerin neden aynı Compose dosyalarını paylaşması gerektiğini açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

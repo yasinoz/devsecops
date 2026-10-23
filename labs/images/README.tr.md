@@ -18,6 +18,19 @@ halde, çalışmaya hazır gelir.
 İmajı, container'ın dosya sistemi artı container başlarken Docker'ın hangi
 komutu çalıştıracağını söyleyen bir miktar metadata olarak düşünebilirsiniz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Her container bir imajdan başlıyor; yani uygulamanızın bağımlılıkları, yapılandırması ve saldırı yüzeyi imajda belirleniyor. Burada yapılan hata sonradan pahalıya patlıyor: şişkin bir taban imaj hem yavaş dağıtım hem de istemeden devraldığınız yüzlerce CVE demek.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Dockerfile yazıp ondan imaj derlemek
+- `CMD` ile `ENTRYPOINT` farkını ve hangisinin ne zaman ayağınıza dolandığını anlatmak
+- bir imajın katmanlarını okuyup, içeriği birebir aynı olan iki imajın neden farklı ID taşıdığını söylemek
+- `latest` yerine sürüm etiketi sabitlemeyi savunmak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

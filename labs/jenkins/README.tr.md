@@ -29,6 +29,19 @@ değildir.
 Biz Jenkins'i tersinden kullanacağız: **en az eklenti, job tanımları kaynak
 kontrolünde.**
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Kod gönderildiğinde derlemeyi birinin çalıştırması gerekiyor ve bu bir insan olmamalı. Jenkins, mevcut bir kurumda karşınıza çıkma ihtimali en yüksek otomasyon sunucusu — çoğu zaman kimsenin yeniden kurmaya cesaret edemediği türden. İşleri kod olarak tanımlamayı bilmek, o sunucuyu değiştirilebilir kılan şey.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Jenkins'i container içinde çalıştırıp giriş yapmak
+- arayüzden bir iş oluşturup bu yaklaşımın neden ölçeklenmediğini görmek
+- aynı işi bildirimsel bir pipeline olarak yazmak
+- pipeline'ı sürüm kontrolünde saklayarak sunucuda yeniden üretemeyeceğiniz hiçbir durum bırakmamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

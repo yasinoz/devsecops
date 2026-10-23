@@ -15,6 +15,19 @@ Admission control is the process of allowing - or blocking - workloads from runn
 
 You can do this with admission controller webhooks - HTTP servers which run inside the cluster and get invoked by the API to apply rules when objects are created. Admission controllers can use your own logic, or can use a standard tool like [Open Policy Agent](https://www.openpolicyagent.org).
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Policies written in a wiki get ignored. Admission control enforces them at the API server, before the workload exists - so 'no containers from untrusted registries' stops being a rule people remember and becomes a rule the cluster applies.
+
+**After this lab you will be able to:**
+
+- explain the difference between validating and mutating webhooks
+- install OPA Gatekeeper into a cluster
+- write a policy and watch the cluster reject a workload that breaks it
+- weigh the risk that a broken admission webhook can block every deployment
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

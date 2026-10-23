@@ -21,6 +21,19 @@ kalmıyor. Ayrıca uygulama tanımlarınız — hatta bulut servislerinin altyap
 kurulumu — kesin olarak Git repolarında saklanabiliyor. Tüm dağıtımınızı
 sıfırdan yeniden oluşturabilirsiniz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Derleme sunucusuna küme yöneticisi yetkisi vermek, CI pipeline'ını altyapınızın en yumuşak hedefi yapmanın yolu. GitOps bunu tersine çeviriyor: kümenin içindeki bir aracı Git'ten çekiyor, yani dışarıda hiçbir şeye yazma yetkisi gerekmiyor — ve depo, gerçekte neyin dağıtıldığının kaydı haline geliyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- bir kümeye ArgoCD kurmak
+- bir uygulamayı Git deposuna yöneltip dağıtımı ArgoCD'ye bırakmak
+- Git'teki bir değişikliğin kimse `kubectl apply` çalıştırmadan kümeye ulaşmasını izlemek
+- çekme temelli dağıtımın neden itme temellisinden daha kolay güvenlik altına alındığını açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

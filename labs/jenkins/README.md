@@ -28,6 +28,19 @@ server.
 We'll use Jenkins the other way round: **minimal plugins, job definitions in
 source control.**
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Somebody has to run the build when code is pushed, and it should not be a person. Jenkins is the automation server you are most likely to meet in an existing organisation - often one nobody dares rebuild. Knowing how to define jobs as code is what makes that server replaceable.
+
+**After this lab you will be able to:**
+
+- run Jenkins in a container and sign in to it
+- create a job through the UI and see why that approach does not scale
+- write the same job as a declarative pipeline
+- store the pipeline in source control so the server holds no state you cannot recreate
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

@@ -19,6 +19,19 @@ Bunun için uygulama bileşenlerinizin iz verisi yayması ve alması gerekiyor;
 böylece bir toplayıcı tüm izleri saklayıp aynı istemci işlemine ait çağrıları
 birbiriyle ilişkilendirebiliyor.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Dağıtık bir sistemde zor soru "API ayakta mı" değil, "bu tek isteğin arkasındaki sekiz çağrıdan hangisi yavaştı". İzler bunu yanıtlıyor ve gözlemlenebilirliğin size sistemdeki yolu gösteren tek ayağı.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- bir uygulamaya iz gönderimi eklemek
+- tek bir işlemi birden çok bileşen boyunca takip etmek
+- bağlam aktarımını ve bir servis başlıkları düşürdüğünde neyin bozulduğunu açıklamak
+- bir izin ne zaman logdan ya da metrikten daha yararlı olduğunu söylemek
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

@@ -15,6 +15,19 @@ You can run containers which have access to the Docker engine - so the app insid
 
 With this approach your whole build infrastructure is portable. You can run a Jenkins server on any Docker engine, load in your pipelines and build any type of software without installing any other tools. You can also save credentials in Jenkins so you can authenticate with other services - then you can push images to Docker Hub or deploy to your production environment from your pipeline.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+The point of containerised CI is that the build server needs nothing installed - no JDK, no .NET SDK, no Node. The build tools arrive in containers. That makes your pipeline portable and reproducible, and it is the pattern behind most modern CI systems.
+
+**After this lab you will be able to:**
+
+- run a build inside a container from a Jenkins pipeline
+- use multi-stage builds so the pipeline compiles and packages in one step
+- build a multi-image application with Compose from CI
+- push the built images to a registry as part of the pipeline
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

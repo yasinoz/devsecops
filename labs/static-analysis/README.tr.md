@@ -24,6 +24,19 @@ istemcisi kodu analiz için gönderip sonuçları yazdırıyor. Bulunan sorunlar
 SonarQube sunucusunda saklanıyor ve kritik sorunların build'i başarısız
 kılmasını yapılandırabiliyorsunuz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+En ucuz hata, birleştirilmeden önce yakalanandır. Statik analiz kaynağı çalıştırmadan okuyup sonradan güvenlik bildirimine dönüşecek desenleri işaretliyor. Bunu derlemeye bağlamak kalıcı kılan şey — kimsenin okumadığı rapor hiçbir şeyi değiştirmiyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- SonarQube'u çalıştırıp bir projeyi onunla analiz etmek
+- bulguları okuyup gerçek sorunu gürültüden ayırmak
+- analizi Docker derlemesinin parçası olarak çalıştırmak
+- derlemeyi düşüren bir kalite kapısı kurup kontrolün atlanamaz olmasını sağlamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

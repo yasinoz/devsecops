@@ -28,6 +28,19 @@ Kendi temel imaj kümenizi — _altın imajlar_ — oluşturup tüm uygulamalar�
 bunları kullanmasını zorunlu kılmak en iyi yaklaşım. Böylece kendi onaylı imaj
 listenizi derleyip ihtiyacınıza göre şekillendirebiliyorsunuz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Her ekip kendi taban imajını seçerse, kurumunuzun "bu CVE'den hangi uygulamalarımız etkileniyor" sorusuna cevabı olmaz. Onaylı taban imajlardan oluşan düzenlenmiş bir küme, bu soruyu yanıtlanabilir hale getiriyor ve tek bir yamayı üzerine kurulan her şey için düzeltmeye çeviriyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- serbest taban imaj politikasının yarattığı sorunu görmek
+- tek bir çalışma ortamı için küçük bir altın imaj kütüphanesi derlemek
+- uygulamaları altın imajların üzerine yeniden kurmak
+- imaj önbelleği ve katman paylaşımının bunu nasıl israf değil ucuz kıldığını açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

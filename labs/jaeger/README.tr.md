@@ -21,6 +21,19 @@ Jaeger'ı üretim yapılandırmasında, farklı özellikler farklı süreçlerde
 çalışacak şekilde çalıştırabilirsiniz; veri deposunu değiştirebilir veya
 toplamayı tamponlamak için bir mesaj kuyruğu ekleyebilirsiniz.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Ham iz verisi okunabilir değil. Jaeger onu bir resme çeviriyor: zamanı hangi span'in yediğini gösteren bir şelale. "Sistem yavaş" cümlesinden belirli bir kod satırına giden en hızlı yol genelde bu.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Jaeger'ı çalıştırıp uygulama izlerini ona göndermek
+- iz şelalesini okuyup yavaş span'i bulmak
+- etiketlerle izleri ilgilendiğiniz olanlara indirmek
+- span'in ne olduğunu ve span'lerin birbiriyle ilişkisini açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

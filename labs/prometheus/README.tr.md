@@ -15,6 +15,19 @@ upstream: labs/prometheus
 [CNCF](https://www.cncf.io) projesi (Kubernetes ile aynı vakıf altında) ve
 eksiksiz bir izleme bileşenleri takımı barındırıyor.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+Gece üçte bir şey yavaşladığında tahmine değil sayılara ihtiyacınız olur. Prometheus, container platformlarında fiilî metrik deposu: uygulamalarınızı düzenli aralıklarla tarayıp geçmişi saklıyor, böylece sistem bozulmadan önce neye benzediğini sorabiliyorsunuz.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- Prometheus'u çalıştırıp yapılandırma dosyasıyla hedeflere yöneltmek
+- hedefler sayfasını okuyup tarama hatasıyla uygulama hatasını ayırmak
+- PromQL ile zaman serisi verisi sorgulamak
+- çekme (pull) modelini ve uygulamaları dağıtma biçiminizi neden değiştirdiğini açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

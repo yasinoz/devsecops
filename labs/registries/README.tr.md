@@ -20,6 +20,19 @@ Kurumlar kendi registry'lerini çalıştırıyor: build pipeline'ından çıkan 
 uzun vadeli saklamak için, ya da imajları üretim ortamıyla aynı ağ bölgesinde
 erişilebilir kılmak için.
 
+<!-- outcomes:auto -->
+## Bu lab ne işe yarıyor
+
+İmaj, ancak başka makineler ona ulaşabiliyorsa işinize yarıyor. Registry bu dağıtım noktası — ve gerçek bir pipeline'da aynı zamanda sürüm geçmişinin tutulduğu, erişim denetiminin uygulandığı yer. Bu adımı atlayan ekipler sonunda tar dosyası taşımaya başlıyor.
+
+**Bu labdan sonra şunları yapabileceksiniz:**
+
+- registry hesabıyla imaj göndermek ve çekmek
+- bir imaj referansını okuyup her parçasının adını söylemek
+- container içinde özel bir registry çalıştırıp kullanmak
+- bir kurumun neden Docker Hub yerine kendi registry'sini barındırdığını açıklamak
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## Bu lab nasıl işliyor
 

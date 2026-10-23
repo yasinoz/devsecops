@@ -15,6 +15,19 @@ Elasticsearch is a document database - it uses JSON as the data format. Document
 
 You can use Elasticsearch as a generic data store, but it's particularly well suited to storing logs because it gives you lots of advanced querying features.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+Metrics tell you something is wrong; logs tell you what happened. Once you have more than a handful of containers, `docker logs` stops working as a strategy - you need the logs collected in one searchable place that outlives the container.
+
+**After this lab you will be able to:**
+
+- run Elasticsearch and check it is healthy
+- index documents and read them back
+- search with the query API and understand how indices are organised
+- explain why centralised logging matters more in containers than on servers
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 

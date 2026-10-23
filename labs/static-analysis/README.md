@@ -15,6 +15,19 @@ Static analysis tools inspect the source code of your applications, looking for 
 
 There are commercial versions of SonarQube but we'll run the free community edition. It runs as a server, and you can trigger the analysis when you build your code. A SonarQube client on your desktop or build server sends the code for analysis and prints the results. Any issues are stored in the SonarQube server, and you can configure critical issues to fail the build.
 
+<!-- outcomes:auto -->
+## Why this lab matters
+
+The cheapest bug to fix is the one caught before it merges. Static analysis reads the source without running it and flags the patterns that turn into security advisories later. Wiring it into the build is what makes it stick - a report nobody reads changes nothing.
+
+**After this lab you will be able to:**
+
+- run SonarQube and analyse a project with it
+- read the findings and tell a real problem from noise
+- run the analysis as part of a Docker build
+- set a quality gate that fails the build, so the check cannot be ignored
+<!-- /outcomes:auto -->
+
 <!-- orientation:auto -->
 ## How this lab works
 
