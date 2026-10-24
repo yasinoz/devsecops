@@ -1,114 +1,81 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
-  },
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "Lab'daki Prometheus veri kaynagi",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "13.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
+  "title": "Uptime",
+  "uid": null,
+  "schemaVersion": 41,
+  "version": 1,
   "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "id": 1,
-  "links": [],
+  "refresh": "10s",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timezone": "browser",
   "panels": [
     {
-      "datasource": null,
+      "id": 1,
+      "type": "row",
+      "title": "Infrastructure",
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 10,
-      "title": "Backend",
-      "type": "row"
+      "panels": []
     },
     {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "displayMode": "auto"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "OFFLINE"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "ok"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Instance"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 222
-              }
-            ]
-          }
-        ]
+      "id": 2,
+      "type": "table",
+      "title": "Current Status",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 6,
-        "w": 5,
+        "w": 8,
         "x": 0,
         "y": 1
       },
-      "id": 11,
-      "options": {
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum without(job, tier) (up{tier=\"backend\"})",
-          "format": "table",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "sum without(job, tier) (up{tier=\"infrastructure\"})",
           "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
+          "range": false,
+          "format": "table",
+          "legendFormat": "{{instance}}"
         }
       ],
-      "title": "Current Status",
       "transformations": [
         {
           "id": "organize",
@@ -116,7 +83,6 @@
             "excludeByName": {
               "Time": true
             },
-            "indexByName": {},
             "renameByName": {
               "Value": "Status",
               "instance": "Instance"
@@ -124,34 +90,130 @@
           }
         }
       ],
-      "type": "table"
-    },
-    {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": "auto"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "OFFLINE",
+                        "color": "red",
+                        "index": 0
+                      },
+                      "1": {
+                        "text": "ok",
+                        "color": "green",
+                        "index": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm"
+      }
+    },
+    {
+      "id": 3,
+      "type": "state-timeline",
+      "title": "Recent Status",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 16,
+        "x": 8,
+        "y": 1
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "sum without(job, tier) (up{tier=\"infrastructure\"})",
+          "instant": false,
+          "range": true,
+          "format": "time_series",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OFFLINE",
+                  "color": "red",
+                  "index": 0
+                },
+                "1": {
+                  "text": "ok",
+                  "color": "green",
+                  "index": 1
+                }
+              }
+            }
+          ],
           "color": {
             "mode": "thresholds"
           },
-          "custom": {
-            "fillOpacity": 70,
-            "lineWidth": 0
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "OFFLINE"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "ok"
-                }
-              },
-              "type": "value"
-            }
-          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -164,133 +226,74 @@
                 "value": 1
               }
             ]
-          }
+          },
+          "custom": {
+            "fillOpacity": 85,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "max": 1,
+          "min": 0
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 6,
-        "w": 7,
-        "x": 5,
-        "y": 1
-      },
-      "id": 14,
       "options": {
-        "alignValue": "left",
+        "mergeValues": true,
+        "showValue": "never",
+        "alignValue": "center",
+        "rowHeight": 0.9,
         "legend": {
-          "displayMode": "hidden",
+          "showLegend": false,
+          "displayMode": "list",
           "placement": "bottom"
         },
-        "mergeValues": true,
-        "rowHeight": 0.9,
-        "showValue": "auto",
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum without(job, tier) (up{tier=\"backend\"})",
-          "interval": "",
-          "legendFormat": "{{instance}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Recent Status",
-      "type": "state-timeline"
+      }
     },
     {
-      "datasource": null,
+      "id": 4,
+      "type": "row",
+      "title": "Web",
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 7
       },
-      "id": 8,
-      "title": "Web",
-      "type": "row"
+      "panels": []
     },
     {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "displayMode": "auto"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "OFFLINE"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "ok"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Instance"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 222
-              }
-            ]
-          }
-        ]
+      "id": 5,
+      "type": "table",
+      "title": "Current Status",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
-        "h": 3,
-        "w": 5,
+        "h": 6,
+        "w": 8,
         "x": 0,
         "y": 8
       },
-      "id": 12,
-      "options": {
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "expr": "sum without(job, tier) (up{tier=\"web\"})",
-          "format": "table",
           "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
+          "range": false,
+          "format": "table",
+          "legendFormat": "{{instance}}"
         }
       ],
-      "title": "Current Status",
       "transformations": [
         {
           "id": "organize",
@@ -298,7 +301,6 @@
             "excludeByName": {
               "Time": true
             },
-            "indexByName": {},
             "renameByName": {
               "Value": "Status",
               "instance": "Instance"
@@ -306,34 +308,130 @@
           }
         }
       ],
-      "type": "table"
-    },
-    {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": "auto"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "OFFLINE",
+                        "color": "red",
+                        "index": 0
+                      },
+                      "1": {
+                        "text": "ok",
+                        "color": "green",
+                        "index": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm"
+      }
+    },
+    {
+      "id": 6,
+      "type": "state-timeline",
+      "title": "Recent Status",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 16,
+        "x": 8,
+        "y": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "sum without(job, tier) (up{tier=\"web\"})",
+          "instant": false,
+          "range": true,
+          "format": "time_series",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OFFLINE",
+                  "color": "red",
+                  "index": 0
+                },
+                "1": {
+                  "text": "ok",
+                  "color": "green",
+                  "index": 1
+                }
+              }
+            }
+          ],
           "color": {
             "mode": "thresholds"
           },
-          "custom": {
-            "fillOpacity": 70,
-            "lineWidth": 0
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "OFFLINE"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "ok"
-                }
-              },
-              "type": "value"
-            }
-          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -346,133 +444,74 @@
                 "value": 1
               }
             ]
-          }
+          },
+          "custom": {
+            "fillOpacity": 85,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "max": 1,
+          "min": 0
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 3,
-        "w": 7,
-        "x": 5,
-        "y": 8
-      },
-      "id": 13,
       "options": {
-        "alignValue": "left",
+        "mergeValues": true,
+        "showValue": "never",
+        "alignValue": "center",
+        "rowHeight": 0.9,
         "legend": {
-          "displayMode": "hidden",
+          "showLegend": false,
+          "displayMode": "list",
           "placement": "bottom"
         },
-        "mergeValues": true,
-        "rowHeight": 0.9,
-        "showValue": "auto",
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum without(job, tier) (up{tier=\"web\"})",
-          "interval": "",
-          "legendFormat": "{{instance}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Recent Status",
-      "type": "state-timeline"
+      }
     },
     {
-      "datasource": null,
+      "id": 7,
+      "type": "row",
+      "title": "Backend",
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 14
       },
-      "id": 6,
-      "title": "Infrastructure",
-      "type": "row"
+      "panels": []
     },
     {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "displayMode": "auto"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "OFFLINE"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "ok"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Instance"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 222
-              }
-            ]
-          }
-        ]
+      "id": 8,
+      "type": "table",
+      "title": "Current Status",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
-        "h": 3,
-        "w": 5,
+        "h": 6,
+        "w": 8,
         "x": 0,
-        "y": 12
+        "y": 15
       },
-      "id": 2,
-      "options": {
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "sum without(job, tier) (up{tier=\"infrastructure\"})",
-          "format": "table",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "sum without(job, tier) (up{tier=\"backend\"})",
           "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
+          "range": false,
+          "format": "table",
+          "legendFormat": "{{instance}}"
         }
       ],
-      "title": "Current Status",
       "transformations": [
         {
           "id": "organize",
@@ -480,7 +519,6 @@
             "excludeByName": {
               "Time": true
             },
-            "indexByName": {},
             "renameByName": {
               "Value": "Status",
               "instance": "Instance"
@@ -488,34 +526,130 @@
           }
         }
       ],
-      "type": "table"
-    },
-    {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": "auto"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "OFFLINE",
+                        "color": "red",
+                        "index": 0
+                      },
+                      "1": {
+                        "text": "ok",
+                        "color": "green",
+                        "index": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm"
+      }
+    },
+    {
+      "id": 9,
+      "type": "state-timeline",
+      "title": "Recent Status",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 16,
+        "x": 8,
+        "y": 15
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "sum without(job, tier) (up{tier=\"backend\"})",
+          "instant": false,
+          "range": true,
+          "format": "time_series",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OFFLINE",
+                  "color": "red",
+                  "index": 0
+                },
+                "1": {
+                  "text": "ok",
+                  "color": "green",
+                  "index": 1
+                }
+              }
+            }
+          ],
           "color": {
             "mode": "thresholds"
           },
-          "custom": {
-            "fillOpacity": 70,
-            "lineWidth": 0
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "index": 0,
-                  "text": "OFFLINE"
-                },
-                "1": {
-                  "index": 1,
-                  "text": "ok"
-                }
-              },
-              "type": "value"
-            }
-          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -528,57 +662,32 @@
                 "value": 1
               }
             ]
-          }
+          },
+          "custom": {
+            "fillOpacity": 85,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "max": 1,
+          "min": 0
         },
         "overrides": []
       },
-      "gridPos": {
-        "h": 3,
-        "w": 7,
-        "x": 5,
-        "y": 12
-      },
-      "id": 4,
       "options": {
-        "alignValue": "left",
+        "mergeValues": true,
+        "showValue": "never",
+        "alignValue": "center",
+        "rowHeight": 0.9,
         "legend": {
-          "displayMode": "hidden",
+          "showLegend": false,
+          "displayMode": "list",
           "placement": "bottom"
         },
-        "mergeValues": true,
-        "rowHeight": 0.9,
-        "showValue": "auto",
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum without(job, tier) (up{tier=\"infrastructure\"})",
-          "interval": "",
-          "legendFormat": "{{instance}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Recent Status",
-      "type": "state-timeline"
+      }
     }
-  ],
-  "refresh": "5s",
-  "schemaVersion": 30,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": []
-  },
-  "time": {
-    "from": "now-15m",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Uptime",
-  "uid": "ZlmmeBi7z",
-  "version": 1
+  ]
 }
