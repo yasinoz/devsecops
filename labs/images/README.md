@@ -3,7 +3,7 @@ title: Building Container Images
 lang: en
 slug: images
 section: cicd
-order: 2
+order: 1
 duration: 40
 requires: [docker]
 status: updated

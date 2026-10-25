@@ -3,7 +3,7 @@ title: Scanning the Running Application (DAST)
 lang: en
 slug: dast
 section: security
-order: 8
+order: 6
 duration: 50
 requires: [docker]
 status: updated

@@ -3,7 +3,7 @@ title: ArgoCD ile GitOps
 lang: tr
 slug: argo
 section: security
-order: 4
+order: 7
 duration: 60
 requires: [docker, kubernetes]
 status: updated

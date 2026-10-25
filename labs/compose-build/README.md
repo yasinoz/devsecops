@@ -3,7 +3,7 @@ title: Building Apps with Compose
 lang: en
 slug: compose-build
 section: cicd
-order: 5
+order: 4
 duration: 45
 requires: [docker]
 status: updated

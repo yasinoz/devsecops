@@ -41,38 +41,8 @@
       },
       "labs": [
         {
-          "slug": "jenkins",
-          "order": 1,
-          "titles": {
-            "en": "Automation with Jenkins",
-            "tr": "Jenkins ile Otomasyon"
-          },
-          "duration": 45,
-          "requires": [
-            "docker"
-          ],
-          "status": "updated",
-          "path": "labs/jenkins",
-          "docs": {
-            "en": {
-              "readme": "labs/jenkins/README.md",
-              "hints": "labs/jenkins/hints.md",
-              "solution": "labs/jenkins/solution.md"
-            },
-            "tr": {
-              "readme": "labs/jenkins/README.tr.md",
-              "hints": "labs/jenkins/hints.tr.md",
-              "solution": "labs/jenkins/solution.tr.md"
-            }
-          },
-          "langs": [
-            "en",
-            "tr"
-          ]
-        },
-        {
           "slug": "images",
-          "order": 2,
+          "order": 1,
           "titles": {
             "en": "Building Container Images",
             "tr": "Container İmajları Derlemek"
@@ -102,7 +72,7 @@
         },
         {
           "slug": "registries",
-          "order": 3,
+          "order": 2,
           "titles": {
             "en": "Accessing Images on Registries",
             "tr": "Registry Üzerindeki İmajlara Erişmek"
@@ -132,7 +102,7 @@
         },
         {
           "slug": "multi-stage",
-          "order": 4,
+          "order": 3,
           "titles": {
             "en": "Multi-Stage Builds",
             "tr": "Çok Aşamalı Build"
@@ -162,7 +132,7 @@
         },
         {
           "slug": "compose-build",
-          "order": 5,
+          "order": 4,
           "titles": {
             "en": "Building Apps with Compose",
             "tr": "Compose ile Uygulama Derlemek"
@@ -183,6 +153,36 @@
               "readme": "labs/compose-build/README.tr.md",
               "hints": "labs/compose-build/hints.tr.md",
               "solution": "labs/compose-build/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
+          "slug": "jenkins",
+          "order": 5,
+          "titles": {
+            "en": "Automation with Jenkins",
+            "tr": "Jenkins ile Otomasyon"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/jenkins",
+          "docs": {
+            "en": {
+              "readme": "labs/jenkins/README.md",
+              "hints": "labs/jenkins/hints.md",
+              "solution": "labs/jenkins/solution.md"
+            },
+            "tr": {
+              "readme": "labs/jenkins/README.tr.md",
+              "hints": "labs/jenkins/hints.tr.md",
+              "solution": "labs/jenkins/solution.tr.md"
             }
           },
           "langs": [
@@ -489,8 +489,38 @@
           ]
         },
         {
-          "slug": "scanning",
+          "slug": "secret-scanning",
           "order": 2,
+          "titles": {
+            "en": "Secret Scanning",
+            "tr": "Sır Tarama"
+          },
+          "duration": 40,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/secret-scanning",
+          "docs": {
+            "en": {
+              "readme": "labs/secret-scanning/README.md",
+              "hints": "labs/secret-scanning/hints.md",
+              "solution": "labs/secret-scanning/solution.md"
+            },
+            "tr": {
+              "readme": "labs/secret-scanning/README.tr.md",
+              "hints": "labs/secret-scanning/hints.tr.md",
+              "solution": "labs/secret-scanning/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
+          "slug": "scanning",
+          "order": 3,
           "titles": {
             "en": "Security Scanning",
             "tr": "Güvenlik Taraması"
@@ -519,8 +549,38 @@
           ]
         },
         {
+          "slug": "iac-security",
+          "order": 4,
+          "titles": {
+            "en": "Infrastructure as Code Security",
+            "tr": "Altyapı Kodunun Güvenliği"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/iac-security",
+          "docs": {
+            "en": {
+              "readme": "labs/iac-security/README.md",
+              "hints": "labs/iac-security/hints.md",
+              "solution": "labs/iac-security/solution.md"
+            },
+            "tr": {
+              "readme": "labs/iac-security/README.tr.md",
+              "hints": "labs/iac-security/hints.tr.md",
+              "solution": "labs/iac-security/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
           "slug": "golden-images",
-          "order": 3,
+          "order": 5,
           "titles": {
             "en": "Golden Image Libraries",
             "tr": "Altın İmaj Kütüphaneleri"
@@ -549,8 +609,38 @@
           ]
         },
         {
+          "slug": "dast",
+          "order": 6,
+          "titles": {
+            "en": "Scanning the Running Application (DAST)",
+            "tr": "Çalışan Uygulamayı Taramak (DAST)"
+          },
+          "duration": 50,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/dast",
+          "docs": {
+            "en": {
+              "readme": "labs/dast/README.md",
+              "hints": "labs/dast/hints.md",
+              "solution": "labs/dast/solution.md"
+            },
+            "tr": {
+              "readme": "labs/dast/README.tr.md",
+              "hints": "labs/dast/hints.tr.md",
+              "solution": "labs/dast/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
           "slug": "argo",
-          "order": 4,
+          "order": 7,
           "titles": {
             "en": "GitOps with ArgoCD",
             "tr": "ArgoCD ile GitOps"
@@ -581,7 +671,7 @@
         },
         {
           "slug": "admission",
-          "order": 5,
+          "order": 8,
           "titles": {
             "en": "Enforcing Workload Policies",
             "tr": "İş Yükü Politikalarını Uygulamak"
@@ -612,7 +702,7 @@
         },
         {
           "slug": "container-security",
-          "order": 6,
+          "order": 9,
           "titles": {
             "en": "Container Security Controls",
             "tr": "Container Güvenlik Kontrolleri"
@@ -634,96 +724,6 @@
               "readme": "labs/container-security/README.tr.md",
               "hints": "labs/container-security/hints.tr.md",
               "solution": "labs/container-security/solution.tr.md"
-            }
-          },
-          "langs": [
-            "en",
-            "tr"
-          ]
-        },
-        {
-          "slug": "secret-scanning",
-          "order": 7,
-          "titles": {
-            "en": "Secret Scanning",
-            "tr": "Sır Tarama"
-          },
-          "duration": 40,
-          "requires": [
-            "docker"
-          ],
-          "status": "updated",
-          "path": "labs/secret-scanning",
-          "docs": {
-            "en": {
-              "readme": "labs/secret-scanning/README.md",
-              "hints": "labs/secret-scanning/hints.md",
-              "solution": "labs/secret-scanning/solution.md"
-            },
-            "tr": {
-              "readme": "labs/secret-scanning/README.tr.md",
-              "hints": "labs/secret-scanning/hints.tr.md",
-              "solution": "labs/secret-scanning/solution.tr.md"
-            }
-          },
-          "langs": [
-            "en",
-            "tr"
-          ]
-        },
-        {
-          "slug": "dast",
-          "order": 8,
-          "titles": {
-            "en": "Scanning the Running Application (DAST)",
-            "tr": "Çalışan Uygulamayı Taramak (DAST)"
-          },
-          "duration": 50,
-          "requires": [
-            "docker"
-          ],
-          "status": "updated",
-          "path": "labs/dast",
-          "docs": {
-            "en": {
-              "readme": "labs/dast/README.md",
-              "hints": "labs/dast/hints.md",
-              "solution": "labs/dast/solution.md"
-            },
-            "tr": {
-              "readme": "labs/dast/README.tr.md",
-              "hints": "labs/dast/hints.tr.md",
-              "solution": "labs/dast/solution.tr.md"
-            }
-          },
-          "langs": [
-            "en",
-            "tr"
-          ]
-        },
-        {
-          "slug": "iac-security",
-          "order": 9,
-          "titles": {
-            "en": "Infrastructure as Code Security",
-            "tr": "Altyapı Kodunun Güvenliği"
-          },
-          "duration": 45,
-          "requires": [
-            "docker"
-          ],
-          "status": "updated",
-          "path": "labs/iac-security",
-          "docs": {
-            "en": {
-              "readme": "labs/iac-security/README.md",
-              "hints": "labs/iac-security/hints.md",
-              "solution": "labs/iac-security/solution.md"
-            },
-            "tr": {
-              "readme": "labs/iac-security/README.tr.md",
-              "hints": "labs/iac-security/hints.tr.md",
-              "solution": "labs/iac-security/solution.tr.md"
             }
           },
           "langs": [

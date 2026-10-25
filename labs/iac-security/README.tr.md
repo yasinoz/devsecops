@@ -3,7 +3,7 @@ title: Altyapı Kodunun Güvenliği
 lang: tr
 slug: iac-security
 section: security
-order: 9
+order: 4
 duration: 45
 requires: [docker]
 status: updated

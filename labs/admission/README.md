@@ -3,7 +3,7 @@ title: Enforcing Workload Policies
 lang: en
 slug: admission
 section: security
-order: 5
+order: 8
 duration: 60
 requires: [docker, kubernetes]
 status: updated

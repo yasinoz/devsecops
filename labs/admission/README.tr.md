@@ -3,7 +3,7 @@ title: İş Yükü Politikalarını Uygulamak
 lang: tr
 slug: admission
 section: security
-order: 5
+order: 8
 duration: 60
 requires: [docker, kubernetes]
 status: updated

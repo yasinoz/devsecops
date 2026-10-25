@@ -3,7 +3,7 @@ title: Çalışan Uygulamayı Taramak (DAST)
 lang: tr
 slug: dast
 section: security
-order: 8
+order: 6
 duration: 50
 requires: [docker]
 status: updated

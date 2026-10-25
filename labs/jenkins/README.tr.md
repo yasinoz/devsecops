@@ -3,7 +3,7 @@ title: Jenkins ile Otomasyon
 lang: tr
 slug: jenkins
 section: cicd
-order: 1
+order: 5
 duration: 45
 requires: [docker]
 status: updated

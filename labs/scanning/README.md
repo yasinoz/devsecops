@@ -3,7 +3,7 @@ title: Security Scanning
 lang: en
 slug: scanning
 section: security
-order: 2
+order: 3
 duration: 45
 requires: [docker]
 status: updated

@@ -3,7 +3,7 @@ title: Accessing Images on Registries
 lang: en
 slug: registries
 section: cicd
-order: 3
+order: 2
 duration: 30
 requires: [docker]
 status: updated

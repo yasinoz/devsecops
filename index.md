@@ -49,11 +49,11 @@ Build automation with Jenkins, container images and release pipelines.
 
 | Lab | Time | Needs |
 |---|---|---|
-| [Automation with Jenkins](labs/jenkins/README.md) | 45 min | docker |
 | [Building Container Images](labs/images/README.md) | 40 min | docker |
 | [Accessing Images on Registries](labs/registries/README.md) | 30 min | docker |
 | [Multi-Stage Builds](labs/multi-stage/README.md) | 40 min | docker |
 | [Building Apps with Compose](labs/compose-build/README.md) | 45 min | docker |
+| [Automation with Jenkins](labs/jenkins/README.md) | 45 min | docker |
 | [Building Docker Images with Jenkins](labs/pipeline/README.md) | 60 min | docker |
 
 ## Observability
@@ -77,14 +77,14 @@ Shifting security left - static analysis, scanning, golden images and policy enf
 | Lab | Time | Needs |
 |---|---|---|
 | [Static Code Analysis](labs/static-analysis/README.md) | 45 min | docker |
+| [Secret Scanning](labs/secret-scanning/README.md) | 40 min | docker |
 | [Security Scanning](labs/scanning/README.md) | 45 min | docker |
+| [Infrastructure as Code Security](labs/iac-security/README.md) | 45 min | docker |
 | [Golden Image Libraries](labs/golden-images/README.md) | 50 min | docker |
+| [Scanning the Running Application (DAST)](labs/dast/README.md) | 50 min | docker |
 | [GitOps with ArgoCD](labs/argo/README.md) | 60 min | docker, kubernetes |
 | [Enforcing Workload Policies](labs/admission/README.md) | 60 min | docker, kubernetes |
 | [Container Security Controls](labs/container-security/README.md) | 50 min | docker, kubernetes |
-| [Secret Scanning](labs/secret-scanning/README.md) | 40 min | docker |
-| [Scanning the Running Application (DAST)](labs/dast/README.md) | 50 min | docker |
-| [Infrastructure as Code Security](labs/iac-security/README.md) | 45 min | docker |
 | [Threat Modelling Workshop](labs/threat-modelling/README.md) | 60 min | - |
 
 <!-- labs:end -->

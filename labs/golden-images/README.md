@@ -3,7 +3,7 @@ title: Golden Image Libraries
 lang: en
 slug: golden-images
 section: security
-order: 3
+order: 5
 duration: 50
 requires: [docker]
 status: updated

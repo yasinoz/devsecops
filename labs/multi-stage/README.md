@@ -3,7 +3,7 @@ title: Multi-Stage Builds
 lang: en
 slug: multi-stage
 section: cicd
-order: 4
+order: 3
 duration: 40
 requires: [docker]
 status: updated

@@ -3,7 +3,7 @@ title: Sır Tarama
 lang: tr
 slug: secret-scanning
 section: security
-order: 7
+order: 2
 duration: 40
 requires: [docker]
 status: updated

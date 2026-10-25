@@ -3,7 +3,7 @@ title: Güvenlik Taraması
 lang: tr
 slug: scanning
 section: security
-order: 2
+order: 3
 duration: 45
 requires: [docker]
 status: updated

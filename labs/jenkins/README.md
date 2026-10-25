@@ -3,7 +3,7 @@ title: Automation with Jenkins
 lang: en
 slug: jenkins
 section: cicd
-order: 1
+order: 5
 duration: 45
 requires: [docker]
 status: updated

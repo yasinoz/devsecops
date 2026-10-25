@@ -3,7 +3,7 @@ title: Container Güvenlik Kontrolleri
 lang: tr
 slug: container-security
 section: security
-order: 6
+order: 9
 duration: 50
 requires: [docker, kubernetes]
 status: updated

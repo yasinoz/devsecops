@@ -3,7 +3,7 @@ title: Registry Üzerindeki İmajlara Erişmek
 lang: tr
 slug: registries
 section: cicd
-order: 3
+order: 2
 duration: 30
 requires: [docker]
 status: updated

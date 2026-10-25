@@ -50,11 +50,11 @@ Jenkins ile otomasyon, container imajları ve sürüm pipeline'ları.
 
 | Lab | Süre | Gerekir |
 |---|---|---|
-| [Jenkins ile Otomasyon](labs/jenkins/README.tr.md) | 45 dk | docker |
 | [Container İmajları Derlemek](labs/images/README.tr.md) | 40 dk | docker |
 | [Registry Üzerindeki İmajlara Erişmek](labs/registries/README.tr.md) | 30 dk | docker |
 | [Çok Aşamalı Build](labs/multi-stage/README.tr.md) | 40 dk | docker |
 | [Compose ile Uygulama Derlemek](labs/compose-build/README.tr.md) | 45 dk | docker |
+| [Jenkins ile Otomasyon](labs/jenkins/README.tr.md) | 45 dk | docker |
 | [Jenkins ile Docker İmajı Derlemek](labs/pipeline/README.tr.md) | 60 dk | docker |
 
 ## Gözlemlenebilirlik
@@ -78,14 +78,14 @@ Güvenliği öne almak — statik analiz, tarama, altın imajlar ve politika uyg
 | Lab | Süre | Gerekir |
 |---|---|---|
 | [Statik Kod Analizi](labs/static-analysis/README.tr.md) | 45 dk | docker |
+| [Sır Tarama](labs/secret-scanning/README.tr.md) | 40 dk | docker |
 | [Güvenlik Taraması](labs/scanning/README.tr.md) | 45 dk | docker |
+| [Altyapı Kodunun Güvenliği](labs/iac-security/README.tr.md) | 45 dk | docker |
 | [Altın İmaj Kütüphaneleri](labs/golden-images/README.tr.md) | 50 dk | docker |
+| [Çalışan Uygulamayı Taramak (DAST)](labs/dast/README.tr.md) | 50 dk | docker |
 | [ArgoCD ile GitOps](labs/argo/README.tr.md) | 60 dk | docker, kubernetes |
 | [İş Yükü Politikalarını Uygulamak](labs/admission/README.tr.md) | 60 dk | docker, kubernetes |
 | [Container Güvenlik Kontrolleri](labs/container-security/README.tr.md) | 50 dk | docker, kubernetes |
-| [Sır Tarama](labs/secret-scanning/README.tr.md) | 40 dk | docker |
-| [Çalışan Uygulamayı Taramak (DAST)](labs/dast/README.tr.md) | 50 dk | docker |
-| [Altyapı Kodunun Güvenliği](labs/iac-security/README.tr.md) | 45 dk | docker |
 | [Tehdit Modelleme Atölyesi](labs/threat-modelling/README.tr.md) | 60 dk | - |
 
 <!-- labs:end -->
