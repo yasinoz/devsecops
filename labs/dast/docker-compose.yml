@@ -1,0 +1,31 @@
+# Proje adi acikca veriliyor: baska lablarin container/volume'lariyla
+# karismasin.
+name: devsecops-dast
+
+# Ag adi da sabitleniyor. ZAP'i ayri bir 'docker run' ile ayni aga
+# baglayacagiz ve lab metni o adi yaziyor; Compose'un uretecegi
+# 'devsecops-dast_default' gibi bir ada birakmak metni kirilgan yapardi.
+services:
+
+  uygulama:
+    image: nginx:1.31.7-alpine
+    volumes:
+      # LABDA BU SATIRI DEGISTIRECEKSINIZ:
+      #   nginx.conf         -> ilk hali (bulgu dolu)
+      #   nginx.guvenli.conf -> ilk duzeltme denemesi
+      #   nginx.tam.conf     -> tam duzeltme
+      - ./uygulama/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+      # Baslik parcacigi her zaman bagli duruyor; yalnizca
+      # nginx.tam.conf onu include ediyor.
+      - ./uygulama/guvenlik-basliklari.conf:/etc/nginx/guvenlik-basliklari.conf:ro
+
+      - ./uygulama/index.html:/usr/share/nginx/html/index.html:ro
+    ports:
+      - "8085:80"
+    networks:
+      - dast-net
+
+networks:
+  dast-net:
+    name: dast-net

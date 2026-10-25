@@ -1,1 +1,10 @@
-0
+# Sir tarama labinda uretilen demo deposu. Ic ice git deposu oldugu icin
+# yok sayiliyor; lab her calistirildiginda yeniden uretiliyor.
+labs/secret-scanning/sirli-depo/
+
+# DAST labinda uretilen ZAP raporlari ve otomasyon plani.
+labs/dast/rapor/
+
+# ZAP, -v ./labs/dast:/zap/wrk ile calistirildiginda otomasyon planini
+# lab klasorune yaziyor. Ogrencide de olusuyor; lab icerigi degil.
+labs/dast/zap.yaml

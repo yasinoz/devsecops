@@ -184,3 +184,31 @@ sections:
         titles:
           en: Container Security Controls
           tr: Container Güvenlik Kontrolleri
+      - slug: secret-scanning
+        order: 7
+        duration: 40
+        requires: [docker]
+        titles:
+          en: Secret Scanning
+          tr: Sır Tarama
+      - slug: dast
+        order: 8
+        duration: 50
+        requires: [docker]
+        titles:
+          en: Scanning the Running Application (DAST)
+          tr: Çalışan Uygulamayı Taramak (DAST)
+      - slug: iac-security
+        order: 9
+        duration: 45
+        requires: [docker]
+        titles:
+          en: Infrastructure as Code Security
+          tr: Altyapı Kodunun Güvenliği
+      - slug: threat-modelling
+        order: 10
+        duration: 60
+        requires: []
+        titles:
+          en: Threat Modelling Workshop
+          tr: Tehdit Modelleme Atölyesi

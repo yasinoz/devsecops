@@ -83,6 +83,10 @@ Güvenliği öne almak — statik analiz, tarama, altın imajlar ve politika uyg
 | [ArgoCD ile GitOps](labs/argo/README.tr.md) | 60 dk | docker, kubernetes |
 | [İş Yükü Politikalarını Uygulamak](labs/admission/README.tr.md) | 60 dk | docker, kubernetes |
 | [Container Güvenlik Kontrolleri](labs/container-security/README.tr.md) | 50 dk | docker, kubernetes |
+| [Sır Tarama](labs/secret-scanning/README.tr.md) | 40 dk | docker |
+| [Çalışan Uygulamayı Taramak (DAST)](labs/dast/README.tr.md) | 50 dk | docker |
+| [Altyapı Kodunun Güvenliği](labs/iac-security/README.tr.md) | 45 dk | docker |
+| [Tehdit Modelleme Atölyesi](labs/threat-modelling/README.tr.md) | 60 dk | - |
 
 <!-- labs:end -->
 

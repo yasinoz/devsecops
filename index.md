@@ -82,6 +82,10 @@ Shifting security left - static analysis, scanning, golden images and policy enf
 | [GitOps with ArgoCD](labs/argo/README.md) | 60 min | docker, kubernetes |
 | [Enforcing Workload Policies](labs/admission/README.md) | 60 min | docker, kubernetes |
 | [Container Security Controls](labs/container-security/README.md) | 50 min | docker, kubernetes |
+| [Secret Scanning](labs/secret-scanning/README.md) | 40 min | docker |
+| [Scanning the Running Application (DAST)](labs/dast/README.md) | 50 min | docker |
+| [Infrastructure as Code Security](labs/iac-security/README.md) | 45 min | docker |
+| [Threat Modelling Workshop](labs/threat-modelling/README.md) | 60 min | - |
 
 <!-- labs:end -->
 

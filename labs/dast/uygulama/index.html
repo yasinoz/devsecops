@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <title>Siparis Portali</title>
+</head>
+<body>
+    <h1>Siparis Portali</h1>
+
+    <p>Siparis numaranizi girerek durumunu sorgulayabilirsiniz.</p>
+
+    <form action="/sorgu" method="get">
+        <label for="no">Siparis numarasi</label>
+        <input type="text" id="no" name="no">
+        <button type="submit">Sorgula</button>
+    </form>
+
+    <p><a href="/giris">Giris yap</a></p>
+
+    <script>
+        // Satir ici betik: icerik guvenlik politikasi yazarken
+        // karsiniza cikacak ilk engel bu olacak.
+        document.querySelector("form").addEventListener("submit", function () {
+            console.log("sorgu gonderiliyor");
+        });
+    </script>
+</body>
+</html>

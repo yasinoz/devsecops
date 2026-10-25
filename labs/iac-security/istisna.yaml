@@ -1,0 +1,20 @@
+# Trivy istisna dosyasi.
+#
+# Buradaki her kayit bir KARAR. Uc alani birden olmayan istisna
+# yazilmiyor:
+#
+#   id          - hangi bulgu
+#   statement   - NEDEN kabul ediyoruz
+#   expired_at  - NE ZAMAN tekrar bakilacak
+#
+# expired_at en onemlisi: tarih gectiginde Trivy istisnayi kendiliginden
+# gecersiz sayiyor ve bulgu geri geliyor. Yani istisnanin unutulmasi
+# aracin isi, insanin hafizasi degil.
+
+misconfigurations:
+  - id: AWS-0104
+    statement: >-
+      Sinirsiz cikis gecici olarak kabul edildi. Sirket vekil sunucusu
+      bu VPC'ye baglandiginda cikis 10.30.0.0/16 ile sinirlanacak.
+      Sahibi: platform ekibi. Takip: ALT-412.
+    expired_at: 2027-02-28

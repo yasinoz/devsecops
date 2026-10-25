@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated": "2026-10-22",
+  "generated": "2026-10-25",
   "track": {
     "slug": "devsecops",
     "titles": {
@@ -640,16 +640,134 @@
             "en",
             "tr"
           ]
+        },
+        {
+          "slug": "secret-scanning",
+          "order": 7,
+          "titles": {
+            "en": "Secret Scanning",
+            "tr": "Sır Tarama"
+          },
+          "duration": 40,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/secret-scanning",
+          "docs": {
+            "en": {
+              "readme": "labs/secret-scanning/README.md",
+              "hints": "labs/secret-scanning/hints.md",
+              "solution": "labs/secret-scanning/solution.md"
+            },
+            "tr": {
+              "readme": "labs/secret-scanning/README.tr.md",
+              "hints": "labs/secret-scanning/hints.tr.md",
+              "solution": "labs/secret-scanning/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
+          "slug": "dast",
+          "order": 8,
+          "titles": {
+            "en": "Scanning the Running Application (DAST)",
+            "tr": "Çalışan Uygulamayı Taramak (DAST)"
+          },
+          "duration": 50,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/dast",
+          "docs": {
+            "en": {
+              "readme": "labs/dast/README.md",
+              "hints": "labs/dast/hints.md",
+              "solution": "labs/dast/solution.md"
+            },
+            "tr": {
+              "readme": "labs/dast/README.tr.md",
+              "hints": "labs/dast/hints.tr.md",
+              "solution": "labs/dast/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
+          "slug": "iac-security",
+          "order": 9,
+          "titles": {
+            "en": "Infrastructure as Code Security",
+            "tr": "Altyapı Kodunun Güvenliği"
+          },
+          "duration": 45,
+          "requires": [
+            "docker"
+          ],
+          "status": "updated",
+          "path": "labs/iac-security",
+          "docs": {
+            "en": {
+              "readme": "labs/iac-security/README.md",
+              "hints": "labs/iac-security/hints.md",
+              "solution": "labs/iac-security/solution.md"
+            },
+            "tr": {
+              "readme": "labs/iac-security/README.tr.md",
+              "hints": "labs/iac-security/hints.tr.md",
+              "solution": "labs/iac-security/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
+        },
+        {
+          "slug": "threat-modelling",
+          "order": 10,
+          "titles": {
+            "en": "Threat Modelling Workshop",
+            "tr": "Tehdit Modelleme Atölyesi"
+          },
+          "duration": 60,
+          "requires": [],
+          "status": "updated",
+          "path": "labs/threat-modelling",
+          "docs": {
+            "en": {
+              "readme": "labs/threat-modelling/README.md",
+              "hints": "labs/threat-modelling/hints.md",
+              "solution": "labs/threat-modelling/solution.md"
+            },
+            "tr": {
+              "readme": "labs/threat-modelling/README.tr.md",
+              "hints": "labs/threat-modelling/hints.tr.md",
+              "solution": "labs/threat-modelling/solution.tr.md"
+            }
+          },
+          "langs": [
+            "en",
+            "tr"
+          ]
         }
       ]
     }
   ],
   "stats": {
-    "total": 19,
-    "en": 19,
-    "tr": 19,
+    "total": 23,
+    "en": 23,
+    "tr": 23,
     "by_status": {
-      "updated": 19
+      "updated": 23
     }
   }
 }
